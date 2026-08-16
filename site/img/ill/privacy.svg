@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Политика конфиденциальности: защита персональных данных пациента">
+  <title>Политика конфиденциальности</title>
+
+  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- ================= документ ================= -->
+  <g transform="rotate(-6 220 250)">
+    <rect x="112" y="96" width="216" height="284" rx="18" fill="#fff" stroke="#fff" stroke-width="2.5"/>
+    <g fill="#0D7C8C" fill-opacity=".2">
+      <rect x="142" y="136" width="112" height="10" rx="5"/>
+      <rect x="142" y="170" width="156" height="8" rx="4"/>
+      <rect x="142" y="192" width="132" height="8" rx="4"/>
+      <rect x="142" y="214" width="156" height="8" rx="4"/>
+      <rect x="142" y="236" width="98" height="8" rx="4"/>
+      <rect x="142" y="270" width="156" height="8" rx="4"/>
+      <rect x="142" y="292" width="120" height="8" rx="4"/>
+      <rect x="142" y="314" width="146" height="8" rx="4"/>
+    </g>
+  </g>
+
+  <!-- ================= щит с замком ================= -->
+  <g transform="translate(300,286)">
+    <path d="M0-108 76-78v66c0 46-30 88-76 104-46-16-76-58-76-104v-66z"
+          fill="#9FE0EE" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M0-94 62-70v58c0 39-25 75-62 89-37-14-62-50-62-89v-58z"
+          fill="none" stroke="#0B4E5A" stroke-opacity=".22" stroke-width="2"/>
+    <!-- замок -->
+    <path d="M-18-26v-14a18 18 0 0 1 36 0v14" fill="none" stroke="#0B4E5A" stroke-opacity=".7" stroke-width="8" stroke-linecap="round"/>
+    <rect x="-28" y="-26" width="56" height="44" rx="10" fill="#0B4E5A" fill-opacity=".7"/>
+    <circle cx="0" cy="-6" r="6" fill="#9FE0EE"/>
+    <path d="M0-2v10" stroke="#9FE0EE" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= подпись ================= -->
+  <text x="240" y="446" text-anchor="middle" fill="#fff" fill-opacity=".92"
+        font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="600">Ваши данные под защитой 152-ФЗ</text>
+</svg>

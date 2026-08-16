@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Схема зубного импланта: титановый винт в кости, абатмент и коронка">
+  <title>Имплантация зуба</title>
+  <defs>
+    <!-- текстура губчатого вещества обрезается по контуру кости -->
+    <clipPath id="imp-bone">
+      <path d="M40 254c30-19 54-21 80-14 24 6 40 7 61 1 19-5 30-17 59-17s40 12 59 17c21 6 37 5 61-1 26-7 50-5 80 14v206H40z"/>
+    </clipPath>
+    <!-- кость растворяется к нижнему и боковым краям: срез челюсти продолжается за кадром -->
+    <linearGradient id="imp-fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".55" stop-color="#fff"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="imp-fade-x" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000"/>
+      <stop offset=".16" stop-color="#fff"/>
+      <stop offset=".84" stop-color="#fff"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="imp-mask">
+      <rect x="0" y="230" width="480" height="250" fill="url(#imp-fade)" mask="url(#imp-mask-x)"/>
+    </mask>
+    <mask id="imp-mask-x">
+      <rect x="0" y="0" width="480" height="480" fill="url(#imp-fade-x)"/>
+    </mask>
+  </defs>
+
+  <!-- ================= подложка ================= -->
+  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- ================= кость ================= -->
+  <!-- фрагмент челюсти: губчатое вещество внутри, кортикальный слой снаружи -->
+  <g mask="url(#imp-mask)">
+  <path d="M40 254c30-19 54-21 80-14 24 6 40 7 61 1 19-5 30-17 59-17s40 12 59 17c21 6 37 5 61-1 26-7 50-5 80 14v206H40z" fill="#fff" fill-opacity=".10"/>
+  <g clip-path="url(#imp-bone)">
+    <g fill="#fff" fill-opacity=".15">
+      <circle cx="126" cy="308" r="4.5"/><circle cx="164" cy="334" r="3"/><circle cx="134" cy="364" r="5.5"/>
+      <circle cx="182" cy="300" r="3.5"/><circle cx="156" cy="390" r="3"/><circle cx="188" cy="358" r="4"/>
+      <circle cx="108" cy="342" r="3"/><circle cx="196" cy="326" r="2.5"/><circle cx="172" cy="368" r="2.5"/>
+      <circle cx="118" cy="392" r="3.5"/><circle cx="200" cy="392" r="3"/><circle cx="146" cy="328" r="2.5"/>
+      <circle cx="354" cy="308" r="4.5"/><circle cx="316" cy="334" r="3"/><circle cx="346" cy="364" r="5.5"/>
+      <circle cx="298" cy="300" r="3.5"/><circle cx="324" cy="390" r="3"/><circle cx="292" cy="358" r="4"/>
+      <circle cx="372" cy="342" r="3"/><circle cx="284" cy="326" r="2.5"/><circle cx="308" cy="368" r="2.5"/>
+      <circle cx="362" cy="392" r="3.5"/><circle cx="280" cy="392" r="3"/><circle cx="334" cy="328" r="2.5"/>
+      <circle cx="240" cy="398" r="3"/><circle cx="210" cy="392" r="2.5"/><circle cx="270" cy="392" r="2.5"/>
+    </g>
+    <!-- кортикальная пластинка по гребню -->
+    <path d="M40 254c30-19 54-21 80-14 24 6 40 7 61 1 19-5 30-17 59-17s40 12 59 17c21 6 37 5 61-1 26-7 50-5 80 14v18c-30-19-54-21-80-14-24 6-40 7-61 1-19-5-30-17-59-17s-40 12-59 17c-21 6-37 5-61-1-26-7-50-5-80 14z"
+          fill="#fff" fill-opacity=".17"/>
+  </g>
+  <path d="M40 254c30-19 54-21 80-14 24 6 40 7 61 1 19-5 30-17 59-17s40 12 59 17c21 6 37 5 61-1 26-7 50-5 80 14" fill="none" stroke="#fff" stroke-opacity=".30" stroke-width="2"/>
+  </g>
+
+  <!-- ================= десна ================= -->
+  <g mask="url(#imp-mask-x)">
+  <!-- отдельный слой мягкой ткани поверх гребня, с манжетой вокруг абатмента -->
+  <path d="M40 254c30-19 54-21 80-14 24 6 40 7 61 1 10-3 17-7 25-11 3 15 3 26 3 32 0 6-5 10-11 10-17 1-29 3-38 9-16 10-32 11-51 6-24-6-48-6-69 5-1-13-1-25 0-38z"
+        fill="#fff" fill-opacity=".26" stroke="#fff" stroke-opacity=".38" stroke-width="1.8" stroke-linejoin="round"/>
+  <path d="M440 254c-30-19-54-21-80-14-24 6-40 7-61 1-10-3-17-7-25-11-3 15-3 26-3 32 0 6 5 10 11 10 17 1 29 3 38 9 16 10 32 11 51 6 24-6 48-6 69 5 1-13 1-25 0-38z"
+        fill="#fff" fill-opacity=".26" stroke="#fff" stroke-opacity=".38" stroke-width="1.8" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ================= имплант ================= -->
+  <!-- титановый винт с конической резьбой -->
+  <path d="M270.0 222.0L262.7 229.4L268.4 236.9L261.2 244.3L266.9 251.8L259.6 259.2L265.3 266.7L258.1 274.1L263.8 281.6L256.5 289.0L262.2 296.4L254.9 303.9L260.7 311.3L253.4 318.8L259.1 326.2L251.8 333.7L257.6 341.1L250.3 348.6L256.0 356.0Q240 372.0 224.0 356.0L229.7 348.6L222.4 341.1L228.2 333.7L220.9 326.2L226.6 318.8L219.3 311.3L225.1 303.9L217.8 296.4L223.5 289.0L216.2 281.6L221.9 274.1L214.7 266.7L220.4 259.2L213.1 251.8L218.8 244.3L211.6 236.9L217.3 229.4L210.0 222.0Z"
+        fill="#CBEFF7" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- внутренний канал винта -->
+  <path d="M240 232v112" stroke="#0D7C8C" stroke-opacity=".22" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- абатмент: переходник между винтом и коронкой -->
+  <path d="M212 190h56l-6 22c-1 6-6 10-12 10h-20c-6 0-11-4-12-10z"
+        fill="#9FE0EE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- ================= коронка ================= -->
+  <path d="M172 148
+           c3-30 10-50 26-54 11-3 18 11 25 24 6 11 28 11 34 0 7-13 14-27 25-24 16 4 23 24 26 54
+           l1 30c0 7-6 12-13 12h-112c-7 0-13-5-13-12z"
+        fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+  <!-- фиссуры жевательной поверхности -->
+  <g stroke="#0D7C8C" stroke-opacity=".26" stroke-width="2.5" stroke-linecap="round" fill="none">
+    <path d="M223 118c7 9 27 9 34 0"/>
+    <path d="M240 125v22"/>
+  </g>
+  <!-- блик на эмали -->
+  <path d="M194 112c-7 9-11 25-12 44" stroke="#0D7C8C" stroke-opacity=".16" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+  <!-- ================= выноски ================= -->
+  <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5" fill="none" stroke-dasharray="4 5">
+    <path d="M312 140h50"/>
+    <path d="M276 202h86"/>
+    <path d="M272 296h90"/>
+  </g>
+  <g fill="#fff">
+    <circle cx="366" cy="140" r="4"/>
+    <circle cx="366" cy="202" r="4"/>
+    <circle cx="366" cy="296" r="4"/>
+  </g>
+  <g fill="#fff" fill-opacity=".9" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="14.5" font-weight="600">
+    <text x="378" y="145">Коронка</text>
+    <text x="378" y="207">Абатмент</text>
+    <text x="378" y="301">Имплант</text>
+  </g>
+</svg>

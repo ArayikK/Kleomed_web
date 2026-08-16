@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Схема All-on-4: несъёмный протез челюсти на четырёх имплантах">
+  <title>Протезирование на имплантах</title>
+  <defs>
+    <linearGradient id="a4-fx" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000"/><stop offset=".1" stop-color="#fff"/>
+      <stop offset=".9" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="a4-mx"><rect width="480" height="480" fill="url(#a4-fx)"/></mask>
+    <!-- имплант: конический винт с резьбой -->
+    <g id="a4-screw">
+      <path d="M-17 0h34l-4 12 4 10-5 10 4 10-5 10 4 10-5 10 3 10-4 10 3 9c-3 9-8 13-12 13s-9-4-12-13l3-9-4-10 3-10-5-10 4-10-5-10 4-10-5-10 4-10z"
+            fill="#CBEFF7" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M0 8v88" stroke="#0D7C8C" stroke-opacity=".25" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <!-- зуб протеза -->
+    <g id="a4-tooth">
+      <path d="M-19 0h38c6 0 10 5 9 11l-4 30c-2 15-10 24-24 24s-22-9-24-24l-4-30c-1-6 3-11 9-11z"
+            fill="#fff" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
+    </g>
+  </defs>
+
+  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- ================= кость челюсти ================= -->
+  <g mask="url(#a4-mx)">
+    <path d="M18 292c40-26 78-36 122-38 44-2 116-2 160 0 44 2 82 12 122 38v96H18z"
+          fill="#fff" fill-opacity=".11"/>
+    <path d="M18 292c40-26 78-36 122-38 44-2 116-2 160 0 44 2 82 12 122 38v20c-40-26-78-36-122-38-44-2-116-2-160 0-44 2-82 12-122 38z"
+          fill="#fff" fill-opacity=".17"/>
+    <path d="M18 292c40-26 78-36 122-38 44-2 116-2 160 0 44 2 82 12 122 38"
+          fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+    <g fill="#fff" fill-opacity=".14">
+      <circle cx="70" cy="348" r="4"/><circle cx="122" cy="372" r="3"/><circle cx="176" cy="352" r="4.5"/>
+      <circle cx="240" cy="374" r="3.5"/><circle cx="304" cy="352" r="4.5"/><circle cx="358" cy="372" r="3"/>
+      <circle cx="410" cy="348" r="4"/><circle cx="96" cy="330" r="2.5"/><circle cx="384" cy="330" r="2.5"/>
+      <circle cx="208" cy="336" r="2.5"/><circle cx="272" cy="336" r="2.5"/>
+    </g>
+  </g>
+
+  <!-- ================= четыре импланта ================= -->
+  <!-- задние наклонены: так обходят пазуху и хватает своей кости -->
+  <g transform="translate(96,286) rotate(-32)"><use href="#a4-screw"/></g>
+  <g transform="translate(190,278)"><use href="#a4-screw"/></g>
+  <g transform="translate(290,278)"><use href="#a4-screw"/></g>
+  <g transform="translate(384,286) rotate(32)"><use href="#a4-screw"/></g>
+
+  <!-- ================= несъёмный протез ================= -->
+  <g>
+    <!-- базис -->
+    <path d="M40 250c40-30 84-42 124-45 42-3 110-3 152 0 40 3 84 15 124 45 4 14 2 24-6 30-40-22-78-30-118-32-44-2-112-2-156 0-40 2-78 10-118 32-8-6-10-16-2-30z"
+          fill="#9FE0EE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- зубной ряд протеза -->
+    <g transform="translate(84,196) rotate(-24)"><use href="#a4-tooth"/></g>
+    <g transform="translate(130,178) rotate(-16)"><use href="#a4-tooth"/></g>
+    <g transform="translate(180,166) rotate(-8)"><use href="#a4-tooth"/></g>
+    <g transform="translate(232,162)"><use href="#a4-tooth"/></g>
+    <g transform="translate(284,162)"><use href="#a4-tooth"/></g>
+    <g transform="translate(336,166) rotate(8)"><use href="#a4-tooth"/></g>
+    <g transform="translate(386,178) rotate(16)"><use href="#a4-tooth"/></g>
+    <g transform="translate(432,196) rotate(24)"><use href="#a4-tooth"/></g>
+  </g>
+
+  <!-- ================= выноски ================= -->
+  <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5" fill="none" stroke-dasharray="4 5">
+    <path d="M240 156v-18"/>
+    <path d="M240 330v70"/>
+  </g>
+  <g fill="#fff"><circle cx="240" cy="134" r="4"/><circle cx="240" cy="404" r="4"/></g>
+  <g fill="#fff" fill-opacity=".92" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="14.5" font-weight="600">
+    <text x="240" y="116">Несъёмный протез</text>
+    <text x="240" y="428">4 импланта — вся челюсть</text>
+  </g>
+</svg>

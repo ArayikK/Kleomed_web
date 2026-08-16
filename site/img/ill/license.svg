@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Лицензии: медицинская лицензия клиники с печатью">
+  <title>Лицензии</title>
+
+  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- ================= второй лист позади ================= -->
+  <g transform="rotate(-7 240 250)">
+    <rect x="118" y="96" width="244" height="300" rx="18" fill="#fff" fill-opacity=".38"/>
+  </g>
+
+  <!-- ================= лицензия ================= -->
+  <g>
+    <rect x="106" y="88" width="248" height="304" rx="18" fill="#fff" stroke="#fff" stroke-width="2.5"/>
+    <!-- рамка документа -->
+    <rect x="122" y="104" width="216" height="272" rx="10" fill="none" stroke="#0D7C8C" stroke-opacity=".2" stroke-width="2"/>
+
+    <!-- герб-эмблема -->
+    <g transform="translate(230,152)">
+      <circle cx="0" cy="0" r="26" fill="#0D7C8C" fill-opacity=".12"/>
+      <path d="M0-17 3.5-6H15L6 1l3.5 11L0 5l-9.5 7L-6 1l-9-7h11.5z" fill="#0D7C8C" fill-opacity=".55"/>
+    </g>
+
+    <!-- заголовок -->
+    <text x="230" y="204" text-anchor="middle" fill="#0D7C8C" fill-opacity=".9"
+          font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="16" font-weight="900">ЛИЦЕНЗИЯ</text>
+    <text x="230" y="224" text-anchor="middle" fill="#0D7C8C" fill-opacity=".5"
+          font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="12" font-weight="600">на медицинскую деятельность</text>
+
+    <!-- строки текста -->
+    <g fill="#0D7C8C" fill-opacity=".22">
+      <rect x="148" y="248" width="164" height="8" rx="4"/>
+      <rect x="148" y="268" width="140" height="8" rx="4"/>
+      <rect x="148" y="288" width="164" height="8" rx="4"/>
+      <rect x="148" y="308" width="106" height="8" rx="4"/>
+    </g>
+    <!-- подпись от руки -->
+    <path d="M150 350c10-12 18 6 26-2s10-14 18-6 14 12 22 2" fill="none"
+          stroke="#0D7C8C" stroke-opacity=".4" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- ================= печать ================= -->
+  <g transform="translate(330,336)">
+    <circle cx="0" cy="0" r="52" fill="#9FE0EE" fill-opacity=".95" stroke="#fff" stroke-width="3"/>
+    <circle cx="0" cy="0" r="41" fill="none" stroke="#0B4E5A" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 5"/>
+    <path d="M-16 2 -5 13 17-11" fill="none" stroke="#0B4E5A" stroke-opacity=".75" stroke-width="7"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ================= подпись ================= -->
+  <text x="240" y="446" text-anchor="middle" fill="#fff" fill-opacity=".92"
+        font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="600">Работаем официально и по закону</text>
+</svg>

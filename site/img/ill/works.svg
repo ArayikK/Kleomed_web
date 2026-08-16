@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Наши работы: сравнение улыбки до и после лечения">
+  <title>Наши работы</title>
+  <defs>
+    <clipPath id="wk-l"><rect x="60" y="120" width="150" height="196" rx="22"/></clipPath>
+    <clipPath id="wk-r"><rect x="270" y="120" width="150" height="196" rx="22"/></clipPath>
+    <!-- зуб ряда «до»/«после» -->
+    <g id="wk-t">
+      <path d="M-17 0h34c5 0 9 4 8 10l-4 30c-1 14-8 22-21 22s-20-8-21-22l-4-30c-1-6 3-10 8-10z"/>
+    </g>
+  </defs>
+
+  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- ================= «до» ================= -->
+  <g>
+    <rect x="60" y="120" width="150" height="196" rx="22" fill="#0B2A33" fill-opacity=".22" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+    <g clip-path="url(#wk-l)">
+      <!-- десна -->
+      <path d="M50 196c30-12 56-16 85-16s55 4 85 16v34c-30-12-56-16-85-16s-55 4-85 16z" fill="#fff" fill-opacity=".18"/>
+      <!-- неровный ряд: разная высота, наклоны, один зуб отсутствует -->
+      <g fill="#B9CBD1" stroke="#8FA9B1" stroke-width="1.5" stroke-linejoin="round">
+        <g transform="translate(84,214) rotate(-11)"><use href="#wk-t"/></g>
+        <g transform="translate(118,206) rotate(8)"><use href="#wk-t"/></g>
+        <g transform="translate(152,216) rotate(-6)"><use href="#wk-t"/></g>
+        <g transform="translate(186,208) rotate(12)"><use href="#wk-t"/></g>
+      </g>
+      <!-- скол и потемнение -->
+      <path d="M104 224c-3 12-3 30 0 42" stroke="#5E7B84" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <path d="M170 232l-10 8 9 7" fill="none" stroke="#5E7B84" stroke-width="4" stroke-linejoin="round"/>
+    </g>
+    <rect x="60" y="120" width="150" height="196" rx="22" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+    <!-- ярлык -->
+    <g>
+      <rect x="76" y="136" width="54" height="26" rx="13" fill="#0B2A33" fill-opacity=".55"/>
+      <text x="103" y="154" text-anchor="middle" fill="#fff" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="13.5" font-weight="800">До</text>
+    </g>
+  </g>
+
+  <!-- ================= «после» ================= -->
+  <g>
+    <rect x="270" y="120" width="150" height="196" rx="22" fill="#fff" fill-opacity=".12" stroke="#fff" stroke-opacity=".45" stroke-width="2"/>
+    <g clip-path="url(#wk-r)">
+      <path d="M260 196c30-12 56-16 85-16s55 4 85 16v34c-30-12-56-16-85-16s-55 4-85 16z" fill="#fff" fill-opacity=".26"/>
+      <!-- ровный ряд одинаковой высоты -->
+      <g fill="#fff">
+        <g transform="translate(294,212)"><use href="#wk-t"/></g>
+        <g transform="translate(328,210)"><use href="#wk-t"/></g>
+        <g transform="translate(362,210)"><use href="#wk-t"/></g>
+        <g transform="translate(396,212)"><use href="#wk-t"/></g>
+      </g>
+      <g stroke="#0D7C8C" stroke-opacity=".13" stroke-width="5" stroke-linecap="round" fill="none">
+        <path d="M288 224c-2 10-2 24 0 34"/><path d="M322 222c-2 10-2 24 0 34"/>
+        <path d="M356 222c-2 10-2 24 0 34"/><path d="M390 224c-2 10-2 24 0 34"/>
+      </g>
+    </g>
+    <rect x="270" y="120" width="150" height="196" rx="22" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="2"/>
+    <g>
+      <rect x="286" y="136" width="86" height="26" rx="13" fill="#fff"/>
+      <text x="329" y="154" text-anchor="middle" fill="#0D7C8C" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="13.5" font-weight="800">После</text>
+    </g>
+    <!-- искры -->
+    <g fill="#fff" fill-opacity=".9">
+      <path d="M404 176l3.5 9 9 3.5-9 3.5-3.5 9-3.5-9-9-3.5 9-3.5z"/>
+      <path d="M286 180l2.5 6 6 2.5-6 2.5-2.5 6-2.5-6-6-2.5 6-2.5z"/>
+    </g>
+  </g>
+
+  <!-- ================= стрелка перехода ================= -->
+  <g>
+    <circle cx="240" cy="240" r="27" fill="#fff"/>
+    <path d="M228 240h22m-8-9 9 9-9 9" fill="none" stroke="#0D7C8C" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ================= подпись ================= -->
+  <text x="240" y="416" text-anchor="middle" fill="#fff" fill-opacity=".92"
+        font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="600">Реальные случаи наших пациентов</text>
+</svg>

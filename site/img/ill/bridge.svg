@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Схема мостовидного протеза: три коронки на двух опорных зубах">
+  <title>Мостовидные протезы</title>
+  <defs>
+    <linearGradient id="bg-fx" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000"/><stop offset=".12" stop-color="#fff"/>
+      <stop offset=".88" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="bg-mx"><rect width="480" height="480" fill="url(#bg-fx)"/></mask>
+    <!-- одна коронка моста -->
+    <g id="bg-unit">
+      <path d="M-40 0h80c7 0 12 6 11 13l-6 44c-2 20-14 32-45 32s-43-12-45-32l-6-44c-1-7 4-13 11-13z"
+            fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M-22 14c-3 10-4 26-2 42" stroke="#0D7C8C" stroke-opacity=".14" stroke-width="6" stroke-linecap="round" fill="none"/>
+    </g>
+    <!-- опорный зуб, обточенный под коронку -->
+    <g id="bg-abut">
+      <path d="M-26 0c0-12 7-19 18-21h16c11 2 18 9 18 21l-5 66h-42z" fill="#9FE0EE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M-32 66h64" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/>
+      <path d="M-22 78h44l-6 76c-1 13-9 22-16 22s-15-9-16-22z" fill="#fff" fill-opacity=".16" stroke="#fff" stroke-opacity=".28" stroke-width="2" stroke-linejoin="round"/>
+    </g>
+  </defs>
+
+  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- ================= опорные зубы и десна ================= -->
+  <g transform="translate(130,242)"><use href="#bg-abut"/></g>
+  <g transform="translate(350,242)"><use href="#bg-abut"/></g>
+  <g mask="url(#bg-mx)">
+    <!-- на месте отсутствующего зуба гребень осел -->
+    <path d="M10 296c34-14 62-18 92-12 24 4 40 5 58 1 22-5 44 6 80 6s58-11 80-6c18 4 34 3 58-1 30-6 58-2 92 12v46c-34-14-62-18-92-12-24 4-40 5-58 1-22-5-44 6-80 6s-58-11-80-6c-18 4-34 3-58-1-30-6-58-2-92 12z"
+          fill="#fff" fill-opacity=".26" stroke="#fff" stroke-opacity=".34" stroke-width="1.8" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ================= мостовидный протез ================= -->
+  <!-- три спаянные коронки: две на опорах, средняя подвесная -->
+  <g transform="translate(0,-24)">
+    <!-- соединители между коронками -->
+    <path d="M158 182h164v34H158z" fill="#fff"/>
+    <g transform="translate(130,182)"><use href="#bg-unit"/></g>
+    <g transform="translate(240,182)"><use href="#bg-unit"/></g>
+    <g transform="translate(350,182)"><use href="#bg-unit"/></g>
+    <!-- общий контур, чтобы конструкция читалась цельной -->
+    <path d="M90 195c0-7 5-13 12-13h276c7 0 12 6 12 13" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- стрелка посадки -->
+  <g stroke="#fff" stroke-opacity=".65" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M240 274v20" stroke-dasharray="5 6"/>
+    <path d="M232 288l8 9 8-9"/>
+  </g>
+
+  <!-- ================= выноски ================= -->
+  <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5" fill="none" stroke-dasharray="4 5">
+    <path d="M240 138v-38"/>
+    <path d="M130 330v56"/>
+  </g>
+  <g fill="#fff"><circle cx="240" cy="96" r="4"/><circle cx="130" cy="390" r="4"/></g>
+  <g fill="#fff" fill-opacity=".92" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="14.5" font-weight="600">
+    <text x="240" y="78">Мост из трёх коронок</text>
+    <text x="130" y="414">Опорный зуб</text>
+  </g>
+</svg>

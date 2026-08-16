@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Схема брекет-системы: брекеты с дугой на зубном ряду">
+  <title>Ортодонтия — брекет-системы</title>
+  <defs>
+    <linearGradient id="br-fx" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000"/><stop offset=".12" stop-color="#fff"/>
+      <stop offset=".88" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="br-mx"><rect width="480" height="480" fill="url(#br-fx)"/></mask>
+    <!-- зуб ряда: начало координат — середина верхнего края -->
+    <g id="br-tooth">
+      <path d="M-26 0h52c8 0 13 6 12 14l-8 74c-2 22-14 34-30 34s-28-12-30-34l-8-74c-1-8 4-14 12-14z"
+            fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M-14 18c-3 12-4 32-2 50" stroke="#0D7C8C" stroke-opacity=".13" stroke-width="6" stroke-linecap="round" fill="none"/>
+    </g>
+    <!-- брекет с пазом под дугу -->
+    <g id="br-bracket">
+      <rect x="-14" y="-12" width="28" height="24" rx="7" fill="#CBEFF7" stroke="#fff" stroke-width="2"/>
+      <path d="M-14 0h28" stroke="#0D7C8C" stroke-opacity=".45" stroke-width="4"/>
+      <g fill="#0D7C8C" fill-opacity=".3"><circle cx="-7" cy="-6" r="2"/><circle cx="7" cy="-6" r="2"/>
+        <circle cx="-7" cy="6" r="2"/><circle cx="7" cy="6" r="2"/></g>
+    </g>
+  </defs>
+
+  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- ================= десна ================= -->
+  <g mask="url(#br-mx)">
+    <path d="M4 150c40-16 74-24 118-27 42-3 94-3 136 0 44 3 78 11 118 27v40c-40-16-74-24-118-27-42-3-94-3-136 0-44 3-78 11-118 27z"
+          fill="#fff" fill-opacity=".24" stroke="#fff" stroke-opacity=".34" stroke-width="1.8" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ================= зубной ряд ================= -->
+  <!-- лёгкая дуга: крайние зубы чуть ниже центральных -->
+  <g>
+    <g transform="translate(88,196) rotate(-5)"><use href="#br-tooth"/></g>
+    <g transform="translate(148,186) rotate(-3)"><use href="#br-tooth"/></g>
+    <g transform="translate(208,180)"><use href="#br-tooth"/></g>
+    <!-- этот зуб развёрнут — его и исправляет система -->
+    <g transform="translate(268,182) rotate(9)"><use href="#br-tooth"/></g>
+    <g transform="translate(332,186) rotate(3)"><use href="#br-tooth"/></g>
+    <g transform="translate(392,196) rotate(5)"><use href="#br-tooth"/></g>
+  </g>
+
+  <!-- ================= дуга ================= -->
+  <path d="M74 268c52-14 106-20 166-20s114 6 166 20"
+        fill="none" stroke="#9FE0EE" stroke-width="6" stroke-linecap="round"/>
+  <path d="M74 268c52-14 106-20 166-20s114 6 166 20"
+        fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- ================= брекеты ================= -->
+  <g>
+    <g transform="translate(88,258) rotate(-5)"><use href="#br-bracket"/></g>
+    <g transform="translate(148,252) rotate(-3)"><use href="#br-bracket"/></g>
+    <g transform="translate(208,248)"><use href="#br-bracket"/></g>
+    <g transform="translate(270,250) rotate(5)"><use href="#br-bracket"/></g>
+    <g transform="translate(332,252) rotate(3)"><use href="#br-bracket"/></g>
+    <g transform="translate(392,258) rotate(5)"><use href="#br-bracket"/></g>
+  </g>
+
+  <!-- ================= стрелка исправления ================= -->
+  <g stroke="#fff" stroke-opacity=".8" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <path d="M300 148a36 36 0 0 0-46 4" stroke-dasharray="5 6"/>
+    <path d="M262 144l-9 9 10 7"/>
+  </g>
+
+  <!-- ================= выноски ================= -->
+  <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5" fill="none" stroke-dasharray="4 5">
+    <path d="M148 264v88"/>
+    <path d="M332 268v84"/>
+  </g>
+  <g fill="#fff"><circle cx="148" cy="356" r="4"/><circle cx="332" cy="356" r="4"/></g>
+  <g fill="#fff" fill-opacity=".9" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="14.5" font-weight="600">
+    <text x="148" y="380">Брекет</text>
+    <text x="332" y="380">Дуга</text>
+  </g>
+</svg>

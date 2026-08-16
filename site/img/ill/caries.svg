@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Разрез зуба: эмаль, дентин, пульпа и кариозная полость">
+  <title>Лечение кариеса</title>
+  <defs>
+    <linearGradient id="ca-fx" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000"/><stop offset=".14" stop-color="#fff"/>
+      <stop offset=".86" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+    </linearGradient>
+    <mask id="ca-mx"><rect width="480" height="480" fill="url(#ca-fx)"/></mask>
+    <!-- контур зуба обрезает внутренние слои -->
+    <clipPath id="ca-clip">
+      <path d="M158 236c-4-52 13-88 38-96 16-5 27 14 35 27 6 11 12 11 18 0 8-13 19-32 35-27 25 8 42 44 38 96
+               l3 36c1 15-2 26-7 43-5 23-10 48-17 56-8 9-12-13-14-34-2-19-6-33-14-40-8 7-12 21-14 40-2 21-6 43-14 34-7-8-12-33-17-56-5-17-8-28-7-43z"/>
+    </clipPath>
+  </defs>
+
+  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- ================= десна ================= -->
+  <g mask="url(#ca-mx)">
+    <path d="M20 258c34-16 62-20 92-14 26 5 44 6 66 1 20-5 32-14 62-14s42 9 62 14c22 5 40 4 66-1 30-6 58-2 92 14v40c-34-16-62-20-92-14-26 5-44 6-66 1-20-5-32-14-62-14s-42 9-62 14c-22 5-40 4-66-1-30-6-58-2-92 14z"
+          fill="#fff" fill-opacity=".22" stroke="#fff" stroke-opacity=".3" stroke-width="1.8" stroke-linejoin="round"/>
+  </g>
+
+  <!-- ================= зуб: эмаль ================= -->
+  <path d="M158 236c-4-52 13-88 38-96 16-5 27 14 35 27 6 11 12 11 18 0 8-13 19-32 35-27 25 8 42 44 38 96
+           l3 36c1 15-2 26-7 43-5 23-10 48-17 56-8 9-12-13-14-34-2-19-6-33-14-40-8 7-12 21-14 40-2 21-6 43-14 34-7-8-12-33-17-56-5-17-8-28-7-43z"
+        fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+
+  <g clip-path="url(#ca-clip)">
+    <!-- дентин -->
+    <path d="M180 244c-3-42 11-70 30-77 13-4 22 11 28 21 5 9 15 9 20 0 6-10 15-25 28-21 19 7 33 35 30 77
+             l3 30c1 12-2 21-6 35-4 19-8 40-14 46-6 7-10-10-11-27-2-16-8-30-18-36-10 6-16 20-18 36-1 17-5 34-11 27-6-6-10-27-14-46-4-14-7-23-6-35z"
+          fill="#CBEFF7"/>
+    <!-- пульпа: камера и каналы -->
+    <path d="M212 214c-2-22 6-38 16-42 8-3 13 7 17 13 3 6 8 6 11 0 4-6 9-16 17-13 10 4 18 20 16 42
+             l1 24c1 8-2 14-4 22-3 12-6 30-9 34-3 5-5-6-6-16-1-10-4-18-9-22-5 4-8 12-9 22-1 10-3 21-6 16-3-4-6-22-9-34-2-8-5-14-4-22z"
+          fill="#5EBBCC"/>
+    <!-- кариозная полость: разрушение сквозь эмаль в дентин -->
+    <path d="M198 168c13-9 28-5 32 6 4 11-2 21-9 28-8 8-19 11-28 7-11-4-13-17-7-26 3-6 7-10 12-15z"
+          fill="#0B2A33" fill-opacity=".72"/>
+    <path d="M210 206c-5 8-5 17 0 22 5 5 11 4 15-2" fill="none" stroke="#0B2A33" stroke-opacity=".6" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <!-- контур полости поверх зуба -->
+  <path d="M198 168c13-9 28-5 32 6 4 11-2 21-9 28-8 8-19 11-28 7-11-4-13-17-7-26 3-6 7-10 12-15z"
+        fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>
+
+  <!-- ================= выноски ================= -->
+  <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5" fill="none" stroke-dasharray="4 5">
+    <path d="M190 160l-44-40"/>
+    <path d="M318 176h44"/>
+    <path d="M262 232h100"/>
+    <path d="M252 316h110"/>
+  </g>
+  <g fill="#fff">
+    <circle cx="142" cy="116" r="4"/><circle cx="366" cy="176" r="4"/>
+    <circle cx="366" cy="232" r="4"/><circle cx="366" cy="316" r="4"/>
+  </g>
+  <g fill="#fff" fill-opacity=".92" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="14.5" font-weight="600">
+    <text x="132" y="111" text-anchor="end">Кариес</text>
+    <text x="378" y="181">Эмаль</text>
+    <text x="378" y="237">Дентин</text>
+    <text x="378" y="321">Пульпа</text>
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="О клинике: стоматологический кабинет с креслом и лампой">
+  <title>О клинике</title>
+
+  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- ================= стоматологическое кресло ================= -->
+  <!-- спинка -->
+  <path d="M132 172c0-16 13-29 29-29h26c16 0 29 13 29 29v92h-84z"
+        fill="#fff" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- подголовник -->
+  <rect x="140" y="104" width="68" height="34" rx="16" fill="#CBEFF7" stroke="#fff" stroke-width="2.5"/>
+  <!-- сиденье -->
+  <path d="M126 264h96c10 0 18 8 18 18v10c0 10-8 18-18 18h-96c-10 0-18-8-18-18v-10c0-10 8-18 18-18z"
+        fill="#9FE0EE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- подножка -->
+  <path d="M240 282h86c12 0 21 10 21 21v6h-30v-6h-77z"
+        fill="#fff" fill-opacity=".85" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- стойка и основание -->
+  <path d="M158 310h32v56h-32z" fill="#fff" fill-opacity=".7" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M112 366h124c8 0 14 6 14 14s-6 14-14 14H112c-8 0-14-6-14-14s6-14 14-14z"
+        fill="#fff" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- ================= бестеневая лампа ================= -->
+  <g>
+    <!-- кронштейн -->
+    <path d="M348 380V236c0-14 11-25 25-25h14" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="6" stroke-linecap="round"/>
+    <path d="M387 211l-40-46" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="6" stroke-linecap="round"/>
+    <!-- плафон -->
+    <g transform="rotate(-38 340 152)">
+      <rect x="296" y="128" width="88" height="46" rx="16" fill="#fff" stroke="#fff" stroke-width="2.5"/>
+      <g fill="#0D7C8C" fill-opacity=".28">
+        <circle cx="318" cy="151" r="7"/><circle cx="340" cy="151" r="7"/><circle cx="362" cy="151" r="7"/>
+      </g>
+    </g>
+    <!-- световой конус -->
+    <path d="M318 186 210 292l-34-26z" fill="#fff" fill-opacity=".14"/>
+  </g>
+
+  <!-- ================= пол ================= -->
+  <path d="M60 394h300" stroke="#fff" stroke-opacity=".28" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 12"/>
+
+  <!-- ================= подпись ================= -->
+  <text x="240" y="440" text-anchor="middle" fill="#fff" fill-opacity=".92"
+        font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="600">Стерильно, спокойно, без боли</text>
+</svg>

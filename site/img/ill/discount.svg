@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Акции: скидка на лечение в клинике">
+  <title>Акции и скидки</title>
+
+  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- ================= ценник ================= -->
+  <g transform="rotate(-12 240 244)">
+    <path d="M132 128h150c10 0 20 4 27 11l86 86c15 15 15 39 0 54l-96 96c-15 15-39 15-54 0l-86-86c-7-7-11-17-11-27V150c0-12 10-22 22-22z"
+          fill="#fff" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+    <!-- люверс -->
+    <circle cx="180" cy="176" r="22" fill="#0D7C8C" fill-opacity=".18"/>
+    <circle cx="180" cy="176" r="11" fill="#0D7C8C" fill-opacity=".4"/>
+    <!-- процент -->
+    <g fill="#0D7C8C">
+      <circle cx="238" cy="248" r="21" fill="none" stroke="#0D7C8C" stroke-width="11"/>
+      <circle cx="316" cy="326" r="21" fill="none" stroke="#0D7C8C" stroke-width="11"/>
+      <path d="M330 234 224 340" stroke="#0D7C8C" stroke-width="13" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- ================= зуб с искрами ================= -->
+  <g transform="translate(118,336)">
+    <circle cx="0" cy="0" r="42" fill="#9FE0EE" stroke="#fff" stroke-width="3"/>
+    <path d="M-18-20c-8 0-14 7-14 15 0 7 1 11 4 16 3 4 4 9 4 15 0 6 2 10 5 10s4-4 5-10l3-10c1-3 2-4 3-4s2 1 3 4l3 10c1 6 2 10 5 10s5-4 5-10c0-6 1-11 4-15 3-5 4-9 4-16 0-8-6-15-14-15-3 0-5 1-7 2-2 1-3 1-4 1s-2 0-4-1c-2-1-4-2-7-2z"
+          fill="#0B4E5A" fill-opacity=".8"/>
+  </g>
+  <g fill="#fff" fill-opacity=".9">
+    <path d="M92 262l5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/>
+    <path d="M168 282l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/>
+    <path d="M74 392l3.5 9 9 3.5-9 3.5-3.5 9-3.5-9-9-3.5 9-3.5z"/>
+  </g>
+
+  <!-- ================= подпись ================= -->
+  <text x="240" y="446" text-anchor="middle" fill="#fff" fill-opacity=".92"
+        font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="600">Действующие предложения месяца</text>
+</svg>
