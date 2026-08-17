@@ -635,7 +635,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .map-card:hover{color:#fff}   /* карточка — ссылка, не даём a:hover затемнить текст */
 .map-card__in{position:relative;padding:clamp(22px,2.4vw,34px);background:linear-gradient(180deg,rgba(11,42,51,0),rgba(11,42,51,.94))}
 .map-card h3{color:#fff;margin-bottom:6px}
-.map-card p{color:#C9E3E8;margin:0 0 18px;font-size:15.5px}
+.map-card p{color:var(--ink-2);margin:0 0 18px;font-size:15.5px}
 
 /* --------------------------------------------------------------- запись */
 .booking{position:relative;overflow:hidden;background:var(--pink)}
@@ -706,7 +706,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .lightbox{position:fixed;inset:0;z-index:1010;display:grid;place-items:center;padding:24px;background:rgba(6,28,35,.95);opacity:0;visibility:hidden;transition:opacity .25s var(--ease),visibility .25s var(--ease)}
 .lightbox.is-open{opacity:1;visibility:visible}
 .lightbox img{max-width:min(94vw,1000px);max-height:86vh;border-radius:var(--radius);object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.55)}
-.lightbox__cap{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#C9E3E8;font-size:15px;font-weight:600;padding-inline:20px}
+.lightbox__cap{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:var(--ink-2);font-size:15px;font-weight:600;padding-inline:20px}
 .lightbox__btn{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border-radius:50%;border:none;background:rgba(255,255,255,.14);cursor:pointer;display:grid;place-items:center;transition:.2s var(--ease)}
 .lightbox__btn:hover{background:var(--brand)}
 .lightbox__btn svg{width:22px;height:22px;fill:#fff}
