@@ -313,9 +313,48 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 }
 .hero__play i svg{width:15px;height:15px;fill:var(--deep)}
 
+
+/* ------------------------------------------------- фото на тёмной сцене */
+/* Маркетинговые снимки сняты на светлом фоне и на изумрудной сцене
+   выглядят вклеенными. Приглушаем их и накрываем зелёной вуалью с
+   затемнением к краям — тогда они лежат в кадре, а не поверх него.
+   Клинические снимки «до/после» и лицензии НЕ трогаем: там важна
+   достоверность цвета. */
+.doctor__photo,.offer__img,.hero__photo,.split__media,.promo-banner__media{position:relative;isolation:isolate}
+.doctor__photo::after,.offer__img::after,.split__media::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(1,16,13,0) 38%,rgba(1,16,13,.72) 100%),
+    radial-gradient(120% 90% at 50% 30%,rgba(1,16,13,0) 40%,rgba(1,16,13,.55) 100%),
+    linear-gradient(200deg,rgba(52,200,138,.14) 0%,rgba(1,60,44,.30) 100%);
+}
+.doctor__photo img,.offer__img img,.split__media img{
+  filter:saturate(.72) contrast(1.04) brightness(.9);
+}
+
+/* врач: кадр берём выше, чтобы лицо не тонуло в макросъёмке за спиной */
+.doctor__photo{border:1px solid var(--line-2)}
+.doctor__photo img{object-position:center 16%}
+.doctor__name{color:#fff}
+
+/* подпись врача поверх снимка — блок читается как один объект */
+.doctor__photo::before{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;z-index:2;
+  background:linear-gradient(90deg,transparent,var(--brand),transparent);
+}
+
+/* ------------------------------------------------- границы секций */
+/* На почти чёрном чередование фонов почти не читается — добавляем
+   тонкую светящуюся линию на стыке. */
+.section--soft{position:relative}
+.section--soft::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(52,200,138,.30) 20%,rgba(52,200,138,.30) 80%,transparent);
+}
+
 /* --------------------------------------------------------------- статистика */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px)}
-.stat{background:var(--card);border:1px solid var(--line-2);border-radius:var(--radius-l);padding:clamp(20px,2.2vw,30px);text-align:center;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-l);padding:clamp(20px,2.2vw,30px);text-align:center;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
 .stat:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
 .stat b{display:block;font-size:clamp(32px,3.4vw,46px);font-weight:900;color:var(--brand-600);line-height:1;letter-spacing:-.04em;margin-bottom:8px}
 .stat span{font-size:14.5px;color:var(--ink-2);font-weight:600;line-height:1.4}
@@ -344,7 +383,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 
 /* --------------------------------------------------------------- причины */
 .reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.8vw,26px)}
-.reason{background:var(--card);border:1px solid var(--line-2);border-radius:var(--radius-l);padding:clamp(24px,2.4vw,36px);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
+.reason{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-l);padding:clamp(24px,2.4vw,36px);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
 .reason:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--brand-100)}
 .reason__icon{width:60px;height:60px;border-radius:20px;background:linear-gradient(140deg,var(--brand-050),var(--pink-2));display:grid;place-items:center;margin-bottom:22px}
 .reason__icon svg{width:28px;height:28px;fill:var(--brand-600)}
@@ -431,7 +470,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .price-tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:22px}
 .price-search{position:relative;flex:1;min-width:240px;max-width:560px}
 .price-search input{width:100%;padding:15px 18px 15px 48px;border:1px solid var(--line);border-radius:100px;background:var(--card);font-size:16px;transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
-.price-search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(13,124,140,.16)}
+.price-search input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(52,200,138,.20)}
 .price-search svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:19px;height:19px;fill:var(--ink-3)}
 
 .price-tabs{display:flex;flex-wrap:wrap;gap:8px}
@@ -567,11 +606,19 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 
 /* --------------------------------------------------------------- запись */
 .booking{position:relative;overflow:hidden;background:var(--pink)}
-.booking img.booking__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.16}
-.booking__in{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,3.6vw,64px);align-items:center}
-.booking h2{color:var(--ink)}
+.booking img.booking__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.20;filter:saturate(.6)}
+/* завеса поверх снимка: без неё светлые участки фото садят контраст текста */
+.booking::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(1,16,13,.92) 0%,rgba(1,16,13,.72) 46%,rgba(1,16,13,.55) 100%),
+    linear-gradient(180deg,rgba(1,16,13,.5) 0%,rgba(1,16,13,.2) 40%,rgba(1,16,13,.6) 100%);
+}
+.booking__in{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,3.6vw,64px);align-items:center}
+.booking h2{color:#fff}
 .booking p{color:var(--ink-2);font-size:17px}
-.booking .eyebrow{color:var(--brand-700)}
+.booking .booking__points li{color:var(--ink)}
+.booking .eyebrow{color:var(--brand-300)}
 .booking__points{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
 .booking__points li{display:flex;align-items:center;gap:12px;margin:0;font-size:16px;font-weight:600;color:var(--ink-2)}
 .booking__points svg{width:22px;height:22px;fill:var(--brand-600);flex-shrink:0}
@@ -582,11 +629,11 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .field{margin-bottom:16px}
 .field label{display:block;font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:7px}
 .field input,.field select,.field textarea{width:100%;padding:15px 17px;border:1px solid var(--line);border-radius:var(--radius-s);background:var(--card);font-size:16px;transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(13,124,140,.16)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(52,200,138,.20)}
 .field input.is-error,.field select.is-error{border-color:#E5484D;box-shadow:0 0 0 4px rgba(229,72,77,.1)}
 .field__err{display:none;font-size:13px;color:#E5484D;margin-top:6px;font-weight:600}
 .field input.is-error~.field__err,.field select.is-error~.field__err{display:block}
-.field select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%237A959E' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:20px;padding-right:44px}
+.field select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236C8C7C' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:20px;padding-right:44px}
 .form-consent{font-size:12.5px;color:var(--ink-3);line-height:1.5;margin:14px 0 0}
 .form-consent a{color:var(--brand-600);text-decoration:underline}
 .form-ok{display:none;text-align:center;padding:20px 0}
@@ -596,19 +643,19 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .form-card.is-sent form,.form-card.is-sent .form-card__sub,.form-card.is-sent>h3{display:none}
 
 /* --------------------------------------------------------------- подвал */
-.footer{background:linear-gradient(150deg,var(--brand-700) 0%,#0F8C9E 60%,var(--brand-300) 140%);color:#C9E3E8;padding-block:clamp(46px,5vw,74px) 26px;font-size:15px}
+.footer{background:linear-gradient(160deg,#06231C 0%,#02120F 55%,#04241B 140%);border-top:1px solid var(--line);color:var(--ink-2);padding-block:clamp(46px,5vw,74px) 26px;font-size:15px}
 .footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:clamp(24px,2.6vw,44px);padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.16)}
-.footer .logo__mark{background:rgba(255,255,255,.16);box-shadow:none}
+.footer .logo__mark{background:var(--glass-2);box-shadow:none}
 .footer .logo__name{color:#fff}
-.footer .logo__sub{color:#A9D2DB}
+.footer .logo__sub{color:var(--brand-300)}
 .footer h4{color:#fff;font-size:15.5px;font-weight:800;margin-bottom:16px;letter-spacing:.02em}
 .footer ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
 .footer li{margin:0}
-.footer a{color:#C9E3E8}
+.footer a{color:var(--ink-2)}
 .footer a:hover{color:#fff}
-.footer__about{max-width:340px;margin:18px 0 0;font-size:14.5px;line-height:1.6;color:#B9DAE1}
-.footer__legal{padding-top:22px;display:grid;gap:10px;font-size:13px;line-height:1.6;color:#A9D2DB}
-.footer__warn{display:flex;gap:11px;align-items:flex-start;padding:15px 20px;border-radius:var(--radius);background:rgba(255,255,255,.12);color:#E4F3F6;font-size:13.5px;margin-bottom:6px}
+.footer__about{max-width:340px;margin:18px 0 0;font-size:14.5px;line-height:1.6;color:var(--ink-2)}
+.footer__legal{padding-top:22px;display:grid;gap:10px;font-size:13px;line-height:1.6;color:var(--ink-3)}
+.footer__warn{display:flex;gap:11px;align-items:flex-start;padding:15px 20px;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line-2);color:var(--ink-2);font-size:13.5px;margin-bottom:6px}
 .footer__warn svg{width:19px;height:19px;fill:#fff;flex-shrink:0;margin-top:2px}
 .footer__bottom{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:center;padding-top:8px}
 
