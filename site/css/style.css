@@ -20,32 +20,32 @@
      собран герой. Всё остальное — стекло и приглушённые поверхности,
      чтобы свет оставался единственным ярким пятном.
      ------------------------------------------------------------------ */
-  --lav:#04141A;          /* фон страницы */
-  --lav-2:#07202A;        /* чередующаяся секция */
-  --pink:#08242F;         /* полоса записи на приём */
-  --pink-2:#0A2A36;
+  --lav:#02120F;          /* фон страницы */
+  --lav-2:#051D17;        /* чередующаяся секция */
+  --pink:#06231C;         /* полоса записи на приём */
+  --pink-2:#082A21;
 
-  --card:#0A2531;         /* поверхность карточки */
-  --card-2:#0E3040;       /* приподнятая карточка */
+  --card:#08281F;         /* поверхность карточки */
+  --card-2:#0C3529;       /* приподнятая карточка */
   --glass:rgba(255,255,255,.055);
   --glass-2:rgba(255,255,255,.09);
 
-  --brand:#2FB8CE;        /* бирюзовый, поднят по яркости под тёмный фон */
-  --brand-600:#5ACCDE;
-  --brand-700:#8CE2EF;
-  --brand-300:#6FDCEC;
-  --brand-100:rgba(47,184,206,.30);
-  --brand-050:rgba(47,184,206,.12);
-  --deep:#020B0F;
-  --deep-2:#010609;
+  --brand:#34C88A;        /* бирюзовый, поднят по яркости под тёмный фон */
+  --brand-600:#5CD9A4;
+  --brand-700:#96ECC2;
+  --brand-300:#7FE3B0;
+  --brand-100:rgba(52,200,138,.30);
+  --brand-050:rgba(52,200,138,.12);
+  --deep:#01100D;
+  --deep-2:#000A08;
 
   --accent:#FF5A2B;       /* акции — единственный тёплый цвет */
   --accent-600:#FF7A52;
   --accent-300:#FF9B79;
 
-  --ink:#EDF7FA;          /* основной текст: контраст 15:1 к фону */
-  --ink-2:#A6C2CC;        /* вторичный: 8:1 */
-  --ink-3:#6E8B96;
+  --ink:#EAF7F0;          /* основной текст: контраст 15:1 к фону */
+  --ink-2:#A3C4B4;        /* вторичный: 8:1 */
+  --ink-3:#6C8C7C;
   --line:rgba(255,255,255,.13);
   --line-2:rgba(255,255,255,.08);
   --white:#fff;
@@ -58,7 +58,7 @@
   --shadow-s:0 2px 10px rgba(0,0,0,.4);
   --shadow:0 12px 40px rgba(0,0,0,.5);
   --shadow-l:0 28px 80px rgba(0,0,0,.6);
-  --shadow-brand:0 12px 34px rgba(47,184,206,.28);
+  --shadow-brand:0 12px 34px rgba(52,200,138,.26);
   --shadow-accent:0 12px 30px rgba(255,90,43,.32);
 
   --container:1680px;
@@ -121,8 +121,8 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
    жёстко — иначе оно перебивает вариант и, например, белый текст оказывается
    на белом фоне. */
 .btn{
-  --btn-bg:var(--brand);        --btn-fg:#04141A;  --btn-bd:transparent;
-  --btn-bg-h:var(--brand-600);  --btn-fg-h:#04141A;--btn-bd-h:transparent;
+  --btn-bg:var(--brand);        --btn-fg:#02120F;  --btn-bd:transparent;
+  --btn-bg-h:var(--brand-600);  --btn-fg-h:#02120F;--btn-bd-h:transparent;
   --btn-sh:var(--shadow-brand); --btn-sh-h:0 16px 38px rgba(13,124,140,.42);
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   padding:16px 30px;border:2px solid var(--btn-bd);border-radius:100px;
@@ -150,13 +150,13 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   backdrop-filter:blur(10px);
 }
 .btn--navy{
-  --btn-bg:#fff;      --btn-fg:#04141A;
-  --btn-bg-h:#EAFDFF; --btn-fg-h:#04141A;
+  --btn-bg:#fff;      --btn-fg:#02120F;
+  --btn-bg-h:#EAFFF4; --btn-fg-h:#02120F;
   --btn-sh:0 12px 30px rgba(11,42,51,.3);--btn-sh-h:0 16px 38px rgba(11,42,51,.38);
 }
 .btn--white{
-  --btn-bg:#fff;  --btn-fg:#04141A;
-  --btn-bg-h:#EAFDFF;--btn-fg-h:#04141A;
+  --btn-bg:#fff;  --btn-fg:#02120F;
+  --btn-bg-h:#EAFFF4;--btn-fg-h:#02120F;
   --btn-sh:0 12px 30px rgba(0,0,0,.16);--btn-sh-h:0 16px 38px rgba(0,0,0,.24);
 }
 .btn--coral{
@@ -170,11 +170,11 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 /* --------------------------------------------------------------- шапка */
 .header{
   position:fixed;inset:0 0 auto;z-index:900;height:var(--header-h);
-  background:rgba(4,20,26,.72);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(16px);
+  background:rgba(2,18,15,.72);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid transparent;
   transition:box-shadow .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);
 }
-.header.is-stuck{box-shadow:0 10px 40px rgba(0,0,0,.5);border-bottom-color:var(--line-2);background:rgba(4,20,26,.9)}
+.header.is-stuck{box-shadow:0 10px 40px rgba(0,0,0,.5);border-bottom-color:var(--line-2);background:rgba(2,18,15,.9)}
 .header__inner{display:flex;align-items:center;gap:clamp(14px,2vw,34px);height:100%}
 .logo{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .logo__mark{
@@ -232,27 +232,27 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   position:absolute;left:50%;top:46%;translate:-50% -50%;
   width:min(130vw,1500px);aspect-ratio:1.5;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 42% 34% at 50% 50%, rgba(120,240,255,.30) 0%, rgba(120,240,255,0) 60%),
-    radial-gradient(ellipse 60% 46% at 50% 52%, rgba(24,140,165,.34) 0%, rgba(24,140,165,0) 70%);
+    radial-gradient(ellipse 40% 32% at 50% 48%, rgba(96,232,168,.26) 0%, rgba(96,232,168,0) 62%),
+    radial-gradient(ellipse 58% 46% at 50% 52%, rgba(1,90,68,.62) 0%, rgba(1,90,68,0) 72%);
   filter:blur(10px);
 }
 /* холодный отблеск от пола */
 .hero::after{
   content:"";position:absolute;left:0;right:0;bottom:0;height:34%;z-index:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(47,184,206,0) 0%,rgba(47,184,206,.10) 55%,rgba(4,20,26,.9) 100%);
+  background:linear-gradient(180deg,rgba(52,200,138,0) 0%,rgba(52,200,138,.07) 55%,rgba(1,16,13,.9) 100%);
 }
 .hero__stage{position:relative;z-index:1;width:100%}
 
 /* заголовок во всю ширину — объект проходит поверх него */
 .hero__title{
   position:relative;z-index:1;margin:0;text-align:center;
-  font-size:clamp(30px,8.1vw,150px);font-weight:900;line-height:.9;white-space:nowrap;
+  font-size:clamp(25px,7.2vw,132px);font-weight:900;line-height:.94;
   letter-spacing:-.05em;color:#fff;text-transform:uppercase;
-  text-wrap:balance;
+  white-space:nowrap;
 }
 .hero__title em{
   font-style:normal;
-  background:linear-gradient(180deg,#fff 40%,rgba(255,255,255,.62) 100%);
+  background:linear-gradient(104deg,#F2FFF8 0%,#8FEFC0 42%,#31B87F 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .hero__eyebrow{
@@ -267,22 +267,15 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 /* сам объект: перекрывает заголовок и даёт кадру глубину */
 .hero__object{
   position:relative;z-index:2;display:grid;place-items:center;
-  margin-top:clamp(-104px,-7.4vw,-34px);
-  margin-bottom:clamp(-14px,-1vw,-4px);
+  margin-top:clamp(-26px,-2.2vw,-8px);
+  margin-bottom:clamp(-44px,-3.2vw,-14px);
   pointer-events:none;
 }
 .hero__object img{
-  width:clamp(178px,21.5vw,340px);height:auto;display:block;
-  filter:drop-shadow(0 40px 70px rgba(0,0,0,.65));
+  width:clamp(240px,31vw,520px);height:auto;display:block;
+  filter:drop-shadow(0 30px 60px rgba(0,0,0,.55));
 }
-/* отражение объекта на глянцевом полу */
-.hero__object img.is-reflection{
-  position:absolute;top:100%;margin-top:-6px;
-  scale:1 -1;opacity:.20;
-  filter:blur(7px);
-  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.85) 0%,transparent 62%);
-          mask-image:linear-gradient(180deg,rgba(0,0,0,.85) 0%,transparent 62%);
-}
+/* отражение уже впечатано в снимок — отдельный слой не нужен */
 
 /* нижняя строка: телефон, счётчик пациентов, видео */
 .hero__actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}
@@ -672,13 +665,13 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   content:"";position:absolute;right:2%;top:50%;translate:0 -50%;z-index:0;pointer-events:none;
   width:min(58vw,820px);aspect-ratio:1.25;
   background:
-    radial-gradient(ellipse 40% 34% at 50% 50%, rgba(120,240,255,.24) 0%, rgba(120,240,255,0) 62%),
-    radial-gradient(ellipse 58% 46% at 50% 52%, rgba(24,140,165,.28) 0%, rgba(24,140,165,0) 72%);
+    radial-gradient(ellipse 38% 32% at 50% 48%, rgba(96,232,168,.20) 0%, rgba(96,232,168,0) 64%),
+    radial-gradient(ellipse 56% 46% at 50% 52%, rgba(1,90,68,.52) 0%, rgba(1,90,68,0) 74%);
   filter:blur(8px);
 }
 .page-hero::after{
   content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(47,184,206,0) 0%,rgba(47,184,206,.07) 60%,rgba(4,20,26,.85) 100%);
+  background:linear-gradient(180deg,rgba(52,200,138,0) 0%,rgba(52,200,138,.06) 60%,rgba(1,16,13,.85) 100%);
 }
 .page-hero__grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,3.6vw,64px);align-items:center;position:relative}
 .page-hero__in{max-width:700px;position:relative}
@@ -689,7 +682,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .page-hero__art{position:relative;display:grid;place-items:center}
 .page-hero__art::before{
   content:"";position:absolute;width:82%;aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle,rgba(160,246,255,.13) 0%,rgba(160,246,255,0) 70%);
+  background:radial-gradient(circle,rgba(150,246,200,.13) 0%,rgba(150,246,200,0) 70%);
 }
 .page-hero__art img{position:relative;width:100%;max-width:428px;height:auto;filter:drop-shadow(0 24px 50px rgba(0,0,0,.55))}
 

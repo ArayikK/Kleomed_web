@@ -10,13 +10,13 @@
     <g id="br-tooth">
       <path d="M-26 0h52c8 0 13 6 12 14l-8 74c-2 22-14 34-30 34s-28-12-30-34l-8-74c-1-8 4-14 12-14z"
             fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M-14 18c-3 12-4 32-2 50" stroke="#0D7C8C" stroke-opacity=".13" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <path d="M-14 18c-3 12-4 32-2 50" stroke="#0C7A55" stroke-opacity=".13" stroke-width="6" stroke-linecap="round" fill="none"/>
     </g>
     <!-- брекет с пазом под дугу -->
     <g id="br-bracket">
-      <rect x="-14" y="-12" width="28" height="24" rx="7" fill="#CBEFF7" stroke="#fff" stroke-width="2"/>
-      <path d="M-14 0h28" stroke="#0D7C8C" stroke-opacity=".45" stroke-width="4"/>
-      <g fill="#0D7C8C" fill-opacity=".3"><circle cx="-7" cy="-6" r="2"/><circle cx="7" cy="-6" r="2"/>
+      <rect x="-14" y="-12" width="28" height="24" rx="7" fill="#C8F5DF" stroke="#fff" stroke-width="2"/>
+      <path d="M-14 0h28" stroke="#0C7A55" stroke-opacity=".45" stroke-width="4"/>
+      <g fill="#0C7A55" fill-opacity=".3"><circle cx="-7" cy="-6" r="2"/><circle cx="7" cy="-6" r="2"/>
         <circle cx="-7" cy="6" r="2"/><circle cx="7" cy="6" r="2"/></g>
     </g>
   </defs>
@@ -27,7 +27,7 @@
   <!-- ================= десна ================= -->
   <g mask="url(#br-mx)">
     <path d="M4 150c40-16 74-24 118-27 42-3 94-3 136 0 44 3 78 11 118 27v40c-40-16-74-24-118-27-42-3-94-3-136 0-44 3-78 11-118 27z"
-          fill="#fff" fill-opacity=".24" stroke="#fff" stroke-opacity=".34" stroke-width="1.8" stroke-linejoin="round"/>
+          fill="#fff" fill-opacity=".24" stroke="#fff" stroke-opacity=".42" stroke-width="1.8" stroke-linejoin="round"/>
   </g>
 
   <!-- ================= зубной ряд ================= -->
@@ -44,7 +44,7 @@
 
   <!-- ================= дуга ================= -->
   <path d="M74 268c52-14 106-20 166-20s114 6 166 20"
-        fill="none" stroke="#9FE0EE" stroke-width="6" stroke-linecap="round"/>
+        fill="none" stroke="#93E7BE" stroke-width="6" stroke-linecap="round"/>
   <path d="M74 268c52-14 106-20 166-20s114 6 166 20"
         fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2" stroke-linecap="round"/>
 

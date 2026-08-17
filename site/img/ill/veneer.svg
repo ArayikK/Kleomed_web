@@ -16,16 +16,16 @@
   <!-- ================= десна сверху, зуб растёт вниз ================= -->
   <g mask="url(#vn-mx)">
     <path d="M40 128c30-14 54-16 80-10 24 5 40 6 61 1 19-4 30-13 59-13s40 9 59 13c21 5 37 4 61-1 26-6 50-4 80 10v34c-30-14-54-16-80-10-24 5-40 6-61 1-19-4-30-13-59-13s-40 9-59 13c-21 5-37 4-61-1-26-6-50-4-80 10z"
-          fill="#fff" fill-opacity=".24" stroke="#fff" stroke-opacity=".34" stroke-width="1.8" stroke-linejoin="round"/>
+          fill="#fff" fill-opacity=".24" stroke="#fff" stroke-opacity=".42" stroke-width="1.8" stroke-linejoin="round"/>
   </g>
 
   <!-- ================= свой зуб ================= -->
   <g transform="translate(272,158)">
-    <use href="#vn-shape" fill="#8FC9D6" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round"/>
+    <use href="#vn-shape" fill="#8AC9AC" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linejoin="round"/>
     <!-- потемнение и скол, которые закрывает винир -->
-    <path d="M-30 40c-4 20-4 52 0 74" stroke="#0B4E5A" stroke-opacity=".22" stroke-width="9" stroke-linecap="round" fill="none"/>
-    <path d="M18 52c-3 16-3 40 0 58" stroke="#0B4E5A" stroke-opacity=".16" stroke-width="7" stroke-linecap="round" fill="none"/>
-    <path d="M52 132l-16 12 14 10" fill="none" stroke="#0B4E5A" stroke-opacity=".28" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M-30 40c-4 20-4 52 0 74" stroke="#0A4D38" stroke-opacity=".22" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M18 52c-3 16-3 40 0 58" stroke="#0A4D38" stroke-opacity=".16" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M52 132l-16 12 14 10" fill="none" stroke="#0A4D38" stroke-opacity=".28" stroke-width="5" stroke-linejoin="round"/>
   </g>
 
   <!-- ================= винир перед зубом ================= -->
@@ -33,10 +33,10 @@
   <g transform="translate(206,192) rotate(-9)">
     <use href="#vn-shape" fill="#fff" fill-opacity=".97" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
     <!-- толщина керамики по нижнему краю -->
-    <path d="M66 16l-11 116c-3 30-21 48-55 48" fill="none" stroke="#9FE0EE" stroke-width="8" stroke-linecap="round"/>
+    <path d="M66 16l-11 116c-3 30-21 48-55 48" fill="none" stroke="#93E7BE" stroke-width="8" stroke-linecap="round"/>
     <!-- блики -->
-    <path d="M-30 26c-5 18-6 50-3 78" stroke="#0D7C8C" stroke-opacity=".15" stroke-width="9" stroke-linecap="round" fill="none"/>
-    <path d="M6 34c-3 12-4 30-2 44" stroke="#0D7C8C" stroke-opacity=".09" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M-30 26c-5 18-6 50-3 78" stroke="#0C7A55" stroke-opacity=".15" stroke-width="9" stroke-linecap="round" fill="none"/>
+    <path d="M6 34c-3 12-4 30-2 44" stroke="#0C7A55" stroke-opacity=".09" stroke-width="6" stroke-linecap="round" fill="none"/>
   </g>
 
   <!-- искры: эффект белоснежной улыбки -->

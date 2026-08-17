@@ -9,8 +9,8 @@
     <!-- имплант: конический винт с резьбой -->
     <g id="a4-screw">
       <path d="M-17 0h34l-4 12 4 10-5 10 4 10-5 10 4 10-5 10 3 10-4 10 3 9c-3 9-8 13-12 13s-9-4-12-13l3-9-4-10 3-10-5-10 4-10-5-10 4-10-5-10 4-10z"
-            fill="#CBEFF7" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/>
-      <path d="M0 8v88" stroke="#0D7C8C" stroke-opacity=".25" stroke-width="5" stroke-linecap="round"/>
+            fill="#C8F5DF" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M0 8v88" stroke="#0C7A55" stroke-opacity=".25" stroke-width="5" stroke-linecap="round"/>
     </g>
     <!-- зуб протеза -->
     <g id="a4-tooth">
@@ -25,7 +25,7 @@
   <!-- ================= кость челюсти ================= -->
   <g mask="url(#a4-mx)">
     <path d="M18 292c40-26 78-36 122-38 44-2 116-2 160 0 44 2 82 12 122 38v96H18z"
-          fill="#fff" fill-opacity=".11"/>
+          fill="#fff" fill-opacity=".14"/>
     <path d="M18 292c40-26 78-36 122-38 44-2 116-2 160 0 44 2 82 12 122 38v20c-40-26-78-36-122-38-44-2-116-2-160 0-44 2-82 12-122 38z"
           fill="#fff" fill-opacity=".17"/>
     <path d="M18 292c40-26 78-36 122-38 44-2 116-2 160 0 44 2 82 12 122 38"
@@ -49,7 +49,7 @@
   <g>
     <!-- базис -->
     <path d="M40 250c40-30 84-42 124-45 42-3 110-3 152 0 40 3 84 15 124 45 4 14 2 24-6 30-40-22-78-30-118-32-44-2-112-2-156 0-40 2-78 10-118 32-8-6-10-16-2-30z"
-          fill="#9FE0EE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+          fill="#93E7BE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
     <!-- зубной ряд протеза -->
     <g transform="translate(84,196) rotate(-24)"><use href="#a4-tooth"/></g>
     <g transform="translate(130,178) rotate(-16)"><use href="#a4-tooth"/></g>

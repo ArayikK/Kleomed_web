@@ -10,11 +10,11 @@
     <g id="bg-unit">
       <path d="M-40 0h80c7 0 12 6 11 13l-6 44c-2 20-14 32-45 32s-43-12-45-32l-6-44c-1-7 4-13 11-13z"
             fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M-22 14c-3 10-4 26-2 42" stroke="#0D7C8C" stroke-opacity=".14" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <path d="M-22 14c-3 10-4 26-2 42" stroke="#0C7A55" stroke-opacity=".14" stroke-width="6" stroke-linecap="round" fill="none"/>
     </g>
     <!-- опорный зуб, обточенный под коронку -->
     <g id="bg-abut">
-      <path d="M-26 0c0-12 7-19 18-21h16c11 2 18 9 18 21l-5 66h-42z" fill="#9FE0EE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M-26 0c0-12 7-19 18-21h16c11 2 18 9 18 21l-5 66h-42z" fill="#93E7BE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
       <path d="M-32 66h64" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/>
       <path d="M-22 78h44l-6 76c-1 13-9 22-16 22s-15-9-16-22z" fill="#fff" fill-opacity=".16" stroke="#fff" stroke-opacity=".28" stroke-width="2" stroke-linejoin="round"/>
     </g>
@@ -29,7 +29,7 @@
   <g mask="url(#bg-mx)">
     <!-- на месте отсутствующего зуба гребень осел -->
     <path d="M10 296c34-14 62-18 92-12 24 4 40 5 58 1 22-5 44 6 80 6s58-11 80-6c18 4 34 3 58-1 30-6 58-2 92 12v46c-34-14-62-18-92-12-24 4-40 5-58 1-22-5-44 6-80 6s-58-11-80-6c-18 4-34 3-58-1-30-6-58-2-92 12z"
-          fill="#fff" fill-opacity=".26" stroke="#fff" stroke-opacity=".34" stroke-width="1.8" stroke-linejoin="round"/>
+          fill="#fff" fill-opacity=".26" stroke="#fff" stroke-opacity=".42" stroke-width="1.8" stroke-linejoin="round"/>
   </g>
 
   <!-- ================= мостовидный протез ================= -->

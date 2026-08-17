@@ -8,36 +8,36 @@
   <g>
     <rect x="96" y="104" width="230" height="288" rx="20" fill="#fff" stroke="#fff" stroke-width="2.5"/>
     <!-- зажим планшета -->
-    <rect x="176" y="86" width="70" height="34" rx="14" fill="#9FE0EE" stroke="#fff" stroke-width="2.5"/>
+    <rect x="176" y="86" width="70" height="34" rx="14" fill="#93E7BE" stroke="#fff" stroke-width="2.5"/>
 
     <!-- пункты чек-листа -->
     <g font-family="system-ui,-apple-system,'Segoe UI',sans-serif">
       <!-- допустимо -->
       <g transform="translate(128,170)">
-        <circle cx="0" cy="0" r="13" fill="#0D7C8C" fill-opacity=".16"/>
-        <path d="M-6 0 -2 5 6-5" fill="none" stroke="#0D7C8C" stroke-opacity=".8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="26" y="-5" width="130" height="9" rx="4.5" fill="#0D7C8C" fill-opacity=".22"/>
+        <circle cx="0" cy="0" r="13" fill="#0C7A55" fill-opacity=".16"/>
+        <path d="M-6 0 -2 5 6-5" fill="none" stroke="#0C7A55" stroke-opacity=".8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="26" y="-5" width="130" height="9" rx="4.5" fill="#0C7A55" fill-opacity=".22"/>
       </g>
       <g transform="translate(128,214)">
-        <circle cx="0" cy="0" r="13" fill="#0D7C8C" fill-opacity=".16"/>
-        <path d="M-6 0 -2 5 6-5" fill="none" stroke="#0D7C8C" stroke-opacity=".8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="26" y="-5" width="106" height="9" rx="4.5" fill="#0D7C8C" fill-opacity=".22"/>
+        <circle cx="0" cy="0" r="13" fill="#0C7A55" fill-opacity=".16"/>
+        <path d="M-6 0 -2 5 6-5" fill="none" stroke="#0C7A55" stroke-opacity=".8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="26" y="-5" width="106" height="9" rx="4.5" fill="#0C7A55" fill-opacity=".22"/>
       </g>
       <!-- требует внимания -->
       <g transform="translate(128,258)">
-        <circle cx="0" cy="0" r="13" fill="#CF4114" fill-opacity=".18"/>
-        <path d="M0-6v5M0 4v1" stroke="#CF4114" stroke-opacity=".9" stroke-width="3.2" stroke-linecap="round"/>
-        <rect x="26" y="-5" width="140" height="9" rx="4.5" fill="#CF4114" fill-opacity=".3"/>
+        <circle cx="0" cy="0" r="13" fill="#FF5A2B" fill-opacity=".18"/>
+        <path d="M0-6v5M0 4v1" stroke="#FF5A2B" stroke-opacity=".9" stroke-width="3.2" stroke-linecap="round"/>
+        <rect x="26" y="-5" width="140" height="9" rx="4.5" fill="#FF5A2B" fill-opacity=".3"/>
       </g>
       <g transform="translate(128,302)">
-        <circle cx="0" cy="0" r="13" fill="#CF4114" fill-opacity=".18"/>
-        <path d="M0-6v5M0 4v1" stroke="#CF4114" stroke-opacity=".9" stroke-width="3.2" stroke-linecap="round"/>
-        <rect x="26" y="-5" width="118" height="9" rx="4.5" fill="#CF4114" fill-opacity=".3"/>
+        <circle cx="0" cy="0" r="13" fill="#FF5A2B" fill-opacity=".18"/>
+        <path d="M0-6v5M0 4v1" stroke="#FF5A2B" stroke-opacity=".9" stroke-width="3.2" stroke-linecap="round"/>
+        <rect x="26" y="-5" width="118" height="9" rx="4.5" fill="#FF5A2B" fill-opacity=".3"/>
       </g>
       <g transform="translate(128,346)">
-        <circle cx="0" cy="0" r="13" fill="#0D7C8C" fill-opacity=".16"/>
-        <path d="M-6 0 -2 5 6-5" fill="none" stroke="#0D7C8C" stroke-opacity=".8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="26" y="-5" width="150" height="9" rx="4.5" fill="#0D7C8C" fill-opacity=".22"/>
+        <circle cx="0" cy="0" r="13" fill="#0C7A55" fill-opacity=".16"/>
+        <path d="M-6 0 -2 5 6-5" fill="none" stroke="#0C7A55" stroke-opacity=".8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="26" y="-5" width="150" height="9" rx="4.5" fill="#0C7A55" fill-opacity=".22"/>
       </g>
     </g>
   </g>
@@ -46,8 +46,8 @@
   <g transform="translate(352,320)">
     <path d="M0-64c7 0 13 4 16 10l52 92c7 12-2 26-16 26h-104c-14 0-23-14-16-26l52-92c3-6 9-10 16-10z"
           fill="#fff" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M0-30v34" stroke="#CF4114" stroke-width="10" stroke-linecap="round"/>
-    <circle cx="0" cy="26" r="6.5" fill="#CF4114"/>
+    <path d="M0-30v34" stroke="#FF5A2B" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="0" cy="26" r="6.5" fill="#FF5A2B"/>
   </g>
 
   <!-- ================= подпись ================= -->

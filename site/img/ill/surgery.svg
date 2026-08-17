@@ -14,7 +14,7 @@
   <!-- ================= десна с соседними зубами ================= -->
   <g mask="url(#sg-mx)">
     <path d="M14 330c36-16 66-20 96-14 24 4 40 5 58 1 10-2 18-6 26-10 6 16 6 28 6 37h68c0-9 0-21 6-37 8 4 16 8 26 10 18 4 34 3 58-1 30-6 60-2 96 14v46c-36-16-66-20-96-14-26 5-44 6-66 1-20-5-32-14-62-14s-42 9-62 14c-22 5-40 4-66-1-30-6-60-2-96 14z"
-          fill="#fff" fill-opacity=".24" stroke="#fff" stroke-opacity=".32" stroke-width="1.8" stroke-linejoin="round"/>
+          fill="#fff" fill-opacity=".24" stroke="#fff" stroke-opacity=".40" stroke-width="1.8" stroke-linejoin="round"/>
     <!-- соседние зубы -->
     <g fill="#fff" fill-opacity=".55" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linejoin="round">
       <path d="M92 336h58l-7 62c-2 17-11 27-22 27s-20-10-22-27z"/>
@@ -24,15 +24,15 @@
 
   <!-- пустая лунка -->
   <path d="M206 344h68l-8 50c-2 18-12 30-26 30s-24-12-26-30z"
-        fill="#0B2A33" fill-opacity=".3" stroke="#fff" stroke-opacity=".34" stroke-width="2" stroke-dasharray="5 5" stroke-linejoin="round"/>
+        fill="#04231A" fill-opacity=".3" stroke="#fff" stroke-opacity=".42" stroke-width="2" stroke-dasharray="5 5" stroke-linejoin="round"/>
 
   <!-- ================= щипцы ================= -->
   <!-- ручки уходят вверх за кадр, шарнир над зубом, щёчки обхватывают коронку -->
-  <g stroke="#9FE0EE" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <g stroke="#93E7BE" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path d="M158 34l72 76"/>
     <path d="M322 34l-72 76"/>
   </g>
-  <g stroke="#CBEFF7" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <g stroke="#C8F5DF" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path d="M228 122c-14 6-26 20-28 40-1 12 0 22 2 30"/>
     <path d="M252 122c14 6 26 20 28 40 1 12 0 22-2 30"/>
   </g>
@@ -42,8 +42,8 @@
     <path d="M252 122c14 6 26 20 28 40 1 12 0 22-2 30"/>
   </g>
   <!-- шарнир -->
-  <circle cx="240" cy="112" r="13" fill="#9FE0EE" stroke="#fff" stroke-width="2.5"/>
-  <circle cx="240" cy="112" r="4" fill="#0D7C8C" fill-opacity=".45"/>
+  <circle cx="240" cy="112" r="13" fill="#93E7BE" stroke="#fff" stroke-width="2.5"/>
+  <circle cx="240" cy="112" r="4" fill="#0C7A55" fill-opacity=".45"/>
 
   <!-- ================= удаляемый зуб ================= -->
   <g transform="translate(240,158)">
@@ -51,7 +51,7 @@
           fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
     <path d="M-42 50h36l-5 56c-1 11-6 18-13 18s-12-7-13-18z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
     <path d="M6 50h36l-5 56c-1 11-6 18-13 18s-12-7-13-18z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-    <path d="M-22 14c-3 9-4 22-2 30" stroke="#0D7C8C" stroke-opacity=".18" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M-22 14c-3 9-4 22-2 30" stroke="#0C7A55" stroke-opacity=".18" stroke-width="6" stroke-linecap="round" fill="none"/>
   </g>
 
   <!-- стрелка извлечения -->

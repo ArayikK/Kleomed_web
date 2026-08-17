@@ -9,10 +9,10 @@
   <path d="M132 172c0-16 13-29 29-29h26c16 0 29 13 29 29v92h-84z"
         fill="#fff" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
   <!-- подголовник -->
-  <rect x="140" y="104" width="68" height="34" rx="16" fill="#CBEFF7" stroke="#fff" stroke-width="2.5"/>
+  <rect x="140" y="104" width="68" height="34" rx="16" fill="#C8F5DF" stroke="#fff" stroke-width="2.5"/>
   <!-- сиденье -->
   <path d="M126 264h96c10 0 18 8 18 18v10c0 10-8 18-18 18h-96c-10 0-18-8-18-18v-10c0-10 8-18 18-18z"
-        fill="#9FE0EE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
+        fill="#93E7BE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
   <!-- подножка -->
   <path d="M240 282h86c12 0 21 10 21 21v6h-30v-6h-77z"
         fill="#fff" fill-opacity=".85" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
@@ -29,7 +29,7 @@
     <!-- плафон -->
     <g transform="rotate(-38 340 152)">
       <rect x="296" y="128" width="88" height="46" rx="16" fill="#fff" stroke="#fff" stroke-width="2.5"/>
-      <g fill="#0D7C8C" fill-opacity=".28">
+      <g fill="#0C7A55" fill-opacity=".28">
         <circle cx="318" cy="151" r="7"/><circle cx="340" cy="151" r="7"/><circle cx="362" cy="151" r="7"/>
       </g>
     </g>
