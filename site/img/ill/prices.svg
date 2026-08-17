@@ -7,52 +7,52 @@
   <!-- ================= прайс-лист ================= -->
   <g>
     <!-- лист с оторванным нижним краем -->
-    <path d="M112 92h214c11 0 20 9 20 20v268l-22-14-22 14-22-14-22 14-22-14-22 14-22-14-22 14-22-14-22 14V112c0-11 9-20 20-20z"
+    <path d="M126 108h196c11 0 20 9 20 20v244l-20-13-20 13-20-13-20 13-20-13-20 13-20-13-20 13-20-13-20 13V128c0-11 9-20 20-20z"
           fill="#fff" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
     <!-- шапка -->
-    <rect x="112" y="92" width="254" height="52" rx="20" fill="#0D7C8C" fill-opacity=".14"/>
-    <rect x="112" y="124" width="254" height="20" fill="#0D7C8C" fill-opacity=".14"/>
-    <text x="140" y="126" fill="#0D7C8C" fill-opacity=".85"
+    <rect x="126" y="108" width="216" height="52" rx="20" fill="#0D7C8C" fill-opacity=".14"/>
+    <rect x="126" y="140" width="216" height="20" fill="#0D7C8C" fill-opacity=".14"/>
+    <text x="196" y="142" fill="#0D7C8C" fill-opacity=".85"
           font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="17" font-weight="800">Прайс-лист</text>
 
     <!-- строки прайса -->
     <g font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="13.5" font-weight="600">
       <g fill="#0D7C8C" fill-opacity=".55">
-        <rect x="140" y="170" width="86" height="9" rx="4.5"/>
-        <rect x="140" y="206" width="110" height="9" rx="4.5"/>
-        <rect x="140" y="242" width="72" height="9" rx="4.5"/>
-        <rect x="140" y="278" width="98" height="9" rx="4.5"/>
-        <rect x="140" y="314" width="80" height="9" rx="4.5"/>
+        <rect x="152" y="190" width="86" height="9" rx="4.5"/>
+        <rect x="152" y="226" width="110" height="9" rx="4.5"/>
+        <rect x="152" y="262" width="72" height="9" rx="4.5"/>
+        <rect x="152" y="298" width="98" height="9" rx="4.5"/>
+        <rect x="152" y="334" width="80" height="9" rx="4.5"/>
       </g>
       <g fill="#0D7C8C" fill-opacity=".9" text-anchor="end">
-        <text x="338" y="180">3 500 ₽</text>
-        <text x="338" y="216">30 000 ₽</text>
-        <text x="338" y="252">18 000 ₽</text>
-        <text x="338" y="288">45 000 ₽</text>
-        <text x="338" y="324">12 000 ₽</text>
+        <text x="316" y="200">3 500 ₽</text>
+        <text x="316" y="236">30 000 ₽</text>
+        <text x="316" y="272">18 000 ₽</text>
+        <text x="316" y="308">45 000 ₽</text>
+        <text x="316" y="344">12 000 ₽</text>
       </g>
       <g stroke="#0D7C8C" stroke-opacity=".14" stroke-width="1.5" stroke-dasharray="2 5">
-        <path d="M140 192h198"/><path d="M140 228h198"/><path d="M140 264h198"/><path d="M140 300h198"/>
+        <path d="M152 212h164"/><path d="M152 248h164"/><path d="M152 284h164"/><path d="M152 320h164"/>
       </g>
     </g>
   </g>
 
   <!-- ================= печать «консультация бесплатно» ================= -->
-  <g transform="rotate(-14 356 344)">
-    <rect x="268" y="320" width="176" height="52" rx="26" fill="none" stroke="#fff" stroke-width="3"/>
-    <rect x="276" y="328" width="160" height="36" rx="18" fill="#fff"/>
-    <text x="356" y="352" text-anchor="middle" fill="#0D7C8C"
+  <g transform="rotate(-14 306 396)">
+    <rect x="218" y="372" width="176" height="52" rx="26" fill="none" stroke="#fff" stroke-width="3"/>
+    <rect x="226" y="380" width="160" height="36" rx="18" fill="#fff"/>
+    <text x="306" y="404" text-anchor="middle" fill="#0D7C8C"
           font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="900">КОНСУЛЬТАЦИЯ 0 ₽</text>
   </g>
 
   <!-- ================= зуб-маркер ================= -->
-  <g transform="translate(126,110)">
+  <g transform="translate(126,128)">
     <circle cx="0" cy="0" r="30" fill="#9FE0EE" stroke="#fff" stroke-width="3"/>
     <path d="M-13-14c-5 0-10 5-10 11 0 5 1 8 3 11 2 3 3 6 3 11 0 4 1 7 3 7s3-3 4-7l2-7c0-2 1-3 2-3s2 1 2 3l2 7c1 4 2 7 4 7s3-3 3-7c0-5 1-8 3-11 2-3 3-6 3-11 0-6-5-11-10-11-2 0-4 1-5 1-1 1-2 1-3 1s-2 0-3-1c-1 0-3-1-5-1z"
           fill="#0B4E5A" fill-opacity=".8"/>
   </g>
 
   <!-- ================= подпись ================= -->
-  <text x="240" y="446" text-anchor="middle" fill="#fff" fill-opacity=".92"
+  <text x="240" y="462" text-anchor="middle" fill="#fff" fill-opacity=".92"
         font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="600">Фиксированная смета до начала лечения</text>
 </svg>
