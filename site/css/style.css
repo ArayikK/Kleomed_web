@@ -160,9 +160,9 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   --btn-sh:0 12px 30px rgba(0,0,0,.16);--btn-sh-h:0 16px 38px rgba(0,0,0,.24);
 }
 .btn--coral{
-  --btn-bg:var(--accent);      --btn-fg:#fff;
-  --btn-bg-h:var(--accent-600);--btn-fg-h:#fff;
-  --btn-sh:var(--shadow-accent);--btn-sh-h:0 16px 38px rgba(207,65,20,.44);
+  --btn-bg:var(--brand);       --btn-fg:#02120F;
+  --btn-bg-h:var(--brand-600); --btn-fg-h:#02120F;
+  --btn-sh:var(--shadow-brand);--btn-sh-h:0 16px 38px rgba(52,200,138,.38);
 }
 .btn--lg{padding:19px 38px;font-size:17px}
 .btn--block{width:100%}
@@ -331,27 +331,12 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
    Клинические снимки «до/после» и лицензии НЕ трогаем: там важна
    достоверность цвета. */
 .doctor__photo,.offer__img,.hero__photo,.split__media,.promo-banner__media{position:relative;isolation:isolate}
-.doctor__photo::after,.offer__img::after,.split__media::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:
-    linear-gradient(180deg,rgba(1,16,13,0) 38%,rgba(1,16,13,.72) 100%),
-    radial-gradient(120% 90% at 50% 30%,rgba(1,16,13,0) 40%,rgba(1,16,13,.55) 100%),
-    linear-gradient(200deg,rgba(52,200,138,.14) 0%,rgba(1,60,44,.30) 100%);
-}
-.doctor__photo img,.offer__img img,.split__media img{
-  filter:saturate(.72) contrast(1.04) brightness(.9);
-}
 
 /* врач: кадр берём выше, чтобы лицо не тонуло в макросъёмке за спиной */
-.doctor__photo{border:1px solid var(--line-2)}
-.doctor__photo img{object-position:center 16%}
 .doctor__name{color:#fff}
 
 /* подпись врача поверх снимка — блок читается как один объект */
-.doctor__photo::before{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:2px;z-index:2;
-  background:linear-gradient(90deg,transparent,var(--brand),transparent);
-}
+
 
 /* ------------------------------------------------- границы секций */
 /* На почти чёрном чередование фонов почти не читается — добавляем
@@ -425,8 +410,8 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 
 /* --------------------------------------------------------------- врач */
 .doctor{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,3.6vw,64px);align-items:center}
-.doctor__photo{border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-l);aspect-ratio:4/5;background:var(--lav-2)}
-.doctor__photo img{width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.doctor__photo{display:grid;place-items:center}
+.doctor__photo img{width:100%;max-width:520px;height:auto;object-fit:contain;filter:drop-shadow(0 26px 54px rgba(0,0,0,.55))}
 .doctor__name{font-size:clamp(24px,2.6vw,36px);margin-bottom:5px}
 .doctor__role{font-size:16.5px;font-weight:700;color:var(--brand-600);margin-bottom:24px}
 .doctor__topic{
@@ -568,7 +553,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   overflow:hidden;display:flex;flex-direction:column;
   transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
 }
-.offer:hover{transform:translateY(-8px);box-shadow:var(--shadow-l);border-color:var(--accent)}
+.offer:hover{transform:translateY(-8px);box-shadow:var(--shadow-l),0 0 0 1px var(--brand);border-color:var(--brand)}
 .offer__img{aspect-ratio:16/10;overflow:hidden;background:var(--lav-2);position:relative}
 .offer__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
 .offer:hover .offer__img img{transform:scale(1.06)}
@@ -639,13 +624,12 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 
 /* --------------------------------------------------------------- запись */
 .booking{position:relative;overflow:hidden;background:var(--pink)}
-.booking img.booking__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.20;filter:saturate(.6)}
+.booking img.booking__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.20}
 /* завеса поверх снимка: без неё светлые участки фото садят контраст текста */
 .booking::before{
   content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:
-    linear-gradient(90deg,rgba(1,16,13,.92) 0%,rgba(1,16,13,.72) 46%,rgba(1,16,13,.55) 100%),
-    linear-gradient(180deg,rgba(1,16,13,.5) 0%,rgba(1,16,13,.2) 40%,rgba(1,16,13,.6) 100%);
+    linear-gradient(90deg,rgba(1,16,13,.90) 0%,rgba(1,16,13,.66) 46%,rgba(1,16,13,.48) 100%);
 }
 .booking__in{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,3.6vw,64px);align-items:center}
 .booking h2{color:#fff}
@@ -667,6 +651,9 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .field__err{display:none;font-size:13px;color:#E5484D;margin-top:6px;font-weight:600}
 .field input.is-error~.field__err,.field select.is-error~.field__err{display:block}
 .field select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236C8C7C' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:20px;padding-right:44px}
+/* подсказка должна быть тише текста, но всё же читаемой: ~8:1 к фону */
+.field input::placeholder,.field textarea::placeholder,
+.price-search input::placeholder{color:#9BBBA9;opacity:1}
 .form-consent{font-size:12.5px;color:var(--ink-3);line-height:1.5;margin:14px 0 0}
 .form-consent a{color:var(--brand-600);text-decoration:underline}
 .form-ok{display:none;text-align:center;padding:20px 0}
