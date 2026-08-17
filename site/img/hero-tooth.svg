@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 660" role="img" aria-label="Здоровый зуб">
+  <title>Здоровый зуб</title>
+  <defs>
+    <!-- контур зуба: коронка + два корня -->
+    <path id="t-shape" d="M310 34
+      C424 34 520 92 544 192c16 66 6 134-14 188-14 38-28 66-38 124-11 70-24 152-58 160
+      -25 6-38-28-46-84-8-58-22-96-52-98-17-1-26 12-26 32-8-20-17-33-34-32-30 2-44 40-52 98
+      -8 56-21 90-46 84-34-8-47-90-58-160-10-58-24-86-38-124-20-54-30-122-14-188C102 92 196 34 310 34z"/>
+
+    <!-- тело: свет сверху-слева, тень снизу-справа -->
+    <radialGradient id="t-body" cx="34%" cy="20%" r="92%">
+      <stop offset="0"   stop-color="#FFFFFF"/>
+      <stop offset=".34" stop-color="#F6FAFB"/>
+      <stop offset=".64" stop-color="#DCE7EB"/>
+      <stop offset=".86" stop-color="#B7C9D1"/>
+      <stop offset="1"   stop-color="#8FA6B1"/>
+    </radialGradient>
+
+    <!-- контровой свет по правому краю: источник стоит позади объекта -->
+    <linearGradient id="t-rim" x1="0" y1="0" x2="1" y2="0">
+      <stop offset=".52" stop-color="#9FF4FF" stop-opacity="0"/>
+      <stop offset=".84" stop-color="#B6F6FF" stop-opacity=".55"/>
+      <stop offset="1"   stop-color="#EAFEFF" stop-opacity=".95"/>
+    </linearGradient>
+    <!-- и слабее по левому -->
+    <linearGradient id="t-rim-l" x1="1" y1="0" x2="0" y2="0">
+      <stop offset=".6"  stop-color="#8FE6F5" stop-opacity="0"/>
+      <stop offset="1"   stop-color="#CFF6FF" stop-opacity=".5"/>
+    </linearGradient>
+
+    <!-- подповерхностное свечение снизу -->
+    <linearGradient id="t-sss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset=".5" stop-color="#3FD0E6" stop-opacity="0"/>
+      <stop offset="1"  stop-color="#3FD0E6" stop-opacity=".30"/>
+    </linearGradient>
+
+    <linearGradient id="t-spec" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="t-soft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <filter id="t-soft2" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="t-glowf" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+
+    <clipPath id="t-clip"><use href="#t-shape"/></clipPath>
+  </defs>
+
+  <!-- ореол вокруг объекта: свет пробивается из-за него -->
+  <g filter="url(#t-glowf)" opacity=".5">
+    <use href="#t-shape" fill="#5FE0F5"/>
+  </g>
+
+  <!-- тело -->
+  <use href="#t-shape" fill="url(#t-body)"/>
+
+  <g clip-path="url(#t-clip)">
+    <!-- контровой свет по краям -->
+    <use href="#t-shape" fill="url(#t-rim)"/>
+    <use href="#t-shape" fill="url(#t-rim-l)"/>
+    <!-- холодное свечение у корней -->
+    <use href="#t-shape" fill="url(#t-sss)"/>
+
+    <!-- затенение в развилке между корнями -->
+    <ellipse cx="310" cy="520" rx="58" ry="130" fill="#6E8894" opacity=".38" filter="url(#t-soft)"/>
+    <!-- мягкая тень по нижнему правому объёму -->
+    <ellipse cx="500" cy="290" rx="120" ry="200" fill="#7C939E" opacity=".22" filter="url(#t-soft)"/>
+
+    <!-- главный блик на эмали -->
+    <path d="M212 96c-50 30-76 84-80 144-3 46 8 80 24 78 18-2 20-46 30-90 11-48 34-88 56-104 14-11 4-34-30-28z"
+          fill="url(#t-spec)" filter="url(#t-soft2)"/>
+    <!-- узкий вертикальный блик -->
+    <path d="M386 122c-16 24-22 64-20 104 2 32 11 52 20 50 10-2 13-32 13-70 0-38-4-78-13-84z"
+          fill="#fff" opacity=".28" filter="url(#t-soft)"/>
+    <!-- точечный горячий блик -->
+    <ellipse cx="228" cy="146" rx="30" ry="46" fill="#fff" opacity=".9" filter="url(#t-soft2)" transform="rotate(-26 228 146)"/>
+    <!-- отражение сцены снизу -->
+    <ellipse cx="310" cy="600" rx="170" ry="44" fill="#AFE9F5" opacity=".22" filter="url(#t-soft)"/>
+  </g>
+
+  <!-- тонкая кромка света по самому краю -->
+  <use href="#t-shape" fill="none" stroke="#EAFDFF" stroke-opacity=".5" stroke-width="1.6"/>
+</svg>
