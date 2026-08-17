@@ -352,6 +352,29 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   background:linear-gradient(90deg,transparent,rgba(52,200,138,.30) 20%,rgba(52,200,138,.30) 80%,transparent);
 }
 
+
+/* ---- герой на узких экранах ----
+   nowrap в заголовке распирал страницу шире вьюпорта: шапку уносило
+   вправо, плашку обрезало. На мобильном строка переносится. */
+@media (max-width:900px){
+  .hero{min-height:auto;padding-bottom:clamp(26px,6vw,44px)}
+  .hero__title{white-space:normal;font-size:clamp(30px,10.4vw,62px);line-height:1.02;letter-spacing:-.035em}
+  .hero__eyebrow span{
+    white-space:normal;text-align:center;line-height:1.35;
+    font-size:11px;letter-spacing:.08em;padding:8px 15px;
+  }
+  .hero__object{margin-top:clamp(-16px,-2vw,-6px);margin-bottom:0}
+  .hero__object img{width:min(78vw,330px)}
+  .hero__actions--center{flex-direction:column;align-items:stretch;gap:10px}
+  .hero__actions--center .btn{width:100%;justify-content:center}
+  .hero__bar{flex-direction:column;align-items:stretch;gap:10px}
+  .hero__pill,.hero__play{justify-content:center}
+}
+@media (max-width:420px){
+  .hero__title{font-size:clamp(27px,10vw,44px)}
+  .hero__pill b{font-size:16px}
+}
+
 /* --------------------------------------------------------------- статистика */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px)}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-l);padding:clamp(20px,2.2vw,30px);text-align:center;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
@@ -836,7 +859,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .license figcaption{padding:14px 6px 4px;font-size:14.5px;font-weight:700;color:var(--ink-2);text-align:center}
 
 /* --------------------------------------------------------------- утилиты */
-.mobile-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:880;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line-2);padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));gap:10px;box-shadow:0 -4px 22px rgba(11,42,51,.12)}
+.mobile-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:880;background:rgba(1,16,13,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));gap:10px;box-shadow:0 -6px 26px rgba(0,0,0,.5)}
 .mobile-bar .btn{flex:1;padding:15px 12px;font-size:15px}
 .to-top{position:fixed;right:22px;bottom:22px;z-index:870;width:52px;height:52px;border-radius:50%;border:none;background:var(--brand);cursor:pointer;display:grid;place-items:center;box-shadow:var(--shadow-brand);opacity:0;visibility:hidden;transform:translateY(12px);transition:.28s var(--ease)}
 .to-top.is-visible{opacity:1;visibility:visible;transform:none}
