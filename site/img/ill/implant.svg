@@ -23,11 +23,14 @@
     <mask id="imp-mask-x">
       <rect x="0" y="0" width="480" height="480" fill="url(#imp-fade-x)"/>
     </mask>
+    <clipPath id="fit"><circle cx="240" cy="240" r="212"/></clipPath>
   </defs>
 
-  <!-- ================= подложка ================= -->
   <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
-  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+  <g clip-path="url(#fit)">
+  <g transform="translate(240,240) scale(1.2) translate(-240,-240)">
+
+  <!-- ================= подложка ================= -->
 
   <!-- ================= кость ================= -->
   <!-- фрагмент челюсти: губчатое вещество внутри, кортикальный слой снаружи -->
@@ -85,20 +88,7 @@
   <!-- блик на эмали -->
   <path d="M194 112c-7 9-11 25-12 44" stroke="#0C7A55" stroke-opacity=".16" stroke-width="6" stroke-linecap="round" fill="none"/>
 
-  <!-- ================= выноски ================= -->
-  <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5" fill="none" stroke-dasharray="4 5">
-    <path d="M312 140h50"/>
-    <path d="M276 202h86"/>
-    <path d="M272 296h90"/>
   </g>
-  <g fill="#fff">
-    <circle cx="366" cy="140" r="4"/>
-    <circle cx="366" cy="202" r="4"/>
-    <circle cx="366" cy="296" r="4"/>
   </g>
-  <g fill="#fff" fill-opacity=".9" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="14.5" font-weight="600">
-    <text x="378" y="145">Коронка</text>
-    <text x="378" y="207">Абатмент</text>
-    <text x="378" y="301">Имплант</text>
-  </g>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="5 9"/>
 </svg>

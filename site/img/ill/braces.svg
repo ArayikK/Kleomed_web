@@ -1,77 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Схема брекет-системы: брекеты с дугой на зубном ряду">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Брекеты с дугой на зубном ряду">
   <title>Ортодонтия — брекет-системы</title>
   <defs>
-    <linearGradient id="br-fx" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#000"/><stop offset=".12" stop-color="#fff"/>
-      <stop offset=".88" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+    <clipPath id="fit"><circle cx="240" cy="240" r="212"/></clipPath>
+    <linearGradient id="br-en" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#D8EFE3"/>
     </linearGradient>
-    <mask id="br-mx"><rect width="480" height="480" fill="url(#br-fx)"/></mask>
     <!-- зуб ряда: начало координат — середина верхнего края -->
-    <g id="br-tooth">
-      <path d="M-26 0h52c8 0 13 6 12 14l-8 74c-2 22-14 34-30 34s-28-12-30-34l-8-74c-1-8 4-14 12-14z"
-            fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M-14 18c-3 12-4 32-2 50" stroke="#0C7A55" stroke-opacity=".13" stroke-width="6" stroke-linecap="round" fill="none"/>
-    </g>
+    <path id="br-t" d="M-31 0h62c8 0 14 6 13 14l-7 74c-2 24-14 38-37 38s-35-14-37-38l-7-74c-1-8 5-14 13-14z"/>
     <!-- брекет с пазом под дугу -->
-    <g id="br-bracket">
-      <rect x="-14" y="-12" width="28" height="24" rx="7" fill="#C8F5DF" stroke="#fff" stroke-width="2"/>
-      <path d="M-14 0h28" stroke="#0C7A55" stroke-opacity=".45" stroke-width="4"/>
-      <g fill="#0C7A55" fill-opacity=".3"><circle cx="-7" cy="-6" r="2"/><circle cx="7" cy="-6" r="2"/>
-        <circle cx="-7" cy="6" r="2"/><circle cx="7" cy="6" r="2"/></g>
+    <g id="br-b">
+      <rect x="-17" y="-15" width="34" height="30" rx="8" fill="#8FE3B8"/>
+      <rect x="-17" y="-15" width="34" height="30" rx="8" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="2"/>
+      <path d="M-17 0h34" stroke="#0A4D38" stroke-opacity=".5" stroke-width="5"/>
+      <g fill="#0A4D38" fill-opacity=".35">
+        <circle cx="-9" cy="-8" r="2.6"/><circle cx="9" cy="-8" r="2.6"/>
+        <circle cx="-9" cy="8" r="2.6"/><circle cx="9" cy="8" r="2.6"/>
+      </g>
     </g>
   </defs>
 
   <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
-  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+  <g clip-path="url(#fit)">
 
-  <!-- ================= десна ================= -->
-  <g mask="url(#br-mx)">
-    <path d="M4 150c40-16 74-24 118-27 42-3 94-3 136 0 44 3 78 11 118 27v40c-40-16-74-24-118-27-42-3-94-3-136 0-44 3-78 11-118 27z"
-          fill="#fff" fill-opacity=".24" stroke="#fff" stroke-opacity=".42" stroke-width="1.8" stroke-linejoin="round"/>
-  </g>
+    <!-- десна -->
+    <path d="M14 176c44-18 82-26 128-29 46-3 102-3 148 0 46 3 84 11 128 29V20H14z" fill="#fff" fill-opacity=".16"/>
+    <path d="M14 176c44-18 82-26 128-29 46-3 102-3 148 0 46 3 84 11 128 29"
+          fill="none" stroke="#fff" stroke-opacity=".34" stroke-width="2"/>
 
-  <!-- ================= зубной ряд ================= -->
-  <!-- лёгкая дуга: крайние зубы чуть ниже центральных -->
-  <g>
-    <g transform="translate(88,196) rotate(-5)"><use href="#br-tooth"/></g>
-    <g transform="translate(148,186) rotate(-3)"><use href="#br-tooth"/></g>
-    <g transform="translate(208,180)"><use href="#br-tooth"/></g>
-    <!-- этот зуб развёрнут — его и исправляет система -->
-    <g transform="translate(268,182) rotate(9)"><use href="#br-tooth"/></g>
-    <g transform="translate(332,186) rotate(3)"><use href="#br-tooth"/></g>
-    <g transform="translate(392,196) rotate(5)"><use href="#br-tooth"/></g>
-  </g>
+    <!-- зубной ряд: зубы с зазорами, один развёрнут -->
+    <g fill="url(#br-en)" stroke="#fff" stroke-opacity=".55" stroke-width="2">
+      <g transform="translate(84,196) rotate(-6)"><use href="#br-t"/></g>
+      <g transform="translate(152,184) rotate(-3)"><use href="#br-t"/></g>
+      <g transform="translate(220,178)"><use href="#br-t"/></g>
+      <g transform="translate(290,180) rotate(11)"><use href="#br-t"/></g>
+      <g transform="translate(358,186) rotate(4)"><use href="#br-t"/></g>
+      <g transform="translate(424,198) rotate(7)"><use href="#br-t"/></g>
+    </g>
 
-  <!-- ================= дуга ================= -->
-  <path d="M74 268c52-14 106-20 166-20s114 6 166 20"
-        fill="none" stroke="#93E7BE" stroke-width="6" stroke-linecap="round"/>
-  <path d="M74 268c52-14 106-20 166-20s114 6 166 20"
-        fill="none" stroke="#fff" stroke-opacity=".4" stroke-width="2" stroke-linecap="round"/>
+    <!-- дуга -->
+    <path d="M52 268c60-16 122-23 188-23s128 7 188 23"
+          fill="none" stroke="#8FE3B8" stroke-width="7" stroke-linecap="round"/>
+    <path d="M52 268c60-16 122-23 188-23s128 7 188 23"
+          fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="2.5" stroke-linecap="round"/>
 
-  <!-- ================= брекеты ================= -->
-  <g>
-    <g transform="translate(88,258) rotate(-5)"><use href="#br-bracket"/></g>
-    <g transform="translate(148,252) rotate(-3)"><use href="#br-bracket"/></g>
-    <g transform="translate(208,248)"><use href="#br-bracket"/></g>
-    <g transform="translate(270,250) rotate(5)"><use href="#br-bracket"/></g>
-    <g transform="translate(332,252) rotate(3)"><use href="#br-bracket"/></g>
-    <g transform="translate(392,258) rotate(5)"><use href="#br-bracket"/></g>
-  </g>
+    <!-- брекеты -->
+    <g transform="translate(84,258) rotate(-6)"><use href="#br-b"/></g>
+    <g transform="translate(152,250) rotate(-3)"><use href="#br-b"/></g>
+    <g transform="translate(220,246)"><use href="#br-b"/></g>
+    <g transform="translate(290,248) rotate(7)"><use href="#br-b"/></g>
+    <g transform="translate(358,252) rotate(4)"><use href="#br-b"/></g>
+    <g transform="translate(424,260) rotate(7)"><use href="#br-b"/></g>
 
-  <!-- ================= стрелка исправления ================= -->
-  <g stroke="#fff" stroke-opacity=".8" stroke-width="2.5" fill="none" stroke-linecap="round">
-    <path d="M300 148a36 36 0 0 0-46 4" stroke-dasharray="5 6"/>
-    <path d="M262 144l-9 9 10 7"/>
   </g>
-
-  <!-- ================= выноски ================= -->
-  <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5" fill="none" stroke-dasharray="4 5">
-    <path d="M148 264v88"/>
-    <path d="M332 268v84"/>
-  </g>
-  <g fill="#fff"><circle cx="148" cy="356" r="4"/><circle cx="332" cy="356" r="4"/></g>
-  <g fill="#fff" fill-opacity=".9" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="14.5" font-weight="600">
-    <text x="148" y="380">Брекет</text>
-    <text x="332" y="380">Дуга</text>
-  </g>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="5 9"/>
 </svg>

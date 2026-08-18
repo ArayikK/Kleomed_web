@@ -1,8 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Цены: прайс-лист клиники с расчётом стоимости лечения">
   <title>Цены</title>
+  <defs><clipPath id="fit"><circle cx="240" cy="240" r="212"/></clipPath></defs>
 
   <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
-  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+  <g clip-path="url(#fit)">
+  <g transform="translate(240,240) scale(1.2) translate(-240,-240)">
+
 
   <!-- ================= прайс-лист ================= -->
   <g>
@@ -38,10 +41,10 @@
   </g>
 
   <!-- ================= печать «консультация бесплатно» ================= -->
-  <g transform="rotate(-14 306 396)">
-    <rect x="218" y="372" width="176" height="52" rx="26" fill="none" stroke="#fff" stroke-width="3"/>
-    <rect x="226" y="380" width="160" height="36" rx="18" fill="#fff"/>
-    <text x="306" y="404" text-anchor="middle" fill="#0C7A55"
+  <g transform="translate(240,378) rotate(-9) scale(.72)">
+    <rect x="-88" y="-26" width="176" height="52" rx="26" fill="none" stroke="#fff" stroke-width="3.4"/>
+    <rect x="-80" y="-18" width="160" height="36" rx="18" fill="#fff"/>
+    <text x="0" y="6" text-anchor="middle" fill="#0C7A55"
           font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="900">КОНСУЛЬТАЦИЯ 0 ₽</text>
   </g>
 
@@ -52,7 +55,7 @@
           fill="#0A4D38" fill-opacity=".8"/>
   </g>
 
-  <!-- ================= подпись ================= -->
-  <text x="240" y="462" text-anchor="middle" fill="#fff" fill-opacity=".92"
-        font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="600">Фиксированная смета до начала лечения</text>
+  </g>
+  </g>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="5 9"/>
 </svg>

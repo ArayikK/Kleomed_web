@@ -792,18 +792,18 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(52,200,138,0) 0%,rgba(52,200,138,.06) 60%,rgba(1,16,13,.85) 100%);
 }
-.page-hero__grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,3.6vw,64px);align-items:center;position:relative}
-.page-hero__in{max-width:700px;position:relative}
-.page-hero h1{color:#fff;margin-bottom:16px}
-.page-hero p{color:rgba(255,255,255,.9);font-size:clamp(16.5px,1.6vw,20px);margin-bottom:28px;max-width:660px}
+.page-hero__grid{position:relative;z-index:1;display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(28px,3.6vw,64px);align-items:center;position:relative}
+.page-hero__in{max-width:780px;position:relative}
+.page-hero h1{color:#fff;margin-bottom:14px;font-size:clamp(26px,3vw,40px);letter-spacing:-.032em}
+.page-hero p{color:rgba(255,255,255,.9);font-size:clamp(15.5px,1.32vw,17.5px);margin-bottom:26px;max-width:760px}
 /* Вместо случайного фото — схема процедуры. Она рисуется прямо на градиенте,
    без карточки и рамки: рамка возвращала бы ту же «наклейку», от которой ушли. */
 .page-hero__art{position:relative;display:grid;place-items:center}
 .page-hero__art::before{
-  content:"";position:absolute;width:82%;aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle,rgba(150,246,200,.13) 0%,rgba(150,246,200,0) 70%);
+  content:"";position:absolute;width:92%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,rgba(150,246,200,.15) 0%,rgba(150,246,200,0) 70%);
 }
-.page-hero__art img{position:relative;width:100%;max-width:428px;height:auto;filter:drop-shadow(0 24px 50px rgba(0,0,0,.55))}
+.page-hero__art img{position:relative;width:100%;max-width:512px;height:auto;filter:drop-shadow(0 24px 50px rgba(0,0,0,.5))}
 
 /* Факты под подзаголовком: цифры со страницы, а не украшение. */
 .page-hero__facts{

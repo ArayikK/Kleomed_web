@@ -18,10 +18,13 @@
       <path d="M-32 66h64" stroke="#fff" stroke-opacity=".6" stroke-width="3" stroke-linecap="round"/>
       <path d="M-22 78h44l-6 76c-1 13-9 22-16 22s-15-9-16-22z" fill="#fff" fill-opacity=".16" stroke="#fff" stroke-opacity=".28" stroke-width="2" stroke-linejoin="round"/>
     </g>
+    <clipPath id="fit"><circle cx="240" cy="240" r="212"/></clipPath>
   </defs>
 
   <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
-  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+  <g clip-path="url(#fit)">
+  <g transform="translate(240,240) scale(1.2) translate(-240,-240)">
+
 
   <!-- ================= опорные зубы и десна ================= -->
   <g transform="translate(130,242)"><use href="#bg-abut"/></g>
@@ -50,14 +53,7 @@
     <path d="M232 288l8 9 8-9"/>
   </g>
 
-  <!-- ================= выноски ================= -->
-  <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5" fill="none" stroke-dasharray="4 5">
-    <path d="M240 138v-38"/>
-    <path d="M130 330v56"/>
   </g>
-  <g fill="#fff"><circle cx="240" cy="96" r="4"/><circle cx="130" cy="390" r="4"/></g>
-  <g fill="#fff" fill-opacity=".92" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="14.5" font-weight="600">
-    <text x="240" y="78">Мост из трёх коронок</text>
-    <text x="130" y="414">Опорный зуб</text>
   </g>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="5 9"/>
 </svg>

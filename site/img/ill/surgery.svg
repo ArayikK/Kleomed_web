@@ -6,10 +6,13 @@
       <stop offset=".86" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
     </linearGradient>
     <mask id="sg-mx"><rect width="480" height="480" fill="url(#sg-fx)"/></mask>
+    <clipPath id="fit"><circle cx="240" cy="240" r="212"/></clipPath>
   </defs>
 
   <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
-  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+  <g clip-path="url(#fit)">
+  <g transform="translate(240,240) scale(1.2) translate(-240,-240)">
+
 
   <!-- ================= десна с соседними зубами ================= -->
   <g mask="url(#sg-mx)">
@@ -60,13 +63,7 @@
     <path d="M102 256l8-10 8 10"/>
   </g>
 
-  <!-- ================= выноски ================= -->
-  <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5" fill="none" stroke-dasharray="4 5">
-    <path d="M240 426v22"/>
   </g>
-  <g fill="#fff"><circle cx="240" cy="452" r="4"/></g>
-  <g fill="#fff" fill-opacity=".92" text-anchor="middle" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="14.5" font-weight="600">
-    <text x="240" y="444">Лунка заживает за 5–7 дней</text>
-    <text x="110" y="230">Под анестезией</text>
   </g>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="5 9"/>
 </svg>

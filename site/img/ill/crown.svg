@@ -1,63 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Схема зубной коронки: коронка устанавливается на обточенный зуб">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Коронка устанавливается на обточенный зуб">
   <title>Зубные коронки</title>
   <defs>
-    <linearGradient id="cr-fx" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#000"/><stop offset=".16" stop-color="#fff"/>
-      <stop offset=".84" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+    <clipPath id="fit"><circle cx="240" cy="240" r="212"/></clipPath>
+    <linearGradient id="cr-en" x1=".25" y1="0" x2=".8" y2="1">
+      <stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#F2FFF8"/><stop offset="1" stop-color="#CDEEDD"/>
     </linearGradient>
-    <mask id="cr-mx"><rect width="480" height="480" fill="url(#cr-fx)"/></mask>
+    <linearGradient id="cr-st" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#A6EEC8"/><stop offset="1" stop-color="#5CBF92"/>
+    </linearGradient>
   </defs>
 
   <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
-  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+  <g clip-path="url(#fit)">
 
-  <!-- ================= десна и корень ================= -->
-  <g mask="url(#cr-mx)">
+    <!-- десна -->
+    <path d="M14 332c42-16 78-20 116-13 28 5 46 6 64 1 20-5 32-15 50-15s30 10 50 15c18 5 36 4 64-1 38-7 74-3 116 13v130H14z"
+          fill="#fff" fill-opacity=".16"/>
+    <path d="M14 332c42-16 78-20 116-13 28 5 46 6 64 1 20-5 32-15 50-15s30 10 50 15c18 5 36 4 64-1 38-7 74-3 116 13"
+          fill="none" stroke="#fff" stroke-opacity=".34" stroke-width="2"/>
+
     <!-- корень под десной -->
-    <path d="M212 306h56l-8 92c-1 12-10 20-20 20s-19-8-20-20z"
-          fill="#fff" fill-opacity=".18" stroke="#fff" stroke-opacity=".3" stroke-width="2" stroke-linejoin="round"/>
-    <!-- десневой валик -->
-    <path d="M40 320c30-18 54-20 80-13 24 6 40 7 61 1 19-5 30-16 59-16s40 11 59 16c21 6 37 5 61-1 26-7 50-5 80 13v34c-30-18-54-20-80-13-24 6-40 7-61 1-19-5-30-16-59-16s-40 11-59 16c-21 6-37 5-61-1-26-7-50-5-80 13z"
-          fill="#fff" fill-opacity=".26" stroke="#fff" stroke-opacity=".36" stroke-width="1.8" stroke-linejoin="round"/>
-  </g>
+    <path d="M198 332h84l-11 88c-2 18-13 30-31 30s-29-12-31-30z" fill="#fff" fill-opacity=".12"/>
 
-  <!-- ================= обточенный зуб (культя) ================= -->
-  <path d="M204 236c0-14 8-22 20-24h32c12 2 20 10 20 24l-6 76h-60z"
-        fill="#93E7BE" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
-  <!-- уступ под край коронки -->
-  <path d="M198 312h84" stroke="#fff" stroke-opacity=".65" stroke-width="3" stroke-linecap="round"/>
+    <!-- культя: обточенный зуб с плоской площадкой и уступом -->
+    <path d="M188 332l6-64c1-13 12-22 26-24h40c14 2 25 11 26 24l6 64z" fill="url(#cr-st)"/>
+    <path d="M188 332l6-64c1-13 12-22 26-24h40c14 2 25 11 26 24l6 64" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2.5"/>
+    <path d="M178 332h124" stroke="#fff" stroke-opacity=".8" stroke-width="6" stroke-linecap="round"/>
 
-  <!-- ================= коронка ================= -->
-  <g>
-    <!-- полая внутренняя часть -->
-    <ellipse cx="240" cy="176" rx="62" ry="15" fill="#0A4D38" fill-opacity=".5"/>
-    <!-- корпус коронки -->
-    <path d="M178 176c-5-34 4-64 23-74 12-6 21 7 29 19 6 9 14 9 20 0 8-12 17-25 29-19 19 10 28 40 23 74
-             a62 15 0 0 1-124 0z"
-          fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-    <!-- фиссуры -->
-    <g stroke="#0C7A55" stroke-opacity=".26" stroke-width="2.5" stroke-linecap="round" fill="none">
-      <path d="M223 122c7 9 27 9 34 0"/><path d="M240 129v34"/>
+    <!-- стрелка посадки -->
+    <g stroke="#fff" stroke-opacity=".85" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M240 190v24" stroke-dasharray="6 8"/>
+      <path d="M228 205l12 13 12-13"/>
     </g>
-    <!-- блик на керамике -->
-    <path d="M200 118c-7 9-11 26-11 46" stroke="#0C7A55" stroke-opacity=".15" stroke-width="6" stroke-linecap="round" fill="none"/>
-    <!-- край коронки -->
-    <ellipse cx="240" cy="176" rx="62" ry="15" fill="none" stroke="#fff" stroke-width="2"/>
-  </g>
 
-  <!-- ================= стрелка посадки ================= -->
-  <g stroke="#fff" stroke-opacity=".65" stroke-width="2.5" fill="none" stroke-linecap="round">
-    <path d="M240 200v20" stroke-dasharray="5 6"/>
-    <path d="M232 214l8 9 8-9"/>
-  </g>
+    <!-- коронка: полый колпачок с жевательными буграми -->
+    <g>
+      <path d="M162 158c-9-52 7-92 37-105 17-7 29 11 41 27 8 12 20 12 28 0 12-16 24-34 41-27 30 13 46 53 37 105z"
+            fill="url(#cr-en)"/>
+      <ellipse cx="240" cy="158" rx="78" ry="17" fill="#0C3125" fill-opacity=".85"/>
+      <ellipse cx="240" cy="158" rx="78" ry="17" fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="2.5"/>
+      <path d="M162 158c-9-52 7-92 37-105 17-7 29 11 41 27 8 12 20 12 28 0 12-16 24-34 41-27 30 13 46 53 37 105"
+            fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="2.5"/>
+      <g stroke="#5CBF92" stroke-opacity=".45" stroke-width="3.5" stroke-linecap="round" fill="none">
+        <path d="M216 68c9 12 30 12 39 0"/><path d="M240 78v58"/>
+      </g>
+      <path d="M190 62c-10 13-15 36-13 62" stroke="#fff" stroke-opacity=".8" stroke-width="9" stroke-linecap="round" fill="none"/>
+    </g>
 
-  <!-- ================= выноски ================= -->
-  <g stroke="#fff" stroke-opacity=".5" stroke-width="1.5" fill="none" stroke-dasharray="4 5">
-    <path d="M304 132h58"/><path d="M286 270h76"/>
   </g>
-  <g fill="#fff"><circle cx="366" cy="132" r="4"/><circle cx="366" cy="270" r="4"/></g>
-  <g fill="#fff" fill-opacity=".9" font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="14.5" font-weight="600">
-    <text x="378" y="137">Коронка</text>
-    <text x="378" y="275">Свой зуб</text>
-  </g>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="5 9"/>
 </svg>

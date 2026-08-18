@@ -1,8 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Противопоказания: список ограничений, которые врач проверяет на консультации">
   <title>Противопоказания</title>
+  <defs><clipPath id="fit"><circle cx="240" cy="240" r="212"/></clipPath></defs>
 
   <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
-  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+  <g clip-path="url(#fit)">
+  <g transform="translate(240,240) scale(1.2) translate(-240,-240)">
+
 
   <!-- ================= карта пациента ================= -->
   <g>
@@ -50,7 +53,7 @@
     <circle cx="0" cy="26" r="6.5" fill="#FF5A2B"/>
   </g>
 
-  <!-- ================= подпись ================= -->
-  <text x="240" y="452" text-anchor="middle" fill="#fff" fill-opacity=".92"
-        font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="600">Врач проверяет их на консультации</text>
+  </g>
+  </g>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="5 9"/>
 </svg>

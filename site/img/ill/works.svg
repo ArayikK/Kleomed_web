@@ -7,10 +7,13 @@
     <g id="wk-t">
       <path d="M-17 0h34c5 0 9 4 8 10l-4 30c-1 14-8 22-21 22s-20-8-21-22l-4-30c-1-6 3-10 8-10z"/>
     </g>
+    <clipPath id="fit"><circle cx="240" cy="240" r="212"/></clipPath>
   </defs>
 
   <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
-  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="1.5" stroke-dasharray="5 9"/>
+  <g clip-path="url(#fit)">
+  <g transform="translate(240,240) scale(1.2) translate(-240,-240)">
+
 
   <!-- ================= «до» ================= -->
   <g>
@@ -72,7 +75,7 @@
     <path d="M228 240h22m-8-9 9 9-9 9" fill="none" stroke="#0C7A55" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 
-  <!-- ================= подпись ================= -->
-  <text x="240" y="416" text-anchor="middle" fill="#fff" fill-opacity=".92"
-        font-family="system-ui,-apple-system,'Segoe UI',sans-serif" font-size="15" font-weight="600">Реальные случаи наших пациентов</text>
+  </g>
+  </g>
+  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="5 9"/>
 </svg>
