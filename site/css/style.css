@@ -399,23 +399,55 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 
 /* --------------------------------------------------------------- услуги */
 .services{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px)}
+
+/* Карточка услуги: предмет с прозрачным фоном лежит на подсвеченной
+   плашке. Свет идёт из-за предмета — та же схема, что в герое. */
 .service{
-  position:relative;display:flex;flex-direction:column;justify-content:flex-end;
-  min-height:360px;border-radius:var(--radius-l);overflow:hidden;
-  background:var(--deep);color:#fff;isolation:isolate;
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+  position:relative;display:flex;flex-direction:column;
+  min-height:392px;border-radius:var(--radius-l);overflow:hidden;isolation:isolate;
+  border:1px solid var(--line);color:#fff;
+  background:
+    linear-gradient(168deg,rgba(255,255,255,.085) 0%,rgba(255,255,255,.028) 44%,rgba(255,255,255,.012) 100%);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
 }
-.service:hover{transform:translateY(-7px);box-shadow:var(--shadow-l);color:#fff}
-.service img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .55s var(--ease)}
-.service:hover img{transform:scale(1.07)}
-.service::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(11,42,51,.05) 0%,rgba(11,42,51,.5) 44%,rgba(11,42,51,.93) 100%)}
-.service__body{padding:24px}
-.service h3{color:#fff;font-size:21px;margin-bottom:8px}
-.service p{font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.88);margin:0}
-.service__more{display:inline-flex;align-items:center;gap:7px;margin-top:15px;font-size:14.5px;font-weight:800;color:#fff}
+/* световое пятно за предметом */
+.service::before{
+  content:"";position:absolute;z-index:0;left:50%;top:118px;translate:-50% -50%;
+  width:80%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(86,230,166,.30) 0%,rgba(86,230,166,.10) 38%,rgba(86,230,166,0) 70%);
+  transition:opacity .3s var(--ease);
+}
+/* нижнее затемнение, чтобы текст всегда лежал на спокойном поле */
+.service::after{
+  content:"";position:absolute;z-index:0;inset:auto 0 0 0;height:62%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(3,14,11,0) 0%,rgba(3,14,11,.55) 62%,rgba(3,14,11,.8) 100%);
+}
+.service:hover{transform:translateY(-7px);box-shadow:var(--shadow-l);border-color:var(--brand-100);color:#fff}
+.service:hover::before{opacity:.75}
+
+/* Снимки обрезаны по десне — снизу у них жёсткий край. Растворяем его
+   в плашке маской, а по бокам чуть подбираем: иначе видно прямоугольник.
+   Общая высота бокса делает предметы одного масштаба во всех карточках. */
+.service img{
+  position:relative;z-index:1;
+  width:100%;height:176px;object-fit:contain;object-position:center bottom;
+  margin:28px 0 0;padding-inline:16px;
+  filter:drop-shadow(0 18px 30px rgba(0,0,0,.55));
+  transition:transform .45s var(--ease);
+}
+.service:hover img{transform:translateY(-6px) scale(1.045)}
+
+.service__body{position:relative;z-index:1;padding:22px 24px 24px;margin-top:auto}
+.service h3{color:#fff;font-size:20px;margin-bottom:8px}
+.service p{font-size:14.5px;line-height:1.5;color:var(--ink-2);margin:0}
+.service__more{display:inline-flex;align-items:center;gap:7px;margin-top:15px;font-size:14.5px;font-weight:800;color:var(--brand-300)}
 .service__more svg{width:16px;height:16px;fill:currentColor;transition:transform .25s var(--ease)}
+.service:hover .service__more{color:var(--brand-700)}
 .service:hover .service__more svg{transform:translateX(5px)}
-.services--sm .service{min-height:260px}
+
+.services--sm .service{min-height:326px}
+.services--sm .service::before{top:98px}
+.services--sm .service img{max-height:136px;margin-top:24px}
 .services--sm .service h3{font-size:18px}
 .services--sm .service p{font-size:13.5px}
 
