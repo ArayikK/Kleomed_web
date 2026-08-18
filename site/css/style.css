@@ -894,8 +894,28 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .info-card ul{margin:12px 0 0}
 .info-card__tag{display:inline-block;padding:6px 14px;border-radius:100px;background:var(--brand-050);color:var(--brand-700);font-size:12.5px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
 
-.warn-card{background:#FFF4F1;border:1px solid #FFD9CD;border-radius:var(--radius-l);padding:clamp(22px,2.2vw,32px);max-width:1280px}
-.warn-card h3{color:var(--accent-600)}
+/* Блок противопоказаний. Раньше это была кремовая плашка со светлой
+   темы — на тёмной сцене она светила как заплатка, а текст в ней шёл
+   тем же приглушённым цветом, что и на тёмном фоне, и не читался. */
+.warn-card{
+  position:relative;max-width:1280px;border-radius:var(--radius-l);
+  background:
+    linear-gradient(150deg,rgba(255,90,43,.12) 0%,rgba(255,90,43,.04) 44%,rgba(255,255,255,.02) 100%);
+  border:1px solid rgba(255,90,43,.30);
+  padding:clamp(24px,2.4vw,34px) clamp(22px,2.2vw,32px) clamp(24px,2.4vw,34px) clamp(60px,5.2vw,78px);
+}
+/* тёплая кромка слева — блок читается как предупреждение до чтения текста */
+.warn-card::after{
+  content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:3px;
+  background:linear-gradient(180deg,var(--accent),rgba(255,90,43,0));
+}
+.warn-card::before{
+  content:"";position:absolute;left:clamp(20px,1.9vw,26px);top:calc(clamp(24px,2.4vw,34px) + 5px);
+  width:28px;height:28px;border-radius:50%;background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23120503' d='M11 6h2v9h-2zM11 17h2v2h-2z'/%3E%3C/svg%3E") center/16px no-repeat;
+  box-shadow:0 6px 18px rgba(255,90,43,.34);
+}
+.warn-card h3{color:var(--accent-300);margin-bottom:.6em}
+.warn-card p,.warn-card li{color:var(--ink-2)}
 .warn-card ul li::before{background:var(--accent)}
 
 .checklist:not(.checklist--cols){max-width:var(--read)}
