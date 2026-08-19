@@ -1,9 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="Цены: прайс-лист клиники с расчётом стоимости лечения">
   <title>Цены</title>
-  <defs><clipPath id="fit"><circle cx="240" cy="240" r="212"/></clipPath></defs>
+  <defs>
+    <radialGradient id="fadeg">
+      <stop offset="0" stop-color="#fff"/><stop offset=".70" stop-color="#fff"/><stop offset="1" stop-color="#000"/>
+    </radialGradient>
+    <mask id="fade"><circle cx="240" cy="240" r="228" fill="url(#fadeg)"/></mask>
+  </defs>
 
-  <circle cx="240" cy="240" r="214" fill="#fff" opacity=".07"/>
-  <g clip-path="url(#fit)">
+  <g mask="url(#fade)">
   <g transform="translate(240,240) scale(1.2) translate(-240,-240)">
 
 
@@ -57,5 +61,4 @@
 
   </g>
   </g>
-  <circle cx="240" cy="240" r="214" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="5 9"/>
 </svg>

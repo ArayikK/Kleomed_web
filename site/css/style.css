@@ -390,6 +390,55 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   .hero__pill b{font-size:16px}
 }
 
+
+/* --------------------------------------------- кнопка с бегущим светом */
+/* Свет по рамке — вращающийся конический градиент под кнопкой. Видна
+   только полоска по краю: сверху лежит непрозрачная «лицевая» часть,
+   она закрывает центр и оставляет рамку в 2px.
+   @property нужен, чтобы браузер анимировал сам угол; без него
+   переменная считается строкой и вращение идёт рывками. */
+@property --live-a{syntax:'<angle>';initial-value:0deg;inherits:false}
+
+.btn-live{
+  position:relative;display:inline-grid;padding:2px;border-radius:100px;
+  isolation:isolate;overflow:hidden;line-height:0;
+  background:rgba(255,255,255,.14);
+}
+.btn-live__glow{
+  position:absolute;inset:-60%;z-index:0;
+  background:conic-gradient(from var(--live-a),
+    transparent 0deg 200deg,
+    rgba(52,200,138,.5) 268deg,
+    #7FE9B4 318deg,
+    #FFFFFF 340deg,
+    #7FE9B4 352deg,
+    transparent 360deg);
+  animation:btn-live-spin 2.6s linear infinite;
+}
+@keyframes btn-live-spin{to{--live-a:360deg}}
+
+.btn-live__face{
+  position:relative;z-index:1;display:inline-flex;align-items:center;gap:11px;
+  padding:15px 30px;border-radius:100px;line-height:1.2;
+  background:rgba(6,32,24,.92);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  font-size:16px;font-weight:800;color:#fff;letter-spacing:.01em;
+  transition:background .25s var(--ease);
+}
+.btn-live__face svg{width:19px;height:19px;fill:var(--brand-300);flex-shrink:0}
+.btn-live:hover .btn-live__face{background:rgba(9,44,33,.92);color:#fff}
+.btn-live:hover{box-shadow:0 12px 34px rgba(52,200,138,.24)}
+
+/* Ореол под кнопкой: свет должен читаться и за её пределами */
+.btn-live::after{
+  content:"";position:absolute;inset:0;border-radius:100px;z-index:-1;
+  box-shadow:0 0 26px rgba(52,200,138,.35);
+}
+
+@media (prefers-reduced-motion:reduce){
+  .btn-live__glow{animation:none;background:rgba(52,200,138,.55)}
+}
+
 /* --------------------------------------------------------------- статистика */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px)}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-l);padding:clamp(20px,2.2vw,30px);text-align:center;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
@@ -796,31 +845,29 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .page-hero__in{max-width:780px;position:relative}
 .page-hero h1{color:#fff;margin-bottom:14px;font-size:clamp(26px,3vw,40px);letter-spacing:-.032em}
 .page-hero p{color:rgba(255,255,255,.9);font-size:clamp(15.5px,1.32vw,17.5px);margin-bottom:26px;max-width:760px}
-/* Вместо случайного фото — схема процедуры. Она рисуется прямо на градиенте,
-   без карточки и рамки: рамка возвращала бы ту же «наклейку», от которой ушли. */
+/* Предмет лежит прямо на сцене — ни круга, ни рамки, ни карточки.
+   Свет идёт из-за него, снизу отражение: та же постановка, что в
+   герое главной. Любая оправа возвращала ощущение наклейки. */
 .page-hero__art{position:relative;display:grid;place-items:center}
 .page-hero__art::before{
-  content:"";position:absolute;width:92%;aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle,rgba(150,246,200,.15) 0%,rgba(150,246,200,0) 70%);
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  width:104%;aspect-ratio:1.12;
+  background:
+    radial-gradient(ellipse 38% 32% at 50% 46%, rgba(126,246,192,.24) 0%, rgba(126,246,192,0) 62%),
+    radial-gradient(ellipse 56% 44% at 50% 50%, rgba(2,98,72,.52) 0%, rgba(2,98,72,0) 74%);
+  filter:blur(7px);
 }
-.page-hero__art img{position:relative;width:100%;max-width:512px;height:auto;filter:drop-shadow(0 24px 50px rgba(0,0,0,.5))}
+.page-hero__art img{position:relative;z-index:1;width:100%;max-width:512px;height:auto;
+  filter:drop-shadow(0 26px 46px rgba(0,0,0,.6))}
 
-/* Снимок вместо схемы. Круг рисует CSS — у снимка своего круга нет,
-   а на семи страницах остались схемы со своим кругом, и без него
-   шапки выглядели бы разнородно. */
-/* Контейнер сам квадратный — иначе круг больше содержимого и его
-   срезает по верхнему краю секции (у .page-hero стоит overflow:hidden). */
-.page-hero__art--photo{width:100%;max-width:512px;aspect-ratio:1;margin-inline:auto}
-.page-hero__art--photo::after{
-  content:"";position:absolute;z-index:0;inset:0;border-radius:50%;
-  background:rgba(255,255,255,.07);
-  border:1.5px dashed rgba(255,255,255,.22);
-}
+/* Снимок услуги свободно лежит на фоне. Кадры прямоугольные, поэтому
+   без оправы их края обязаны раствориться — иначе снова «наклейка».
+   Радиусы в radial-gradient считаются от ширины и высоты бокса. */
+.page-hero__art--photo{width:100%;max-width:470px;margin-inline:auto}
 .page-hero__art--photo img{
-  position:relative;z-index:1;width:auto;max-width:82%;max-height:70%;object-fit:contain;
-  /* снимки прямоугольные и в круге видны их края — растворяем к углам */
-  -webkit-mask-image:radial-gradient(ellipse 55% 55% at 50% 48%,#000 58%,rgba(0,0,0,.42) 84%,transparent 100%);
-          mask-image:radial-gradient(ellipse 55% 55% at 50% 48%,#000 58%,rgba(0,0,0,.42) 84%,transparent 100%);
+  max-width:100%;
+  -webkit-mask-image:radial-gradient(ellipse 56% 56% at 50% 48%,#000 50%,rgba(0,0,0,.38) 82%,transparent 100%);
+          mask-image:radial-gradient(ellipse 56% 56% at 50% 48%,#000 50%,rgba(0,0,0,.38) 82%,transparent 100%);
 }
 
 /* Факты под подзаголовком: цифры со страницы, а не украшение. */
