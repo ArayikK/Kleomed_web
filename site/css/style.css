@@ -1017,8 +1017,8 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   content:"";position:absolute;z-index:0;pointer-events:none;
   width:104%;aspect-ratio:1.12;
   background:
-    radial-gradient(ellipse 38% 32% at 50% 46%, rgba(126,246,192,.24) 0%, rgba(126,246,192,0) 62%),
-    radial-gradient(ellipse 56% 44% at 50% 50%, rgba(2,98,72,.52) 0%, rgba(2,98,72,0) 74%);
+    radial-gradient(ellipse 34% 28% at 50% 46%, rgba(126,246,192,.13) 0%, rgba(126,246,192,0) 62%),
+    radial-gradient(ellipse 48% 38% at 50% 50%, rgba(2,98,72,.28) 0%, rgba(2,98,72,0) 74%);
   filter:blur(7px);
 }
 .page-hero__art img{position:relative;z-index:1;width:100%;max-width:512px;height:auto;
@@ -1027,7 +1027,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 /* Снимок услуги свободно лежит на фоне. Кадры прямоугольные, поэтому
    без оправы их края обязаны раствориться — иначе снова «наклейка».
    Радиусы в radial-gradient считаются от ширины и высоты бокса. */
-.page-hero__art--photo{width:100%;max-width:470px;margin-inline:auto}
+.page-hero__art--photo{width:100%;max-width:640px;margin-inline:auto}
 .page-hero__art--photo img{
   max-width:100%;
   -webkit-mask-image:radial-gradient(ellipse 56% 56% at 50% 48%,#000 50%,rgba(0,0,0,.38) 82%,transparent 100%);
@@ -1059,8 +1059,8 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .art-badge__ico{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:var(--brand-050)}
 .art-badge__ico svg{width:17px;height:17px;fill:none;stroke:var(--brand-300);stroke-width:2}
 .art-badge span{font-size:13px;font-weight:700;color:#fff;line-height:1.32}
-.art-badge--tr{top:0;right:-8%}
-.art-badge--br{bottom:4%;right:-10%}
+.art-badge--tr{top:0;right:-2%}
+.art-badge--br{bottom:4%;right:-4%}
 
 /* точка на фото + пунктирная линия + подпись — что именно на снимке.
    Направление зависит от того, к какому краю кадра ближе точка:
