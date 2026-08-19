@@ -393,50 +393,69 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 
 /* --------------------------------------------- кнопка с бегущим светом */
 /* Свет по рамке — вращающийся конический градиент под кнопкой. Видна
-   только полоска по краю: сверху лежит непрозрачная «лицевая» часть,
-   она закрывает центр и оставляет рамку в 2px.
+   только полоска по краю: сверху лежит непрозрачная «лицевая» часть.
    @property нужен, чтобы браузер анимировал сам угол; без него
    переменная считается строкой и вращение идёт рывками. */
 @property --live-a{syntax:'<angle>';initial-value:0deg;inherits:false}
 
 .btn-live{
-  position:relative;display:inline-grid;padding:2px;border-radius:100px;
+  position:relative;display:inline-grid;padding:2.5px;border-radius:100px;
   isolation:isolate;overflow:hidden;line-height:0;
-  background:rgba(255,255,255,.14);
+  background:rgba(255,255,255,.16);
+  transition:transform .3s var(--ease);
 }
+.btn-live:hover{transform:translateY(-3px)}
+
+/* дышащий ореол: кнопка «зовёт» даже боковым зрением */
+.btn-live::before{
+  content:"";position:absolute;inset:-26px;z-index:-1;border-radius:100px;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(52,200,138,.42),rgba(52,200,138,0) 100%);
+  animation:btn-live-breathe 3.2s ease-in-out infinite;
+}
+@keyframes btn-live-breathe{
+  0%,100%{opacity:.5;transform:scale(.94)}
+  50%    {opacity:1;transform:scale(1.06)}
+}
+
 .btn-live__glow{
   position:absolute;inset:-60%;z-index:0;
   background:conic-gradient(from var(--live-a),
-    transparent 0deg 200deg,
-    rgba(52,200,138,.5) 268deg,
-    #7FE9B4 318deg,
-    #FFFFFF 340deg,
-    #7FE9B4 352deg,
+    transparent 0deg 186deg,
+    rgba(52,200,138,.45) 250deg,
+    #7FE9B4 306deg,
+    #FFFFFF 336deg,
+    #7FE9B4 350deg,
     transparent 360deg);
-  animation:btn-live-spin 2.6s linear infinite;
+  animation:btn-live-spin 2.4s linear infinite;
 }
 @keyframes btn-live-spin{to{--live-a:360deg}}
 
 .btn-live__face{
-  position:relative;z-index:1;display:inline-flex;align-items:center;gap:11px;
-  padding:15px 30px;border-radius:100px;line-height:1.2;
-  background:rgba(6,32,24,.92);
+  position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+  gap:14px;min-width:min(84vw,368px);
+  padding:21px 44px;border-radius:100px;line-height:1.2;
+  background:linear-gradient(180deg,rgba(10,46,34,.94),rgba(5,26,19,.94));
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-  font-size:16px;font-weight:800;color:#fff;letter-spacing:.01em;
+  font-size:19px;font-weight:900;color:#fff;letter-spacing:.005em;
   transition:background .25s var(--ease);
 }
-.btn-live__face svg{width:19px;height:19px;fill:var(--brand-300);flex-shrink:0}
-.btn-live:hover .btn-live__face{background:rgba(9,44,33,.92);color:#fff}
-.btn-live:hover{box-shadow:0 12px 34px rgba(52,200,138,.24)}
-
-/* Ореол под кнопкой: свет должен читаться и за её пределами */
-.btn-live::after{
-  content:"";position:absolute;inset:0;border-radius:100px;z-index:-1;
-  box-shadow:0 0 26px rgba(52,200,138,.35);
+.btn-live__face b{font-weight:900}
+.btn-live__star{width:22px;height:22px;fill:var(--brand-300);flex-shrink:0}
+.btn-live__arrow{
+  width:20px;height:20px;fill:var(--brand-300);flex-shrink:0;
+  transition:transform .28s var(--ease);
 }
+.btn-live:hover .btn-live__face{background:linear-gradient(180deg,rgba(14,60,44,.94),rgba(7,34,25,.94))}
+.btn-live:hover .btn-live__arrow{transform:translateX(6px)}
+.btn-live:hover .btn-live__star{fill:#fff}
 
 @media (prefers-reduced-motion:reduce){
-  .btn-live__glow{animation:none;background:rgba(52,200,138,.55)}
+  .btn-live__glow{animation:none;background:rgba(52,200,138,.6)}
+  .btn-live::before{animation:none;opacity:.7}
+  .btn-live:hover{transform:none}
+}
+@media (max-width:520px){
+  .btn-live__face{min-width:0;width:100%;padding:18px 26px;font-size:17px;gap:11px}
 }
 
 /* --------------------------------------------------------------- статистика */
