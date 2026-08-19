@@ -353,7 +353,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
    затемнением к краям — тогда они лежат в кадре, а не поверх него.
    Клинические снимки «до/после» и лицензии НЕ трогаем: там важна
    достоверность цвета. */
-.doctor__photo,.offer__img,.hero__photo,.split__media,.promo-banner__media{position:relative;isolation:isolate}
+.doctor__photo,.hero__photo,.split__media{position:relative;isolation:isolate}
 
 /* врач: кадр берём выше, чтобы лицо не тонуло в макросъёмке за спиной */
 .doctor__name{color:#fff}
@@ -772,30 +772,6 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .promo-banner .btn{position:relative;flex-shrink:0}
 .promo-flag{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;padding:7px 16px;border-radius:100px;margin-bottom:14px;box-shadow:var(--shadow-accent)}
 
-.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2vw,28px)}
-.offer{
-  position:relative;background:var(--card);border:1px solid var(--line-2);border-radius:var(--radius-xl);
-  overflow:hidden;display:flex;flex-direction:column;
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
-}
-.offer:hover{transform:translateY(-8px);box-shadow:var(--shadow-l),0 0 0 1px var(--brand);border-color:var(--brand)}
-.offer__img{aspect-ratio:16/10;overflow:hidden;background:var(--lav-2);position:relative}
-.offer__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
-.offer:hover .offer__img img{transform:scale(1.06)}
-/* z-index обязателен: при наведении картинка получает transform и создаёт
-   свой контекст наложения — без этого она перекрывает плашки поверх себя */
-.offer__flag{position:absolute;z-index:2;top:16px;left:16px;padding:8px 16px;border-radius:100px;background:var(--accent);color:#fff;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;box-shadow:var(--shadow-accent)}
-.offer__save{position:absolute;z-index:2;top:14px;right:14px;width:62px;height:62px;border-radius:50%;background:#fff;color:var(--accent);display:grid;place-items:center;font-size:18px;font-weight:900;letter-spacing:-.03em;box-shadow:var(--shadow)}
-.offer__body{padding:clamp(20px,2.2vw,30px);display:flex;flex-direction:column;flex:1}
-.offer h3{font-size:22px;margin-bottom:8px}
-.offer__price{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
-.offer__price b{font-size:36px;font-weight:900;color:var(--accent);letter-spacing:-.04em}
-.offer__price s{font-size:18px;color:var(--ink-3)}
-.offer .checklist{margin-bottom:22px}
-.offer .checklist li{font-size:14.5px;padding-left:32px}
-.offer .checklist li::before{width:21px;height:21px;background-size:14px}
-.offer .btn{margin-top:auto}
-
 /* ---- «смотреть все» под секцией-превью ---- */
 .sec-more{display:flex;justify-content:center;margin-top:clamp(24px,2.6vw,38px)}
 
@@ -1146,7 +1122,7 @@ body.is-locked{overflow:hidden}
   .stats{grid-template-columns:repeat(2,1fr)}
   .footer__grid{grid-template-columns:1fr 1fr}
   .header__phone{display:none}
-  .offers,.reasons,.cards-3,.licenses{grid-template-columns:1fr 1fr}
+  .reasons,.cards-3,.licenses{grid-template-columns:1fr 1fr}
 }
 @media (max-width:900px){
   :root{--header-h:70px}
@@ -1160,7 +1136,7 @@ body.is-locked{overflow:hidden}
   .hero__promo .price b{font-size:27px}
   .doctor,.split,.booking__in,.contacts{grid-template-columns:1fr}
   .split--rev .split__media{order:0}
-  .offers,.reasons,.cards-3,.licenses{grid-template-columns:1fr}
+  .reasons,.cards-3,.licenses{grid-template-columns:1fr}
   .checklist--cols,.pills{grid-template-columns:1fr}
   .promo-banner{grid-template-columns:1fr}
   .callout{grid-template-columns:1fr}
