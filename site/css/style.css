@@ -458,6 +458,111 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   .btn-live__face{min-width:0;width:100%;padding:18px 26px;font-size:17px;gap:11px}
 }
 
+
+/* --------------------------------------------------------------- калькулятор скидки */
+/* 3D-объекты в шапке лежат свободно, без круга — как и снимки услуг */
+.page-hero__art--3d img{max-width:340px;filter:drop-shadow(0 30px 50px rgba(0,0,0,.6))}
+
+.calc{position:relative;overflow:hidden}
+.calc__deco{position:absolute;z-index:0;pointer-events:none;opacity:.5}
+.calc__deco--1{left:-70px;top:44px;width:280px;transform:rotate(-12deg)}
+.calc__deco--2{right:-40px;bottom:60px;width:260px}
+
+.calc__box{
+  position:relative;z-index:1;max-width:1080px;margin-inline:auto;
+  background:linear-gradient(168deg,rgba(255,255,255,.075),rgba(255,255,255,.02));
+  border:1px solid var(--line);border-radius:var(--radius-xl);
+  padding:clamp(22px,3vw,44px);
+}
+.calc__grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.2vw,16px);
+  border:0;padding:0;margin:0 0 22px;
+}
+.calc__opt{position:relative;display:block;cursor:pointer}
+.calc__opt input{position:absolute;opacity:0;width:0;height:0}
+.calc__optIn{
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;height:100%;
+  padding:18px 20px;border-radius:var(--radius);
+  background:rgba(255,255,255,.04);border:1px solid var(--line-2);
+  transition:background .22s var(--ease),border-color .22s var(--ease),transform .22s var(--ease);
+}
+.calc__opt:hover .calc__optIn{background:rgba(255,255,255,.07);transform:translateY(-3px)}
+.calc__ico{
+  width:44px;height:44px;border-radius:14px;display:grid;place-items:center;margin-bottom:8px;
+  background:var(--brand-050);border:1px solid var(--brand-100);
+}
+.calc__ico svg{width:22px;height:22px;fill:none;stroke:var(--brand-300);stroke-width:2}
+.calc__optIn b{font-size:17px;font-weight:800;color:#fff}
+.calc__optIn small{font-size:13px;color:var(--ink-3);line-height:1.4}
+/* выбранная категория */
+.calc__opt input:checked + .calc__optIn{
+  background:rgba(52,200,138,.12);border-color:var(--brand);
+  box-shadow:0 0 0 1px var(--brand),0 12px 30px rgba(52,200,138,.18);
+}
+.calc__opt input:checked + .calc__optIn .calc__ico{background:var(--brand);border-color:var(--brand)}
+.calc__opt input:checked + .calc__optIn .calc__ico svg{stroke:#02120F}
+.calc__opt input:focus-visible + .calc__optIn{outline:3px solid var(--brand);outline-offset:3px}
+
+.calc__err{color:#FF9B79;font-size:14.5px;font-weight:700;margin:0 0 14px}
+.calc__note{margin:16px 0 0;font-size:13.5px;color:var(--ink-3);max-width:640px}
+.btn-live--calc{margin-top:2px}
+
+/* ---- шторка: страница уходит в тень, цифра выходит на первый план ---- */
+.calc-veil{
+  position:fixed;inset:0;z-index:1200;display:grid;place-items:center;
+  padding:24px;background:rgba(1,10,8,.86);
+  -webkit-backdrop-filter:blur(10px) saturate(120%);backdrop-filter:blur(10px) saturate(120%);
+  opacity:0;transition:opacity .45s var(--ease);
+}
+.calc-veil.is-on{opacity:1}
+.calc-veil__in{text-align:center;max-width:640px;width:100%}
+
+/* загрузка */
+/* display:grid перебивает атрибут hidden — иначе загрузка остаётся
+   висеть за результатом */
+.calc-load[hidden],.calc-res[hidden],.calc-veil[hidden]{display:none!important}
+.calc-load{display:grid;place-items:center;gap:20px}
+.calc-load__ring{
+  position:absolute;width:190px;height:190px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.08);
+  border-top-color:var(--brand);border-right-color:var(--brand-300);
+  animation:calc-spin 1s linear infinite;
+}
+.calc-load__ico{width:118px;height:auto;animation:calc-pulse 1.6s ease-in-out infinite}
+.calc-load__txt{margin:0;font-size:17px;font-weight:700;color:var(--ink-2);letter-spacing:.02em}
+@keyframes calc-spin{to{transform:rotate(360deg)}}
+@keyframes calc-pulse{0%,100%{transform:scale(.94)}50%{transform:scale(1.06)}}
+
+/* результат */
+.calc-res__cat{
+  margin:0 0 6px;font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brand-300);
+}
+.calc-res__num{
+  margin:0;line-height:.9;font-weight:900;letter-spacing:-.05em;color:#fff;
+  display:flex;align-items:baseline;justify-content:center;gap:2px;
+  /* размер растёт по ходу счёта — им управляет js через --k */
+  font-size:calc(78px + 132px * var(--k,0));
+  text-shadow:0 0 calc(30px + 70px * var(--k,0)) rgba(52,200,138,calc(.25 + .45 * var(--k,0)));
+}
+.calc-res__num i{font-style:normal;font-size:.42em;font-weight:900;color:var(--brand-300)}
+.calc-res__sub{margin:14px 0 0;font-size:19px;color:var(--ink-2)}
+.calc-res__act{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:30px}
+.calc-res__note{margin:20px auto 0;max-width:460px;font-size:13.5px;color:var(--ink-3)}
+
+@media (max-width:900px){
+  .calc__grid{grid-template-columns:repeat(2,1fr)}
+  .calc__deco{display:none}
+}
+@media (max-width:560px){
+  .calc__grid{grid-template-columns:1fr}
+  .calc-res__num{font-size:calc(62px + 78px * var(--k,0))}
+}
+@media (prefers-reduced-motion:reduce){
+  .calc-load__ring,.calc-load__ico{animation:none}
+  .calc-veil{transition:none}
+}
+
 /* --------------------------------------------------------------- статистика */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.6vw,22px)}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-l);padding:clamp(20px,2.2vw,30px);text-align:center;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}

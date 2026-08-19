@@ -309,6 +309,88 @@
     });
   });
 
+
+  /* ------------------------------------------- калькулятор скидки */
+  var calcForm = $('#calc-form');
+  if (calcForm) {
+    var veil    = $('#calc-veil'),
+        load    = $('#calc-load'),
+        res     = $('#calc-res'),
+        resNum  = $('#calc-res-num'),
+        resCat  = $('#calc-res-cat'),
+        errBox  = $('#calc-err'),
+        btnClose= $('#calc-close'),
+        btnBook = $('#calc-book'),
+        timers  = [];
+
+    var slow = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function clearTimers() { timers.forEach(function (t) { clearTimeout(t); clearInterval(t); }); timers = []; }
+
+    function closeVeil() {
+      clearTimers();
+      veil.classList.remove('is-on');
+      document.body.classList.remove('is-locked');
+      setTimeout(function () { veil.hidden = true; }, 450);
+    }
+
+    /* Счёт от нуля до целевого значения. Кегль и свечение растут вместе
+       со счётчиком — за это отвечает --k, её же читает css. */
+    function countTo(target) {
+      var dur = 1100, t0 = Date.now(), box = resNum.parentNode;
+      box.style.setProperty('--k', 0);
+      resNum.textContent = '0';
+      var id = setInterval(function () {
+        var p = Math.min((Date.now() - t0) / dur, 1);
+        var e = 1 - Math.pow(1 - p, 3);           /* быстро в начале, мягко в конце */
+        resNum.textContent = Math.round(target * e);
+        box.style.setProperty('--k', e.toFixed(3));
+        if (p >= 1) {
+          clearInterval(id);
+          resNum.textContent = target;            /* добиваем точное значение */
+          box.style.setProperty('--k', 1);
+        }
+      }, 16);
+      timers.push(id);
+    }
+
+    calcForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var picked = calcForm.querySelector('input[name="cat"]:checked');
+      if (!picked) {
+        errBox.hidden = false;
+        calcForm.querySelector('.calc__opt').scrollIntoView({ block: 'center', behavior: 'smooth' });
+        return;
+      }
+      errBox.hidden = true;
+
+      var off = parseInt(picked.getAttribute('data-off'), 10) || 0;
+      resCat.textContent = picked.value;
+
+      /* показываем шторку и крутим загрузку 3–4 секунды */
+      veil.hidden = false;
+      load.hidden = false;
+      res.hidden = true;
+      document.body.classList.add('is-locked');
+      requestAnimationFrame(function () { veil.classList.add('is-on'); });
+
+      var wait = slow ? 400 : 3000 + Math.random() * 1000;
+      timers.push(setTimeout(function () {
+        load.hidden = true;
+        res.hidden = false;
+        if (slow) { resNum.textContent = off; resNum.parentNode.style.setProperty('--k', 1); }
+        else countTo(off);
+      }, wait));
+    });
+
+    if (btnClose) btnClose.addEventListener('click', closeVeil);
+    if (btnBook)  btnBook.addEventListener('click', closeVeil);
+    veil.addEventListener('click', function (e) { if (e.target === veil) closeVeil(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !veil.hidden) closeVeil();
+    });
+  }
+
   /* ------------------------------------------- год в подвале */
   $$('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
