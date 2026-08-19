@@ -77,16 +77,44 @@
         <a class="btn btn--white btn--lg" href="tel:+79119377727">+7 (911) 937-77-27</a>
       </div>
     </div>
-    <div class="page-hero__art page-hero__art--3d">
-      <img src="img/promo/percent-big.png" alt="Скидки клиники «Клеомед»" width="314" height="304" fetchpriority="high">
+    <div class="page-hero__art page-hero__art--3d promo-hero">
+      <img class="promo-hero__main" src="img/promo/percent-big.png" alt="Скидки клиники «Клеомед»" width="314" height="304" fetchpriority="high">
+      <img class="promo-hero__acc promo-hero__acc--tag" src="img/promo/tag.png" alt="" aria-hidden="true" loading="lazy">
+      <img class="promo-hero__acc promo-hero__acc--gift" src="img/promo/gift.png" alt="" aria-hidden="true" loading="lazy">
     </div>
+  </div>
+</section>
+
+
+<!-- ============================================== КАК ЭТО РАБОТАЕТ -->
+<section class="section how" style="padding-bottom:0">
+  <div class="container">
+    <ol class="how__list">
+      <li class="how__step reveal reveal-d0">
+        <span class="how__ico"><img src="img/promo/tag.png" alt="" aria-hidden="true" loading="lazy"></span>
+        <b>Выберите категорию</b>
+        <span>Студент, пенсионер, участник СВО и другие — отметьте свою ниже.</span>
+      </li>
+      <li class="how__step reveal reveal-d1">
+        <span class="how__ico"><img src="img/promo/gift.png" alt="" aria-hidden="true" loading="lazy"></span>
+        <b>Узнайте размер скидки</b>
+        <span>Расчёт займёт пару секунд — цифра появится прямо на странице.</span>
+      </li>
+      <li class="how__step reveal reveal-d2">
+        <span class="how__ico"><img src="img/promo/megaphone-loud.png" alt="" aria-hidden="true" loading="lazy"></span>
+        <b>Запишитесь со скидкой</b>
+        <span>Назовите категорию администратору — зафиксируем её в смете.</span>
+      </li>
+    </ol>
   </div>
 </section>
 
 <!-- ============================================== КАЛЬКУЛЯТОР СКИДКИ -->
 <section class="section calc" id="calc">
-  <img class="calc__deco calc__deco--1" src="img/promo/branch.png" alt="" aria-hidden="true" loading="lazy">
-  <img class="calc__deco calc__deco--2" src="img/promo/sparkles.png" alt="" aria-hidden="true" loading="lazy">
+  <img class="calc__deco calc__deco--1" src="img/promo/swoosh.png" alt="" aria-hidden="true" loading="lazy">
+  <img class="calc__deco calc__deco--2" src="img/promo/stethoscope.png" alt="" aria-hidden="true" loading="lazy">
+  <img class="calc__deco calc__deco--3" src="img/promo/percent-white.png" alt="" aria-hidden="true" loading="lazy">
+  <img class="calc__deco calc__deco--4" src="img/promo/tag.png" alt="" aria-hidden="true" loading="lazy">
   <div class="container">
     <div class="section-head section-head--center">
       <span class="eyebrow">Персональная скидка</span>
@@ -95,7 +123,7 @@
       Она суммируется с бесплатной консультацией и фиксируется в смете.</p>
     </div>
 
-    <form class="calc__box reveal" id="calc-form" novalidate>
+    <div class="calc__aura"><form class="calc__box reveal" id="calc-form" novalidate>
       <fieldset class="calc__grid">
         <legend class="visually-hidden">Выберите вашу категорию</legend>
 
@@ -160,7 +188,7 @@
       </button>
 
       <p class="calc__note">Скидка не суммируется с акциями месяца. Понадобится подтверждающий документ на приёме.</p>
-    </form>
+    </form></div>
   </div>
 </section>
 
@@ -175,6 +203,8 @@
     </div>
 
     <div class="calc-res" id="calc-res" hidden>
+      <img class="calc-res__deco calc-res__deco--l" src="img/promo/swoosh.png" alt="" aria-hidden="true">
+      <img class="calc-res__deco calc-res__deco--r" src="img/promo/gift.png" alt="" aria-hidden="true">
       <p class="calc-res__cat" id="calc-res-cat"></p>
       <p class="calc-res__num"><span id="calc-res-num">0</span><i>%</i></p>
       <p class="calc-res__sub">скидка на лечение в «Клеомед»</p>
