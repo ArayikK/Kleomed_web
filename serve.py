@@ -10,10 +10,16 @@ Usage:
     python serve.py            # http://localhost:8080
     python serve.py 9000       # another port
 """
+import json
 import os
 import sys
+import urllib.error
+import urllib.request
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+
+# Where leads.py listens locally. Same default as the service itself.
+LEADS_PORT = int(os.environ.get("KLEOMED_PORT", "8081"))
 
 
 class NoCacheHandler(SimpleHTTPRequestHandler):
@@ -30,7 +36,69 @@ class NoCacheHandler(SimpleHTTPRequestHandler):
         for h in ("If-Modified-Since", "If-None-Match"):
             if h in self.headers:
                 del self.headers[h]
+
+        # Mirror the production nginx rule: /ceny resolves to ceny.html. The
+        # canonical URLs in the pages are extensionless, so without this the
+        # preview would answer 404 for exactly the addresses search engines use.
+        head, sep, tail = self.path.partition("?")
+        if not os.path.splitext(head)[1] and not head.endswith("/"):
+            if os.path.isfile(self.translate_path(head) + ".html"):
+                self.path = head + ".html" + sep + tail
+
         return super().send_head()
+
+    def send_error(self, code, message=None, explain=None):
+        """Serve the real 404 page instead of the stock plain-text one, so the
+        page can be checked locally the same way visitors will see it."""
+        if code == 404 and self.path.startswith("/site/"):
+            page = os.path.join(self.directory, "site", "404.html")
+            if os.path.isfile(page):
+                with open(page, "rb") as f:
+                    body = f.read()
+                self.send_response(404)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                if self.command != "HEAD":
+                    self.wfile.write(body)
+                return
+        return super().send_error(code, message, explain)
+
+    def do_POST(self):
+        """Forward /api/ to the leads service, the way nginx does in production.
+
+        Without this the booking form could only be tested against the live
+        server, and a broken form is the one bug on this site that costs
+        actual patients."""
+        if not self.path.startswith("/api/"):
+            return self.send_error(405, "Method Not Allowed")
+
+        try:
+            length = int(self.headers.get("Content-Length", "0"))
+        except ValueError:
+            length = 0
+        body = self.rfile.read(length) if length else b""
+
+        url = "http://127.0.0.1:%d%s" % (LEADS_PORT, self.path)
+        req = urllib.request.Request(
+            url, data=body, method="POST",
+            headers={"Content-Type": self.headers.get("Content-Type", "application/json")})
+        try:
+            with urllib.request.urlopen(req, timeout=10) as r:
+                code, payload = r.status, r.read()
+        except urllib.error.HTTPError as e:
+            code, payload = e.code, e.read()
+        except OSError:
+            code = 502
+            payload = json.dumps(
+                {"ok": False, "error": "Сервис заявок не запущен (leads.py)"},
+                ensure_ascii=False).encode("utf-8")
+
+        self.send_response(code)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(payload)))
+        self.end_headers()
+        self.wfile.write(payload)
 
     def log_message(self, fmt, *args):
         msg = fmt % args

@@ -1,0 +1,52 @@
+# Сервис приёма заявок. Положить в /etc/systemd/system/kleomed-leads.service
+#
+#   systemctl daemon-reload
+#   systemctl enable --now kleomed-leads
+#   systemctl status kleomed-leads
+#   journalctl -u kleomed-leads -f      # смотреть журнал
+
+[Unit]
+Description=Kleomed — приём заявок с сайта
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kleomed
+Group=kleomed
+
+# Ключи и токены лежат в файле с правами 600, а не в этом юните:
+# systemd-юнит читается кем угодно через systemctl cat.
+EnvironmentFile=/etc/kleomed/leads.env
+
+ExecStart=/usr/bin/python3 /opt/kleomed/leads.py
+WorkingDirectory=/opt/kleomed
+
+Restart=always
+RestartSec=3
+
+# База с персональными данными — единственное место, куда можно писать.
+StateDirectory=kleomed
+StateDirectoryMode=0700
+ReadWritePaths=/var/lib/kleomed
+
+# Без этого sqlite создаёт файл базы с правами 644, и данные пациентов может
+# прочитать любой пользователь системы. Umask 0077 закрывает всё, что сервис
+# создаёт, до «только владелец».
+UMask=0077
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6
+RestrictNamespaces=yes
+LockPersonality=yes
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

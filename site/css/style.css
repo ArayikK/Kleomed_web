@@ -36,7 +36,7 @@
   --brand-300:#7FE3B0;
   --brand-100:rgba(52,200,138,.30);
   --brand-050:rgba(52,200,138,.12);
-  --deep:#01100D;
+  --deep:#03110E;       /* поле сцены — снято пипеткой с макета */
   --deep-2:#000A08;
 
   --accent:#FF5A2B;       /* акции — единственный тёплый цвет */
@@ -46,20 +46,37 @@
   --ink:#EAF7F0;          /* основной текст: контраст 15:1 к фону */
   --ink-2:#A3C4B4;        /* вторичный: 8:1 */
   --ink-3:#6C8C7C;
+  --ink-strong:#fff;      /* заголовки и всё, что должно бить максимальным контрастом */
+  --on-brand:#02120F;     /* текст поверх фирменной заливки */
   --line:rgba(255,255,255,.13);
   --line-2:rgba(255,255,255,.08);
   --white:#fff;
+
+  /* Подмешивается в стекло, тонкие линии и заливки секций. В тёмной теме
+     это белый «налёт», в светлой — наоборот, зелёная тень. Один токен
+     разворачивает десятки rgba() сразу. */
+  --tint-rgb:255,255,255;
+  --panel-rgb:2,18,15;   /* шапка, нижняя панель, затемнение к низу секций */
+  --calc-box-bg:linear-gradient(168deg,rgba(10,30,23,.94),rgba(6,20,15,.94));
+  --veil-bg:rgba(1,10,8,.86);
+  --shade-rgb:0,0,0;      /* цвет теней */
 
   --radius-s:12px;
   --radius:18px;
   --radius-l:26px;
   --radius-xl:36px;
 
-  --shadow-s:0 2px 10px rgba(0,0,0,.4);
-  --shadow:0 12px 40px rgba(0,0,0,.5);
-  --shadow-l:0 28px 80px rgba(0,0,0,.6);
+  --shadow-s:0 2px 10px rgba(var(--shade-rgb),.4);
+  --shadow:0 12px 40px rgba(var(--shade-rgb),.5);
+  --shadow-l:0 28px 80px rgba(var(--shade-rgb),.6);
   --shadow-brand:0 12px 34px rgba(52,200,138,.26);
   --shadow-accent:0 12px 30px rgba(255,90,43,.32);
+
+  /* Синий ВКонтакте. Единственный цвет в палитре, который живёт по чужим
+     правилам: по нему кнопку и узнают, перекрашивать её в зелёный — значит
+     сделать из знака просто кружок. Задан один раз на обе темы. */
+  --vk:#0077FF;
+  --vk-700:#0062D6;
 
   --container:1680px;
   --gutter:clamp(18px,3vw,56px);
@@ -68,6 +85,69 @@
 
   --header-h:84px;
   --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+/* ------------------------------------------------------- светлая тема */
+/* Светлая сцена собрана по макету: сочное салатовое поле, белый объект в
+   самой светлой его точке, белая надпись поверх. Это не «тёмная тема,
+   вывернутая наизнанку» — у неё своя логика света: в тёмной свет идёт
+   из точки за объектом, здесь наоборот, поле само светится к центру.
+   Зелёный для текста приходится уводить в глубину: салатовый из макета
+   на своём же фоне даёт 2.5:1 и годится только для крупных надписей. */
+:root[data-theme="light"]{
+  /* ------------------------------------------------------------------
+     Цвета сняты пипеткой с макета: поле #B5D5A0 по краям и #E1F1CA в
+     центре, зелёная надпись #528F66. Для страницы взят тон между ними —
+     на нём и белые карточки читаются объектами, и текст держит контраст.
+     Проверено по каждой паре: обычный текст не ниже 4.5:1, крупный — 3:1.
+     Единственное исключение — белый заголовок героя, см. .hero__title.
+     ------------------------------------------------------------------ */
+  --lav:#D5E8C1;          /* фон страницы */
+  --lav-2:#CBE2B3;        /* чередующаяся секция */
+  --pink:#CBE2B3;         /* полоса записи на приём */
+  --pink-2:#C0DBA7;
+
+  --card:#FFFFFF;
+  --card-2:#F6FBEE;
+  --glass:rgba(26,58,28,.06);
+  --glass-2:rgba(26,58,28,.10);
+
+  /* Тёмный оттенок для заливок с белым текстом: белое на нём 4.95:1.
+     Травяной из макета давал 3.4:1 — на кнопке это плохо читается. */
+  --brand:#1F8049;
+  --brand-600:#25794A;
+  --brand-700:#17603A;    /* надписи-эйрбоу: 5.8:1 к фону */
+  /* Самый светлый зелёный, который держит 3:1 — им светится половина
+     заголовка героя. */
+  --brand-300:#2E9857;
+  --brand-100:rgba(31,128,73,.32);
+  --brand-050:rgba(31,128,73,.10);
+  --deep:#BCD9A5;         /* поле героя — самый насыщенный тон макета */
+  --deep-2:#AFD196;
+
+  --accent:#A83309;       /* акции: 5.3:1 к фону */
+  --accent-600:#952C06;
+  --accent-300:#7C2405;
+
+  --ink:#16311D;          /* 10.8:1 */
+  --ink-2:#3A5741;        /* 6.2:1 */
+  --ink-3:#4F6B55;        /* 4.5:1 */
+  --ink-strong:#0B1F12;   /* 13.2:1 */
+  --on-brand:#FFFFFF;
+  --line:rgba(26,58,28,.17);
+  --line-2:rgba(26,58,28,.10);
+
+  --tint-rgb:26,58,28;
+  --panel-rgb:229,242,214;
+  --calc-box-bg:linear-gradient(168deg,#FFFFFF,#F3FAEA);
+  --veil-bg:rgba(213,232,193,.93);
+  --shade-rgb:38,68,32;
+
+  --shadow-s:0 2px 10px rgba(38,68,32,.08);
+  --shadow:0 12px 40px rgba(38,68,32,.13);
+  --shadow-l:0 28px 80px rgba(38,68,32,.17);
+  --shadow-brand:0 12px 34px rgba(31,128,73,.24);
+  --shadow-accent:0 12px 30px rgba(168,51,9,.26);
 }
 
 
@@ -110,8 +190,8 @@ body::before{
 
 /* Секции больше не заливки: полупрозрачные вуали, сквозь которые видно
    поле. Иначе сплошной цвет перекрывал бы свет. */
-.section--soft{background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.032) 16%,rgba(255,255,255,.032) 84%,rgba(255,255,255,0) 100%)}
-.section--alt{background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.05) 16%,rgba(255,255,255,.05) 84%,rgba(255,255,255,0) 100%)}
+.section--soft{background:linear-gradient(180deg,rgba(var(--tint-rgb),0) 0%,rgba(var(--tint-rgb),.032) 16%,rgba(var(--tint-rgb),.032) 84%,rgba(var(--tint-rgb),0) 100%)}
+.section--alt{background:linear-gradient(180deg,rgba(var(--tint-rgb),0) 0%,rgba(var(--tint-rgb),.05) 16%,rgba(var(--tint-rgb),.05) 84%,rgba(var(--tint-rgb),0) 100%)}
 .section--soft::after,.section--alt::after{
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:radial-gradient(70% 60% at 50% 0%, rgba(52,200,138,.07) 0%, rgba(52,200,138,0) 70%);
@@ -122,7 +202,7 @@ body::before{
 .container{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
 .section{padding-block:var(--section-y)}
 .section--navy{background:var(--deep);color:var(--ink-2)}
-.section--navy h2,.section--navy h3{color:#fff}
+.section--navy h2,.section--navy h3{color:var(--ink-strong)}
 
 .section-head{max-width:820px;margin-bottom:clamp(30px,3.6vw,54px)}
 .section-head--center{margin-inline:auto;text-align:center}
@@ -144,8 +224,8 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
    жёстко — иначе оно перебивает вариант и, например, белый текст оказывается
    на белом фоне. */
 .btn{
-  --btn-bg:var(--brand);        --btn-fg:#02120F;  --btn-bd:transparent;
-  --btn-bg-h:var(--brand-600);  --btn-fg-h:#02120F;--btn-bd-h:transparent;
+  --btn-bg:var(--brand);        --btn-fg:var(--on-brand);  --btn-bd:transparent;
+  --btn-bg-h:var(--brand-600);  --btn-fg-h:var(--on-brand);--btn-bd-h:transparent;
   --btn-sh:var(--shadow-brand); --btn-sh-h:0 16px 38px rgba(13,124,140,.42);
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
   padding:16px 30px;border:2px solid var(--btn-bd);border-radius:100px;
@@ -167,8 +247,8 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .btn svg{width:18px;height:18px;fill:currentColor}
 
 .btn--ghost{
-  --btn-bg:var(--glass);   --btn-fg:#fff;              --btn-bd:var(--line);
-  --btn-bg-h:var(--glass-2);--btn-fg-h:#fff;           --btn-bd-h:var(--brand-100);
+  --btn-bg:var(--glass);   --btn-fg:var(--ink-strong);              --btn-bd:var(--line);
+  --btn-bg-h:var(--glass-2);--btn-fg-h:var(--ink-strong);           --btn-bd-h:var(--brand-100);
   --btn-sh:none;--btn-sh-h:none;
   backdrop-filter:blur(10px);
 }
@@ -180,32 +260,47 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .btn--white{
   --btn-bg:#fff;  --btn-fg:#02120F;
   --btn-bg-h:#EAFFF4;--btn-fg-h:#02120F;
-  --btn-sh:0 12px 30px rgba(0,0,0,.16);--btn-sh-h:0 16px 38px rgba(0,0,0,.24);
+  --btn-sh:0 12px 30px rgba(var(--shade-rgb),.16);--btn-sh-h:0 16px 38px rgba(var(--shade-rgb),.24);
 }
 .btn--coral{
-  --btn-bg:var(--brand);       --btn-fg:#02120F;
-  --btn-bg-h:var(--brand-600); --btn-fg-h:#02120F;
+  --btn-bg:var(--brand);       --btn-fg:var(--on-brand);
+  --btn-bg-h:var(--brand-600); --btn-fg-h:var(--on-brand);
   --btn-sh:var(--shadow-brand);--btn-sh-h:0 16px 38px rgba(52,200,138,.38);
 }
 .btn--lg{padding:19px 38px;font-size:17px}
 .btn--block{width:100%}
 
 /* --------------------------------------------------------------- шапка */
+/* Шапка сидит прямо на сцене, как в макете: своей заливки у неё нет.
+   Раньше поверх верха героя лежала плашка rgba(2,18,15,.72) — ровно там,
+   где в макете самый свет (#022C23), и заголовок оказывался на плоской
+   тёмной полосе. Плашка появляется только при прокрутке, когда под шапку
+   уезжает содержимое и её надо от него отделить. Так же устроена светлая
+   тема — теперь обе ведут себя одинаково. */
 .header{
   position:fixed;inset:0 0 auto;z-index:900;height:var(--header-h);
-  background:rgba(2,18,15,.72);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(16px);
+  background:transparent;
   border-bottom:1px solid transparent;
   transition:box-shadow .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);
 }
-.header.is-stuck{box-shadow:0 10px 40px rgba(0,0,0,.5);border-bottom-color:var(--line-2);background:rgba(2,18,15,.9)}
+.header.is-stuck{
+  box-shadow:0 10px 40px rgba(var(--shade-rgb),.5);border-bottom-color:var(--line-2);
+  background:rgba(var(--panel-rgb),.9);
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(16px);
+}
 .header__inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(14px,2vw,34px);height:100%}
 .logo{display:flex;align-items:center;gap:12px;flex-shrink:0}
+/* Знак — присланный фирменный зуб, отдельными файлами под тёмный и светлый
+   фон (у них разная обводка). Ставится фоном, а не <img>: так браузер
+   скачивает только ту версию, которая нужна текущей теме, и HTML всех
+   17 страниц трогать не пришлось. Плитки под знаком нет — объект лежит
+   на фоне сам, как остальные предметы на сайте. */
 .logo__mark{
-  width:44px;height:44px;border-radius:14px;flex-shrink:0;
-  background:linear-gradient(140deg,var(--brand-300) 0%,var(--brand-700) 120%);
-  display:grid;place-items:center;box-shadow:var(--shadow-brand);
+  width:44px;height:44px;border-radius:0;flex-shrink:0;
+  background:url("../img/logo-dark.png") center/contain no-repeat;
+  box-shadow:none;
 }
-.logo__mark svg{width:25px;height:25px;fill:#fff}
+.logo__mark svg{display:none}
 .logo__text{display:flex;flex-direction:column;line-height:1.05}
 .logo__name{font-weight:900;font-size:20px;letter-spacing:.04em;color:var(--ink)}
 .logo__sub{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-600)}
@@ -233,7 +328,16 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 }
 .icon-btn:hover,.burger:hover{background:var(--glass-2);border-color:var(--brand-100)}
 .icon-btn svg{width:19px;height:19px;fill:var(--ink)}
-.icon-btn:hover svg{fill:#fff}
+.icon-btn:hover svg{fill:var(--ink-strong)}
+/* ---- переключатель темы ---- */
+/* Иконка показывает, КУДА переключимся: в тёмной теме солнце, в светлой луна. */
+.theme-toggle{border:1px solid var(--line);background:var(--glass)}
+.theme-toggle svg{width:20px;height:20px;fill:var(--ink)}
+.theme-toggle:hover svg{fill:var(--brand-700)}
+.theme-toggle__moon{display:none}
+:root[data-theme="light"] .theme-toggle__sun{display:none}
+:root[data-theme="light"] .theme-toggle__moon{display:block}
+
 .burger span{display:block;width:19px;height:2px;background:var(--ink);border-radius:2px;position:relative;transition:.25s var(--ease)}
 .burger span::before,.burger span::after{content:"";position:absolute;left:0;width:19px;height:2px;background:var(--ink);border-radius:2px;transition:.25s var(--ease)}
 .burger span::before{top:-6px}
@@ -257,30 +361,45 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
    перекрывает буквы, и кадр получает глубину. */
 .hero{
   position:relative;background:var(--deep);overflow:hidden;isolation:isolate;
-  min-height:min(90vh,880px);display:flex;align-items:center;
-  padding-top:calc(var(--header-h) + clamp(20px,3vw,40px));padding-bottom:clamp(30px,4vw,60px);
+  display:flex;align-items:stretch;
+  /* Ровно один экран — height, а не min-height. min-height задаёт пол, и
+     при нём flex-у нечем сжимать: блок просто вырастает вниз вместе с
+     содержимым. Потолок нужен, чтобы остаток высоты был величиной
+     конечной и его можно было раздать зубу.
+     svh, а не vh: на мобильных vh считается от окна без адресной строки,
+     и первый экран оказывается выше видимого ровно на её высоту. */
+  height:100vh;height:100svh;
+  padding-top:calc(var(--header-h) + clamp(20px,3vw,40px));padding-bottom:clamp(20px,2.4vw,36px);
 }
-/* контровой свет: широкое пятно за объектом */
+/* Контровой свет. Слой лежит ровно по сцене (inset:0), поэтому проценты
+   в градиентах — это проценты самого кадра, и пятно не разъезжается при
+   смене высоты экрана. Форма снята с макета: по краям поле остаётся
+   чёрным (#03110E), а к центру за зубом набирает до #023B2E на высоте
+   заголовка. Отсюда и размеры — 40% ширины и 60% высоты от сцены: на
+   x=14% свет уже почти гаснет, на x=3% его нет совсем, как в макете.
+   Прежнее пятно было и уже, и ниже: заголовок стоял на чистом чёрном. */
 .hero__glow{
-  position:absolute;left:50%;top:46%;translate:-50% -50%;
-  width:min(130vw,1500px);aspect-ratio:1.5;z-index:0;pointer-events:none;
+  position:absolute;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 40% 32% at 50% 48%, rgba(96,232,168,.26) 0%, rgba(96,232,168,0) 62%),
-    radial-gradient(ellipse 58% 46% at 50% 52%, rgba(1,90,68,.62) 0%, rgba(1,90,68,0) 72%);
+    radial-gradient(ellipse 22% 26% at 50% 45%, rgba(122,255,206,.20) 0%, rgba(122,255,206,0) 70%),
+    radial-gradient(ellipse 42% 64% at 50% 45%, rgba(4,180,140,.55) 0%, rgba(4,180,140,0) 100%);
   filter:blur(10px);
 }
-/* холодный отблеск от пола */
+/* Отблеск от пола. Тёплой зелени тут больше нет: она поднимала красный
+   канал у нижнего края (#082219 вместо #011D17 в макете) и низ кадра
+   уходил в серость. Свет внизу теперь даёт само пятно, а этот слой лишь
+   запечатывает стык со следующей секцией. */
 .hero::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:34%;z-index:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(52,200,138,0) 0%,rgba(52,200,138,.07) 55%,rgba(1,16,13,.9) 100%);
+  content:"";position:absolute;left:0;right:0;bottom:0;height:22%;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(var(--panel-rgb),0) 0%,rgba(var(--panel-rgb),.55) 100%);
 }
-.hero__stage{position:relative;z-index:1;width:100%}
+.hero__stage{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;justify-content:center}
 
 /* заголовок во всю ширину — объект проходит поверх него */
 .hero__title{
   position:relative;z-index:1;margin:0;text-align:center;
   font-size:clamp(25px,7.2vw,132px);font-weight:900;line-height:.94;
-  letter-spacing:-.05em;color:#fff;text-transform:uppercase;
+  letter-spacing:-.05em;color:var(--ink-strong);text-transform:uppercase;
   white-space:nowrap;
 }
 .hero__title em{
@@ -297,18 +416,73 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-300);
 }
 
-/* сам объект: перекрывает заголовок и даёт кадру глубину */
+/* Герой собран тремя этажами: заголовок, под ним зуб, под ним кнопки.
+   Ничего не перекрывается.
+
+   Размер зуба НЕ задан числом — и это главное здесь. Любое число (44vw,
+   34vh) на одних экранах оставляет пустое поле, на других выталкивает
+   кнопки под сгиб: высота заголовка считается от ширины окна, а место
+   под зуб — от высоты, и связи между ними нет. Поэтому объект просто
+   забирает всю высоту, которая осталась от остальных этажей: flex:1
+   раздаёт ему остаток, а min-height:0 разрешает сжаться на низком окне.
+   Растёт и уменьшается он сам, подгонять под новые экраны не придётся. */
 .hero__object{
-  position:relative;z-index:2;display:grid;place-items:center;
-  margin-top:clamp(-26px,-2.2vw,-8px);
-  margin-bottom:clamp(-44px,-3.2vw,-14px);
+  position:relative;z-index:1;
+  /* flex, а не grid с place-items:center: у центрированного элемента сетки
+     высота остаётся неопределённой, и height:100% у снимка не к чему
+     привязать — он разворачивается в натуральные 1338px. align-items:
+     stretch даёт вложенному блоку ту самую высоту, которую роздал flex. */
+  display:flex;align-items:stretch;justify-content:center;
+  flex:1 1 auto;min-height:72px;
+  /* Потолок — от ширины: на широком и низком окне зуб иначе разъедется
+     на пол-экрана. 460px сверху — дальше снимок (1338px) начал бы мылить
+     на экранах с удвоенной плотностью. Множитель 0.879 — это 1176/1338,
+     высота снимка к его ширине. */
+  max-height:calc(min(34vw,460px) * .879);
+  margin-top:clamp(8px,1.4vw,22px);
+  margin-bottom:clamp(8px,1.4vw,22px);
   pointer-events:none;
 }
-.hero__object img{
-  width:clamp(240px,31vw,520px);height:auto;display:block;
-  filter:drop-shadow(0 30px 60px rgba(0,0,0,.55));
+/* Снимок тянется по высоте, ширина идёт за пропорцией. Так низ зуба всегда
+   совпадает с низом блока — а к нему привязано отражение (top:100%). */
+.hero__object img.hero__img{
+  height:100%;width:auto;display:block;margin:0 auto;
+  filter:drop-shadow(0 30px 60px rgba(var(--shade-rgb),.55));
 }
-/* отражение уже впечатано в снимок — отдельный слой не нужен */
+
+
+/* Снимок зуба ОДИН на обе темы — это тот же объект, что и в макете.
+   Раньше их было два (тёмный и светлый) и они умели показаться разом;
+   теперь такой ошибки быть не может в принципе. */
+/* Блок, а не сетка: у элемента сетки с place-items:center высота остаётся
+   неопределённой, и height:100% у снимка внутри снова не к чему привязать.
+   align-self:stretch задаёт блоку высоту, розданную flex-ом, а ширину он
+   как flex-элемент берёт по содержимому — то есть ровно по зубу. От этой
+   ширины считает свои проценты отражение (top:100%, width:100%). */
+.hero__stack{position:relative;display:block;align-self:stretch}
+
+/* ---- отражение ----
+   В снимке его нет, поэтому строим сами: тот же файл, перевёрнутый по
+   вертикали и уведённый маской в прозрачность. Так отражение можно
+   настроить отдельно под каждую сцену — на чёрном оно заметное, на
+   салатовом почти невидимое, как в макетах. Слой absolute, в поток не
+   попадает и кнопки под собой не двигает. */
+/* Маска висит на КОНТЕЙНЕРЕ, а не на снимке. У снимка своя система
+   координат, и она перевёрнута трансформацией: там пришлось бы держать
+   проценты маски в согласии с высотой полосы, и любая правка высоты тихо
+   гасила бы отражение целиком. У контейнера верх — это край под зубом,
+   так что градиент читается как есть. */
+.hero__reflect{
+  position:absolute;top:100%;left:0;width:100%;height:10%;
+  overflow:hidden;pointer-events:none;opacity:.30;
+  filter:blur(1.5px);
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.35) 55%,rgba(0,0,0,0) 100%);
+          mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.35) 55%,rgba(0,0,0,0) 100%);
+}
+.hero__reflect img{
+  position:absolute;top:0;left:0;width:100%;height:auto;display:block;
+  transform:scaleY(-1) translateY(-100%);transform-origin:top;
+}
 
 /* нижняя строка: телефон, счётчик пациентов, видео */
 .hero__actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}
@@ -329,18 +503,18 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .hero__faces{display:flex}
 .hero__faces img{
   width:38px;height:38px;border-radius:50%;object-fit:cover;
-  border:2px solid rgba(255,255,255,.5);margin-left:-12px;background:var(--card-2);
+  border:2px solid rgba(var(--tint-rgb),.5);margin-left:-12px;background:var(--card-2);
 }
 .hero__faces img:first-child{margin-left:0}
-.hero__pill b{display:block;font-size:17px;font-weight:900;color:#fff;line-height:1.1}
+.hero__pill b{display:block;font-size:17px;font-weight:900;color:var(--ink-strong);line-height:1.1}
 .hero__pill span{display:block;font-size:12.5px;color:var(--ink-2)}
 .hero__play{
   display:inline-flex;align-items:center;gap:13px;padding:8px 24px 8px 8px;border-radius:100px;
   background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(10px);
-  font-size:15px;font-weight:700;color:#fff;
+  font-size:15px;font-weight:700;color:var(--ink-strong);
   transition:background .25s var(--ease),border-color .25s var(--ease);
 }
-.hero__play:hover{background:var(--glass-2);border-color:var(--brand-100);color:#fff}
+.hero__play:hover{background:var(--glass-2);border-color:var(--brand-100);color:var(--ink-strong)}
 .hero__play i{
   width:42px;height:42px;border-radius:50%;background:#fff;display:grid;place-items:center;flex-shrink:0;
 }
@@ -353,10 +527,10 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
    затемнением к краям — тогда они лежат в кадре, а не поверх него.
    Клинические снимки «до/после» и лицензии НЕ трогаем: там важна
    достоверность цвета. */
-.doctor__photo,.hero__photo,.split__media{position:relative;isolation:isolate}
+.doctor__photo,.offer__img,.hero__photo,.split__media{position:relative;isolation:isolate}
 
 /* врач: кадр берём выше, чтобы лицо не тонуло в макросъёмке за спиной */
-.doctor__name{color:#fff}
+.doctor__name{color:var(--ink-strong)}
 
 /* подпись врача поверх снимка — блок читается как один объект */
 
@@ -371,15 +545,64 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 /* ---- герой на узких экранах ----
    nowrap в заголовке распирал страницу шире вьюпорта: шапку уносило
    вправо, плашку обрезало. На мобильном строка переносится. */
+/* Низкое окно (ноутбук, развёрнутый браузер с панелями). Здесь дело не в
+   ширине, а в высоте: зуб уже ужат через vh, но при 560-640px живой высоты
+   первый экран съедают ещё и отступы с крупным заголовком. Порог 720px —
+   высота, ниже которой блок кнопок начинал уезжать под сгиб на замерах.
+   min-width не даёт правилу пересечься с мобильной вёрсткой ниже. */
+@media (min-width:901px) and (max-height:720px){
+  .hero{padding-top:calc(var(--header-h) + 8px);padding-bottom:clamp(14px,1.6vw,24px)}
+  .hero__title{font-size:clamp(25px,5.2vw,84px)}
+  .hero__eyebrow{margin-bottom:8px}
+  .hero__eyebrow span{padding:6px 14px;font-size:11.5px}
+  /* Зуб уже посчитан от vh; здесь ужимаются промежутки между этажами —
+     на них набегает больше, чем можно ещё срезать с самого объекта. */
+  .hero__object{margin-top:8px;margin-bottom:8px}
+  .hero__actions--center{margin-top:14px}
+  .hero__bar{margin-top:16px}
+}
+
+/* Совсем низкое окно — 1280x600 и подобные. Ступень отдельная, потому что
+   на такой высоте одними промежутками уже не обойтись: приходится трогать
+   и кегль заголовка, и сам объект. Выше 620px эти правила не включаются,
+   чтобы не мельчить там, где место есть. */
+@media (min-width:901px) and (max-height:620px){
+  .hero__title{font-size:clamp(24px,4.6vw,70px)}
+  .hero__object{--tooth-w:clamp(120px,min(26vw,31vh),380px)}
+  .hero__actions--center{margin-top:10px}
+  .hero__bar{margin-top:12px}
+}
+
 @media (max-width:900px){
-  .hero{min-height:auto;padding-bottom:clamp(26px,6vw,44px)}
+  /* Ровно один экран, как на десктопе: ниже кнопки «Наши акции» на первом
+     развороте не должно быть видно ничего. height, а не min-height — иначе
+     flex-у нечего сжимать и блок вырастает вниз вместе с содержимым.
+     svh: обычный vh на телефоне считается от окна без адресной строки. */
+  /* min-height, а не height: на первом экране ниже «Наших акций» ничего
+     видно быть не должно, но если экран совсем низкий, блок обязан
+     вырасти, а не обрезать кнопки — у .hero стоит overflow:hidden,
+     и при жёсткой высоте они просто исчезали. */
+  .hero{min-height:100svh;height:auto;padding-bottom:clamp(16px,4vw,28px)}
   .hero__title{white-space:normal;font-size:clamp(30px,10.4vw,62px);line-height:1.02;letter-spacing:-.035em}
   .hero__eyebrow span{
     white-space:normal;text-align:center;line-height:1.35;
     font-size:11px;letter-spacing:.08em;padding:8px 15px;
   }
-  .hero__object{margin-top:clamp(-16px,-2vw,-6px);margin-bottom:0}
-  .hero__object img{width:min(78vw,330px)}
+  /* На телефоне страница и так листается, тянуть зуб под высоту экрана
+     незачем — возвращаем размер от ширины, как было. */
+  /* Кнопки, заголовок и плашка сохраняют свой размер — подстраивается
+     только зуб: он забирает всю высоту, которая осталась от них.
+     Потолок задан через ширину (как на десктопе), поэтому объект не
+     разъедется вширь на низком и широком экране. Множитель .879 —
+     отношение высоты снимка к ширине, 1176/1338. */
+  .hero__object{
+    margin-top:clamp(6px,2vw,14px);margin-bottom:clamp(6px,2vw,14px);
+    flex:1 1 auto;min-height:76px;
+    /* Потолок сразу по двум осям: по ширине — чтобы объект не разъезжался
+       на широком телефоне, по высоте (svh) — чтобы на низком экране он
+       уступал место кнопкам, а не выталкивал их под сгиб. */
+    max-height:min(calc(min(80vw,400px) * .879), 34svh);
+  }
   .hero__actions--center{flex-direction:column;align-items:stretch;gap:10px}
   .hero__actions--center .btn{width:100%;justify-content:center}
   .hero__bar{flex-direction:column;align-items:stretch;gap:10px}
@@ -388,6 +611,19 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 @media (max-width:420px){
   .hero__title{font-size:clamp(27px,10vw,44px)}
   .hero__pill b{font-size:16px}
+}
+
+/* Низкий телефон (типа 360x640) и режим с раскрытой клавиатурой. Кнопки
+   тут не трогаем — их размер задан условием задачи; ужимаются заголовок,
+   плашка и промежутки, а зуб получает право стать совсем маленьким. */
+@media (max-width:900px) and (max-height:700px){
+  .hero{padding-top:calc(var(--header-h) + 8px);padding-bottom:14px}
+  .hero__title{font-size:clamp(24px,7.6vw,38px)}
+  .hero__eyebrow{margin-bottom:6px}
+  .hero__eyebrow span{font-size:10px;padding:6px 12px}
+  .hero__object{margin-top:6px;margin-bottom:6px;min-height:48px}
+  .hero__actions--center{margin-top:8px;gap:8px}
+  .hero__bar{margin-top:8px}
 }
 
 
@@ -433,16 +669,16 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .btn-live__face{
   position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
   gap:14px;min-width:min(84vw,368px);
-  padding:21px 44px;border-radius:100px;line-height:1.2;
+  padding:13px 40px;border-radius:100px;line-height:1.15;
   background:linear-gradient(180deg,rgba(10,46,34,.94),rgba(5,26,19,.94));
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-  font-size:19px;font-weight:900;color:#fff;letter-spacing:.005em;
+  font-size:30px;font-weight:900;color:#fff;letter-spacing:-.02em;
   transition:background .25s var(--ease);
 }
 .btn-live__face b{font-weight:900}
-.btn-live__star{width:22px;height:22px;fill:var(--brand-300);flex-shrink:0}
+.btn-live__star{width:28px;height:28px;fill:var(--brand-300);flex-shrink:0}
 .btn-live__arrow{
-  width:20px;height:20px;fill:var(--brand-300);flex-shrink:0;
+  width:26px;height:26px;fill:var(--brand-300);flex-shrink:0;
   transition:transform .28s var(--ease);
 }
 .btn-live:hover .btn-live__face{background:linear-gradient(180deg,rgba(14,60,44,.94),rgba(7,34,25,.94))}
@@ -455,20 +691,27 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   .btn-live:hover{transform:none}
 }
 @media (max-width:520px){
-  .btn-live__face{min-width:0;width:100%;padding:18px 26px;font-size:17px;gap:11px}
+  /* 20px — предел, при котором «Рассчитать скидку» ещё держится в одну строку */
+  .btn-live__face{min-width:0;width:100%;padding:13px 18px;font-size:20px;gap:9px}
+  .btn-live__star{width:20px;height:20px}
+  .btn-live__arrow{width:18px;height:18px}
 }
+
+/* компактный вариант — встаёт в один ряд с обычными кнопками героя на подстраницах услуг */
+.btn-live--inline .btn-live__face{min-width:0;padding:11px 30px;font-size:24px;gap:11px}
+.btn-live--inline .btn-live__star,.btn-live--inline .btn-live__arrow{width:23px;height:23px}
 
 
 /* --------------------------------------------------------------- калькулятор скидки */
 /* 3D-объекты в шапке лежат свободно, без круга — как и снимки услуг */
-.page-hero__art--3d img{max-width:340px;filter:drop-shadow(0 30px 50px rgba(0,0,0,.6))}
+.page-hero__art--3d img{max-width:340px;filter:drop-shadow(0 30px 50px rgba(var(--shade-rgb),.6))}
 
 /* ---- герой: объёмный процент + мелкие украшения вокруг ---- */
 .promo-hero{position:relative}
 .promo-hero__main{position:relative;z-index:1}
 .page-hero__art .promo-hero__acc{
   position:absolute;z-index:2;pointer-events:none;max-width:none;
-  filter:drop-shadow(0 14px 26px rgba(0,0,0,.5));
+  filter:drop-shadow(0 14px 26px rgba(var(--shade-rgb),.5));
   animation:promo-bob 5s ease-in-out infinite;
 }
 .page-hero__art .promo-hero__acc--tag{width:104px;left:-4%;top:8%;animation-delay:-1.4s}
@@ -483,7 +726,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 }
 .how__list::before{
   content:"";position:absolute;left:14%;right:14%;top:38px;height:1px;z-index:0;
-  background:repeating-linear-gradient(90deg,rgba(255,255,255,.22) 0 10px,transparent 10px 20px);
+  background:repeating-linear-gradient(90deg,rgba(var(--tint-rgb),.22) 0 10px,transparent 10px 20px);
 }
 .how__step{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
 .how__ico{
@@ -492,16 +735,16 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   border:1px solid var(--line);
 }
 .how__ico img{width:44px;height:auto}
-.how__step b{font-size:16.5px;font-weight:800;color:#fff}
+.how__step b{font-size:16.5px;font-weight:800;color:var(--ink-strong)}
 .how__step span{font-size:14px;color:var(--ink-2);max-width:260px;line-height:1.5}
 .how__step::before{
   counter-increment:h;content:counter(h);position:absolute;left:50%;top:0;translate:18px -6px;
-  width:22px;height:22px;border-radius:50%;background:var(--brand);color:#02120F;
+  width:22px;height:22px;border-radius:50%;background:var(--brand);color:var(--on-brand);
   font-size:12px;font-weight:900;display:grid;place-items:center;
 }
 
 .calc{position:relative;overflow:hidden}
-.calc__deco{position:absolute;z-index:0;pointer-events:none;opacity:.4;filter:drop-shadow(0 10px 20px rgba(0,0,0,.4))}
+.calc__deco{position:absolute;z-index:0;pointer-events:none;opacity:.4;filter:drop-shadow(0 10px 20px rgba(var(--shade-rgb),.4))}
 .calc__deco--1{left:-30px;top:30px;width:150px;transform:rotate(-16deg)}
 .calc__deco--2{right:1%;top:6%;width:96px;transform:rotate(8deg)}
 .calc__deco--3{left:4%;bottom:6%;width:80px;transform:rotate(-6deg)}
@@ -523,7 +766,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 }
 .calc__box{
   position:relative;z-index:1;
-  background:linear-gradient(168deg,rgba(10,30,23,.94),rgba(6,20,15,.94));
+  background:var(--calc-box-bg);
   border:1px solid var(--line);border-radius:var(--radius-xl);
   padding:clamp(22px,3vw,44px);
 }
@@ -536,16 +779,16 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .calc__optIn{
   display:flex;flex-direction:column;align-items:flex-start;gap:4px;height:100%;
   padding:18px 20px;border-radius:var(--radius);
-  background:rgba(255,255,255,.04);border:1px solid var(--line-2);
+  background:rgba(var(--tint-rgb),.04);border:1px solid var(--line-2);
   transition:background .22s var(--ease),border-color .22s var(--ease),transform .22s var(--ease);
 }
-.calc__opt:hover .calc__optIn{background:rgba(255,255,255,.07);transform:translateY(-3px)}
+.calc__opt:hover .calc__optIn{background:rgba(var(--tint-rgb),.07);transform:translateY(-3px)}
 .calc__ico{
   width:44px;height:44px;border-radius:14px;display:grid;place-items:center;margin-bottom:8px;
   background:var(--brand-050);border:1px solid var(--brand-100);
 }
 .calc__ico svg{width:22px;height:22px;fill:none;stroke:var(--brand-300);stroke-width:2}
-.calc__optIn b{font-size:17px;font-weight:800;color:#fff}
+.calc__optIn b{font-size:17px;font-weight:800;color:var(--ink-strong)}
 .calc__optIn small{font-size:13px;color:var(--ink-3);line-height:1.4}
 /* выбранная категория */
 .calc__opt input:checked + .calc__optIn{
@@ -553,17 +796,17 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   box-shadow:0 0 0 1px var(--brand),0 12px 30px rgba(52,200,138,.18);
 }
 .calc__opt input:checked + .calc__optIn .calc__ico{background:var(--brand);border-color:var(--brand)}
-.calc__opt input:checked + .calc__optIn .calc__ico svg{stroke:#02120F}
+.calc__opt input:checked + .calc__optIn .calc__ico svg{stroke:var(--on-brand)}
 .calc__opt input:focus-visible + .calc__optIn{outline:3px solid var(--brand);outline-offset:3px}
 
-.calc__err{color:#FF9B79;font-size:14.5px;font-weight:700;margin:0 0 14px}
+.calc__err{color:var(--accent-300);font-size:14.5px;font-weight:700;margin:0 0 14px}
 .calc__note{margin:16px 0 0;font-size:13.5px;color:var(--ink-3);max-width:640px}
 .btn-live--calc{margin-top:2px}
 
 /* ---- шторка: страница уходит в тень, цифра выходит на первый план ---- */
 .calc-veil{
   position:fixed;inset:0;z-index:1200;display:grid;place-items:center;
-  padding:24px;background:rgba(1,10,8,.86);
+  padding:24px;background:var(--veil-bg);
   -webkit-backdrop-filter:blur(10px) saturate(120%);backdrop-filter:blur(10px) saturate(120%);
   opacity:0;transition:opacity .45s var(--ease);
 }
@@ -575,9 +818,10 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
    висеть за результатом */
 .calc-load[hidden],.calc-res[hidden],.calc-veil[hidden]{display:none!important}
 .calc-load{display:grid;place-items:center;gap:20px}
+.calc-load__stage{position:relative;display:grid;place-items:center;width:190px;height:190px}
 .calc-load__ring{
-  position:absolute;width:190px;height:190px;border-radius:50%;
-  border:2px solid rgba(255,255,255,.08);
+  position:absolute;inset:0;border-radius:50%;
+  border:2px solid rgba(var(--tint-rgb),.08);
   border-top-color:var(--brand);border-right-color:var(--brand-300);
   animation:calc-spin 1s linear infinite;
 }
@@ -588,7 +832,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 
 /* результат */
 .calc-res{position:relative}
-.calc-res__deco{position:absolute;z-index:0;pointer-events:none;opacity:0;filter:drop-shadow(0 10px 20px rgba(0,0,0,.5))}
+.calc-res__deco{position:absolute;z-index:0;pointer-events:none;opacity:0;filter:drop-shadow(0 10px 20px rgba(var(--shade-rgb),.5))}
 .calc-res:not([hidden]) .calc-res__deco{animation:calc-res-pop .6s var(--ease) .5s both}
 .calc-res__deco--l{left:-8%;top:-6%;width:78px;transform:rotate(-14deg)}
 .calc-res__deco--r{right:-6%;bottom:6%;width:88px;transform:rotate(10deg)}
@@ -600,7 +844,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   color:var(--brand-300);
 }
 .calc-res__num{
-  margin:0;line-height:.9;font-weight:900;letter-spacing:-.05em;color:#fff;
+  margin:0;line-height:.9;font-weight:900;letter-spacing:-.05em;color:var(--ink-strong);
   display:flex;align-items:baseline;justify-content:center;gap:2px;
   /* размер растёт по ходу счёта — им управляет js через --k */
   font-size:calc(78px + 132px * var(--k,0));
@@ -619,7 +863,15 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   .promo-hero__acc{display:none}
 }
 @media (max-width:560px){
-  .calc__grid{grid-template-columns:1fr}
+  /* на телефоне категории остаются в два столбца — в один они
+     растягивали калькулятор на несколько экранов. Плитка ужимается:
+     иконка меньше, подпись компактнее, поля уже. */
+  .calc__grid{grid-template-columns:repeat(2,1fr);gap:9px}
+  .calc__optIn{padding:13px 12px;gap:2px}
+  .calc__ico{width:34px;height:34px;border-radius:11px;margin-bottom:6px}
+  .calc__ico svg{width:18px;height:18px}
+  .calc__optIn b{font-size:14px;line-height:1.2}
+  .calc__optIn small{font-size:11.5px;line-height:1.3}
   .calc-res__num{font-size:calc(62px + 78px * var(--k,0))}
 }
 @media (prefers-reduced-motion:reduce){
@@ -642,9 +894,9 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .service{
   position:relative;display:flex;flex-direction:column;
   min-height:392px;border-radius:var(--radius-l);overflow:hidden;isolation:isolate;
-  border:1px solid var(--line);color:#fff;
+  border:1px solid var(--line);color:var(--ink-strong);
   background:
-    linear-gradient(168deg,rgba(255,255,255,.085) 0%,rgba(255,255,255,.028) 44%,rgba(255,255,255,.012) 100%);
+    linear-gradient(168deg,rgba(var(--tint-rgb),.085) 0%,rgba(var(--tint-rgb),.028) 44%,rgba(var(--tint-rgb),.012) 100%);
   transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
 }
 /* световое пятно за предметом */
@@ -659,7 +911,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   content:"";position:absolute;z-index:0;inset:auto 0 0 0;height:62%;pointer-events:none;
   background:linear-gradient(180deg,rgba(3,14,11,0) 0%,rgba(3,14,11,.55) 62%,rgba(3,14,11,.8) 100%);
 }
-.service:hover{transform:translateY(-7px);box-shadow:var(--shadow-l);border-color:var(--brand-100);color:#fff}
+.service:hover{transform:translateY(-7px);box-shadow:var(--shadow-l);border-color:var(--brand-100);color:var(--ink-strong)}
 .service:hover::before{opacity:.75}
 
 /* Снимки обрезаны по десне — снизу у них жёсткий край. Растворяем его
@@ -669,13 +921,13 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   position:relative;z-index:1;
   width:100%;height:176px;object-fit:contain;object-position:center bottom;
   margin:28px 0 0;padding-inline:16px;
-  filter:drop-shadow(0 18px 30px rgba(0,0,0,.55));
+  filter:drop-shadow(0 18px 30px rgba(var(--shade-rgb),.55));
   transition:transform .45s var(--ease);
 }
 .service:hover img{transform:translateY(-6px) scale(1.045)}
 
 .service__body{position:relative;z-index:1;padding:22px 24px 24px;margin-top:auto}
-.service h3{color:#fff;font-size:20px;margin-bottom:8px}
+.service h3{color:var(--ink-strong);font-size:20px;margin-bottom:8px}
 .service p{font-size:14.5px;line-height:1.5;color:var(--ink-2);margin:0}
 .service__more{display:inline-flex;align-items:center;gap:7px;margin-top:15px;font-size:14.5px;font-weight:800;color:var(--brand-300)}
 .service__more svg{width:16px;height:16px;fill:currentColor;transition:transform .25s var(--ease)}
@@ -700,7 +952,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 /* --------------------------------------------------------------- врач */
 .doctor{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,3.6vw,64px);align-items:center}
 .doctor__photo{display:grid;place-items:center}
-.doctor__photo img{width:100%;max-width:520px;height:auto;object-fit:contain;filter:drop-shadow(0 26px 54px rgba(0,0,0,.55))}
+.doctor__photo img{width:100%;max-width:520px;height:auto;object-fit:contain;filter:drop-shadow(0 26px 54px rgba(var(--shade-rgb),.55))}
 .doctor__name{font-size:clamp(24px,2.6vw,36px);margin-bottom:5px}
 .doctor__role{font-size:16.5px;font-weight:700;color:var(--brand-600);margin-bottom:24px}
 .doctor__topic{
@@ -709,6 +961,11 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 }
 .doctor__text{font-size:clamp(16px,1.35vw,17.5px);line-height:1.68;color:var(--ink-2);margin-bottom:1.1em}
 .doctor__text:last-of-type{margin-bottom:26px}
+/* второй врач — зеркальная раскладка: портреты не выстраиваются
+   в один столбец, и блоки читаются как отдельные карточки */
+.doctor + .doctor{margin-top:clamp(40px,5vw,84px)}
+.doctor--rev{grid-template-columns:1.2fr .8fr}
+.doctor--rev .doctor__photo{order:2}
 
 /* --------------------------------------------------------------- работы */
 .cases{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px)}
@@ -836,6 +1093,31 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .promo-banner .btn{position:relative;flex-shrink:0}
 .promo-flag{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;padding:7px 16px;border-radius:100px;margin-bottom:14px;box-shadow:var(--shadow-accent)}
 
+/* ---- карточки акций месяца ---- */
+.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2vw,28px)}
+.offer{
+  position:relative;background:var(--card);border:1px solid var(--line-2);border-radius:var(--radius-xl);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
+}
+.offer:hover{transform:translateY(-8px);box-shadow:var(--shadow-l),0 0 0 1px var(--brand);border-color:var(--brand)}
+.offer__img{aspect-ratio:16/10;overflow:hidden;background:var(--lav-2);position:relative}
+.offer__img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.offer:hover .offer__img img{transform:scale(1.06)}
+/* z-index обязателен: при наведении картинка получает transform и создаёт
+   свой контекст наложения — без этого она перекрывает плашки поверх себя */
+.offer__flag{position:absolute;z-index:2;top:16px;left:16px;padding:8px 16px;border-radius:100px;background:var(--accent);color:#fff;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;box-shadow:var(--shadow-accent)}
+.offer__save{position:absolute;z-index:2;top:14px;right:14px;width:62px;height:62px;border-radius:50%;background:#fff;color:var(--accent);display:grid;place-items:center;font-size:18px;font-weight:900;letter-spacing:-.03em;box-shadow:var(--shadow)}
+.offer__body{padding:clamp(20px,2.2vw,30px);display:flex;flex-direction:column;flex:1}
+.offer h3{font-size:22px;margin-bottom:8px}
+.offer__price{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
+.offer__price b{font-size:36px;font-weight:900;color:var(--accent);letter-spacing:-.04em}
+.offer__price s{font-size:18px;color:var(--ink-3)}
+.offer .checklist{margin-bottom:22px}
+.offer .checklist li{font-size:14.5px;padding-left:32px}
+.offer .checklist li::before{width:21px;height:21px;background-size:14px}
+.offer .btn{margin-top:auto}
+
 /* ---- «смотреть все» под секцией-превью ---- */
 .sec-more{display:flex;justify-content:center;margin-top:clamp(24px,2.6vw,38px)}
 
@@ -845,7 +1127,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .price-table tr.is-free td:last-child{color:var(--brand);text-transform:uppercase;font-size:14px;letter-spacing:.06em}
 
 /* ---- способы связи: главный конверсионный блок ---- */
-.ways{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px)}
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,22px)}
 .way{
   display:flex;flex-direction:column;align-items:flex-start;gap:4px;
   padding:clamp(22px,2.2vw,30px);border:1px solid var(--line-2);border-radius:var(--radius-l);
@@ -882,13 +1164,13 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .socials a:hover svg{fill:#fff}
 .map-card{border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow);background:var(--deep);min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;color:#fff}
 .map-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
-.map-card:hover{color:#fff}   /* карточка — ссылка, не даём a:hover затемнить текст */
+.map-card:hover{color:var(--ink-strong)}   /* карточка — ссылка, не даём a:hover затемнить текст */
 .map-card__in{position:relative;padding:clamp(22px,2.4vw,34px);background:linear-gradient(180deg,rgba(11,42,51,0),rgba(11,42,51,.94))}
-.map-card h3{color:#fff;margin-bottom:6px}
+.map-card h3{color:var(--ink-strong);margin-bottom:6px}
 .map-card p{color:var(--ink-2);margin:0 0 18px;font-size:15.5px}
 
 /* --------------------------------------------------------------- запись */
-.booking{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.035) 22%,rgba(255,255,255,.035) 78%,rgba(255,255,255,0))}
+.booking{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(var(--tint-rgb),0),rgba(var(--tint-rgb),.035) 22%,rgba(var(--tint-rgb),.035) 78%,rgba(var(--tint-rgb),0))}
 .booking img.booking__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.20}
 /* завеса поверх снимка: без неё светлые участки фото садят контраст текста */
 .booking::before{
@@ -897,7 +1179,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
     linear-gradient(90deg,rgba(1,16,13,.90) 0%,rgba(1,16,13,.66) 46%,rgba(1,16,13,.48) 100%);
 }
 .booking__in{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,3.6vw,64px);align-items:center}
-.booking h2{color:#fff}
+.booking h2{color:var(--ink-strong)}
 .booking p{color:var(--ink-2);font-size:17px}
 .booking .booking__points li{color:var(--ink)}
 .booking .eyebrow{color:var(--brand-300)}
@@ -928,20 +1210,20 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .form-card.is-sent form,.form-card.is-sent .form-card__sub,.form-card.is-sent>h3{display:none}
 
 /* --------------------------------------------------------------- подвал */
-.footer{background:linear-gradient(180deg,rgba(255,255,255,.05) 0%,rgba(3,12,9,.55) 100%);border-top:1px solid var(--line);color:var(--ink-2);padding-block:clamp(46px,5vw,74px) 26px;font-size:15px}
-.footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:clamp(24px,2.6vw,44px);padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.16)}
-.footer .logo__mark{background:var(--glass-2);box-shadow:none}
-.footer .logo__name{color:#fff}
+.footer{background:linear-gradient(180deg,rgba(var(--tint-rgb),.05) 0%,rgba(var(--panel-rgb),.55) 100%);border-top:1px solid var(--line);color:var(--ink-2);padding-block:clamp(46px,5vw,74px) 26px;font-size:15px}
+.footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:clamp(24px,2.6vw,44px);padding-bottom:36px;border-bottom:1px solid rgba(var(--tint-rgb),.16)}
+.footer .logo__mark{box-shadow:none}
+.footer .logo__name{color:var(--ink-strong)}
 .footer .logo__sub{color:var(--brand-300)}
-.footer h4{color:#fff;font-size:15.5px;font-weight:800;margin-bottom:16px;letter-spacing:.02em}
+.footer h4{color:var(--ink-strong);font-size:15.5px;font-weight:800;margin-bottom:16px;letter-spacing:.02em}
 .footer ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
 .footer li{margin:0}
 .footer a{color:var(--ink-2)}
-.footer a:hover{color:#fff}
+.footer a:hover{color:var(--ink-strong)}
 .footer__about{max-width:340px;margin:18px 0 0;font-size:14.5px;line-height:1.6;color:var(--ink-2)}
 .footer__legal{padding-top:22px;display:grid;gap:10px;font-size:13px;line-height:1.6;color:var(--ink-3)}
 .footer__warn{display:flex;gap:11px;align-items:flex-start;padding:15px 20px;border-radius:var(--radius);background:var(--glass);border:1px solid var(--line-2);color:var(--ink-2);font-size:13.5px;margin-bottom:6px}
-.footer__warn svg{width:19px;height:19px;fill:#fff;flex-shrink:0;margin-top:2px}
+.footer__warn svg{width:19px;height:19px;fill:var(--ink-strong);flex-shrink:0;margin-top:2px}
 .footer__bottom{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:center;padding-top:8px}
 
 /* --------------------------------------------------------------- модалка */
@@ -977,7 +1259,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .acc__sign{width:30px;height:30px;flex-shrink:0;border-radius:50%;background:var(--brand-050);display:grid;place-items:center;transition:transform .28s var(--ease),background .22s var(--ease)}
 .acc__sign svg{width:16px;height:16px;fill:var(--brand-600)}
 .acc.is-open .acc__sign{transform:rotate(180deg);background:var(--brand)}
-.acc.is-open .acc__sign svg{fill:#fff}
+.acc.is-open .acc__sign svg{fill:var(--on-brand)}
 .acc__panel{max-height:0;overflow:hidden;transition:max-height .32s var(--ease)}
 .acc__panel-in{padding:0 24px 22px;color:var(--ink-2);font-size:15.5px;line-height:1.65}
 .acc__panel-in>*:last-child{margin-bottom:0}
@@ -991,7 +1273,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .data-table tr:hover td{background:var(--lav)}
 
 /* --------------------------------------------------------------- внутренние */
-.page-hero{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:var(--deep);padding-top:calc(var(--header-h) + clamp(36px,4.4vw,68px));padding-bottom:clamp(36px,4.4vw,68px)}
+.page-hero{position:relative;overflow:hidden;isolation:isolate;color:var(--ink-strong);background:var(--deep);padding-top:calc(var(--header-h) + clamp(36px,4.4vw,68px));padding-bottom:clamp(36px,4.4vw,68px)}
 /* свет из-за иллюстрации, как в герое главной */
 .page-hero::before{
   content:"";position:absolute;right:2%;top:50%;translate:0 -50%;z-index:0;pointer-events:none;
@@ -1003,35 +1285,43 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 }
 .page-hero::after{
   content:"";position:absolute;left:0;right:0;bottom:0;height:40%;z-index:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(52,200,138,0) 0%,rgba(52,200,138,.06) 60%,rgba(1,16,13,.85) 100%);
+  background:linear-gradient(180deg,rgba(52,200,138,0) 0%,rgba(52,200,138,.06) 60%,rgba(var(--panel-rgb),.85) 100%);
 }
 .page-hero__grid{position:relative;z-index:1;display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(28px,3.6vw,64px);align-items:center;position:relative}
 .page-hero__in{max-width:780px;position:relative}
-.page-hero h1{color:#fff;margin-bottom:14px;font-size:clamp(26px,3vw,40px);letter-spacing:-.032em}
-.page-hero p{color:rgba(255,255,255,.9);font-size:clamp(15.5px,1.32vw,17.5px);margin-bottom:26px;max-width:760px}
+.page-hero h1{color:var(--ink-strong);margin-bottom:14px;font-size:clamp(26px,3vw,40px);letter-spacing:-.032em}
+.page-hero p{color:rgba(var(--tint-rgb),.9);font-size:clamp(15.5px,1.32vw,17.5px);margin-bottom:26px;max-width:760px}
 /* Предмет лежит прямо на сцене — ни круга, ни рамки, ни карточки.
    Свет идёт из-за него, снизу отражение: та же постановка, что в
    герое главной. Любая оправа возвращала ощущение наклейки. */
+/* Герой без иллюстрации: текст занимает всю ширину сетки, а не жмётся
+   в левую колонку рядом с пустотой. */
+.page-hero--plain .page-hero__grid{grid-template-columns:1fr}
 .page-hero__art{position:relative;display:grid;place-items:center}
 .page-hero__art::before{
   content:"";position:absolute;z-index:0;pointer-events:none;
   width:104%;aspect-ratio:1.12;
   background:
-    radial-gradient(ellipse 34% 28% at 50% 46%, rgba(126,246,192,.13) 0%, rgba(126,246,192,0) 62%),
-    radial-gradient(ellipse 48% 38% at 50% 50%, rgba(2,98,72,.28) 0%, rgba(2,98,72,0) 74%);
+    radial-gradient(ellipse 30% 24% at 50% 46%, rgba(126,246,192,.07) 0%, rgba(126,246,192,0) 58%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(2,98,72,.14) 0%, rgba(2,98,72,0) 68%);
   filter:blur(7px);
 }
 .page-hero__art img{position:relative;z-index:1;width:100%;max-width:512px;height:auto;
-  filter:drop-shadow(0 26px 46px rgba(0,0,0,.6))}
+  filter:drop-shadow(0 26px 46px rgba(var(--shade-rgb),.6))}
 
 /* Снимок услуги свободно лежит на фоне. Кадры прямоугольные, поэтому
    без оправы их края обязаны раствориться — иначе снова «наклейка».
    Радиусы в radial-gradient считаются от ширины и высоты бокса. */
+/* Свечения вокруг снимка нет: зелёный ореол по периметру прямоугольника
+   читался как оправа, а кадр держит форму и без него. Маска краёв ниже
+   остаётся — она и растворяет границы. */
+.page-hero__art--photo::before{display:none}
 .page-hero__art--photo{width:100%;max-width:640px;margin-inline:auto}
+/* Маски по краям больше нет: снимки лежат с альфа-каналом, объект и так
+   вырезан, а мягкое затухание съедало края зубов и мутило картинку.
+   Свечение секции (.page-hero::before/::after) при этом остаётся. */
 .page-hero__art--photo img{
   max-width:100%;
-  -webkit-mask-image:radial-gradient(ellipse 56% 56% at 50% 48%,#000 50%,rgba(0,0,0,.38) 82%,transparent 100%);
-          mask-image:radial-gradient(ellipse 56% 56% at 50% 48%,#000 50%,rgba(0,0,0,.38) 82%,transparent 100%);
 }
 
 /* ---- сцена снимка: точка на фото + подпись, как у старых схем ---- */
@@ -1054,11 +1344,11 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
   padding:9px 16px 9px 9px;border-radius:100px;
   background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
-  box-shadow:0 16px 32px rgba(0,0,0,.4);
+  box-shadow:0 16px 32px rgba(var(--shade-rgb),.4);
 }
 .art-badge__ico{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:var(--brand-050)}
 .art-badge__ico svg{width:17px;height:17px;fill:none;stroke:var(--brand-300);stroke-width:2}
-.art-badge span{font-size:13px;font-weight:700;color:#fff;line-height:1.32}
+.art-badge span{font-size:13px;font-weight:700;color:var(--ink-strong);line-height:1.32}
 .art-badge--tr{top:0;right:-2%}
 .art-badge--br{bottom:4%;right:-4%}
 
@@ -1100,17 +1390,26 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .page-hero__facts li{
   display:flex;align-items:center;gap:11px;margin:0;
   padding:11px 18px 11px 13px;border-radius:100px;
-  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.26);
-  backdrop-filter:blur(4px);
+  /* Два слоя, а не один. Раньше фон был только «стеклянный» — белый на 13%,
+     и на страницах, где под чип заезжает светлая часть снимка (кресло на
+     «О клинике»), текст переставал читаться. Нижний слой на --panel-rgb даёт
+     гарантированную подложку, верхний сохраняет прежний стеклянный оттенок.
+     Токен разворачивается по теме сам: почти чёрный в тёмной, почти белый
+     в светлой. */
+  background:
+    linear-gradient(rgba(var(--tint-rgb),.13), rgba(var(--tint-rgb),.13)),
+    rgba(var(--panel-rgb),.66);
+  border:1px solid rgba(var(--tint-rgb),.26);
+  backdrop-filter:blur(10px);
 }
-.page-hero__facts svg{width:21px;height:21px;fill:none;stroke:#fff;stroke-width:2;flex-shrink:0;opacity:.9}
+.page-hero__facts svg{width:21px;height:21px;fill:none;stroke:var(--ink-strong);stroke-width:2;flex-shrink:0;opacity:.9}
 /* иконки Griddy и Health Icons залиты, у Lucide — обводка */
-.page-hero__facts svg.is-solid{fill:#fff;stroke:none}
-.page-hero__facts b{display:block;font-size:16px;font-weight:800;color:#fff;line-height:1.15;white-space:nowrap}
-.page-hero__facts span{display:block;font-size:12.5px;color:rgba(255,255,255,.72);line-height:1.3;white-space:nowrap}
-.breadcrumbs{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;margin-bottom:20px;color:rgba(255,255,255,.62)}
-.breadcrumbs a{color:rgba(255,255,255,.9)}
-.breadcrumbs a:hover{color:#fff}
+.page-hero__facts svg.is-solid{fill:var(--ink-strong);stroke:none}
+.page-hero__facts b{display:block;font-size:16px;font-weight:800;color:var(--ink-strong);line-height:1.15;white-space:nowrap}
+.page-hero__facts span{display:block;font-size:12.5px;color:rgba(var(--tint-rgb),.72);line-height:1.3;white-space:nowrap}
+.breadcrumbs{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px;margin-bottom:20px;color:rgba(var(--tint-rgb),.62)}
+.breadcrumbs a{color:rgba(var(--tint-rgb),.9)}
+.breadcrumbs a:hover{color:var(--ink-strong)}
 .breadcrumbs span{opacity:.55}
 
 /* ------------------------------------------------------------------
@@ -1144,7 +1443,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 }
 
 /* компактный призыв к записи вместо развёрнутого блока с главной */
-.cta-band{background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.055) 40%,rgba(255,255,255,.055) 60%,rgba(255,255,255,0));border-block:none;padding-block:clamp(34px,4vw,56px)}
+.cta-band{background:linear-gradient(180deg,rgba(var(--tint-rgb),0),rgba(var(--tint-rgb),.055) 40%,rgba(var(--tint-rgb),.055) 60%,rgba(var(--tint-rgb),0));border-block:none;padding-block:clamp(34px,4vw,56px)}
 .cta-band__in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
 .cta-band h2{font-size:clamp(24px,2.6vw,34px);margin-bottom:8px}
 .cta-band p{margin:0;color:var(--ink-2);max-width:620px}
@@ -1186,8 +1485,11 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
    тем же приглушённым цветом, что и на тёмном фоне, и не читался. */
 .warn-card{
   position:relative;max-width:1280px;border-radius:var(--radius-l);
+  /* Заливка НЕПРОЗРАЧНАЯ и своя. Раньше здесь была полупрозрачная
+     оранжевая плёнка, и сквозь неё проступал зелёный фон секции —
+     плашка съезжала в болотный оттенок к правому краю. */
   background:
-    linear-gradient(150deg,rgba(255,90,43,.12) 0%,rgba(255,90,43,.04) 44%,rgba(255,255,255,.02) 100%);
+    linear-gradient(150deg,#2C1109 0%,#210C05 52%,#1B0904 100%);
   border:1px solid rgba(255,90,43,.30);
   padding:clamp(24px,2.4vw,34px) clamp(22px,2.2vw,32px) clamp(24px,2.4vw,34px) clamp(60px,5.2vw,78px);
 }
@@ -1215,12 +1517,16 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .license figcaption{padding:14px 6px 4px;font-size:14.5px;font-weight:700;color:var(--ink-2);text-align:center}
 
 /* --------------------------------------------------------------- утилиты */
-.mobile-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:880;background:rgba(1,16,13,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));gap:10px;box-shadow:0 -6px 26px rgba(0,0,0,.5)}
+/* Панель скрыта на первом экране: там уже есть «Записаться на приём»
+   и телефон, две пары одинаковых кнопок мешали друг другу и съедали
+   высоту первого разворота. Класс is-on вешает main.js после прокрутки. */
+.mobile-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:880;background:rgba(var(--panel-rgb),.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));gap:10px;box-shadow:0 -6px 26px rgba(var(--shade-rgb),.5)}
 .mobile-bar .btn{flex:1;padding:15px 12px;font-size:15px}
-.to-top{position:fixed;right:22px;bottom:22px;z-index:870;width:52px;height:52px;border-radius:50%;border:none;background:var(--brand);cursor:pointer;display:grid;place-items:center;box-shadow:var(--shadow-brand);opacity:0;visibility:hidden;transform:translateY(12px);transition:.28s var(--ease)}
+.to-top{position:fixed;right:22px;bottom:132px;z-index:870;width:52px;height:52px;border-radius:50%;border:none;background:var(--brand);cursor:pointer;display:grid;place-items:center;box-shadow:var(--shadow-brand);opacity:0;visibility:hidden;transform:translateY(12px);transition:.28s var(--ease)}
 .to-top.is-visible{opacity:1;visibility:visible;transform:none}
 .to-top:hover{background:var(--brand-700)}
 .to-top svg{width:21px;height:21px;fill:#fff}
+
 
 .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .js .reveal.is-in{opacity:1;transform:none}
@@ -1240,11 +1546,10 @@ body.is-locked{overflow:hidden}
 @media (max-width:1080px){
   .services,.cases,.strip--cases{grid-template-columns:repeat(2,1fr)}
   .ba-grid{grid-template-columns:1fr}
-  .ways{grid-template-columns:repeat(2,1fr)}
   .stats{grid-template-columns:repeat(2,1fr)}
   .footer__grid{grid-template-columns:1fr 1fr}
   .header__phone{display:none}
-  .reasons,.cards-3,.licenses{grid-template-columns:1fr 1fr}
+  .offers,.reasons,.cards-3,.licenses{grid-template-columns:1fr 1fr}
 }
 @media (max-width:900px){
   :root{--header-h:70px}
@@ -1257,8 +1562,11 @@ body.is-locked{overflow:hidden}
   .hero__promo{left:auto;right:12px;bottom:-18px;max-width:250px;padding:16px 20px 14px}
   .hero__promo .price b{font-size:27px}
   .doctor,.split,.booking__in,.contacts{grid-template-columns:1fr}
+  /* в столбец у обоих врачей портрет идёт первым */
+  .doctor--rev .doctor__photo{order:0}
   .split--rev .split__media{order:0}
-  .reasons,.cards-3,.licenses{grid-template-columns:1fr}
+  .offers,.reasons,.cards-3,.licenses{grid-template-columns:1fr}
+  .ways{grid-template-columns:1fr}
   .checklist--cols,.pills{grid-template-columns:1fr}
   .promo-banner{grid-template-columns:1fr}
   .callout{grid-template-columns:1fr}
@@ -1267,9 +1575,19 @@ body.is-locked{overflow:hidden}
   .page-hero__art img{max-width:330px}
   .page-hero__in{max-width:none}
   .page-hero__facts li{padding:9px 15px 9px 11px}
-  .mobile-bar{display:flex}
+  .mobile-bar{
+    display:flex;
+    transform:translateY(115%);opacity:0;pointer-events:none;
+    transition:transform .28s var(--ease),opacity .28s var(--ease);
+  }
+  .mobile-bar.is-on{transform:none;opacity:1;pointer-events:auto}
   body{padding-bottom:78px}
-  .to-top{bottom:88px;right:16px;width:46px;height:46px}
+  .to-top{bottom:152px;right:16px;width:46px;height:46px}
+  /* Виджет Битрикса ставит свою кнопку в угол и про нашу нижнюю панель не
+     знает — на телефоне она легла прямо на «Записаться». Поднимаем её над
+     панелью. Цепляемся за data-атрибут, а не за класс: имена классов
+     b24-* меняются от версии к версии, атрибут держится. */
+  [data-b24-crm-button-cont]{bottom:78px!important}
   .review{flex-basis:min(84%,340px)}
 }
 @media (max-width:640px){
@@ -1277,6 +1595,14 @@ body.is-locked{overflow:hidden}
   .services,.cases,.cards-2,.strip--cases{grid-template-columns:1fr}
   .gallery,.strip{grid-template-columns:repeat(3,1fr)}
   .stats{grid-template-columns:1fr 1fr}
+  /* nowrap в плашках распирал страницу шире вьюпорта: шапку внутренних
+     страниц уносило вправо, кнопки обрезало. На узком экране плашки
+     встают в столбец и переносят строки. */
+  .page-hero__facts li{flex:1 1 100%;min-width:0}
+  .page-hero__facts b,.page-hero__facts span{white-space:normal}
+  .hero__actions{flex-direction:column;align-items:stretch}
+  .hero__actions .btn,.hero__actions .btn-live{width:100%}
+  .hero__actions .btn{justify-content:center}
   .footer__grid{grid-template-columns:1fr;gap:28px}
   .logo__sub{display:none}
   .price-tab{flex:1;text-align:center;padding:10px 12px;font-size:13.5px}
@@ -1288,6 +1614,101 @@ body.is-locked{overflow:hidden}
   .steps li::before{left:16px;width:34px;height:34px}
 }
 
+/* --------------------------------------------------- герой «О клинике» */
+/* Кресло стоит открыто, в полную силу — как предметный кадр на сцене:
+   свет из-за объекта даёт общий .page-hero__art::before. Родное
+   разрешение снимка 612px, поэтому выше него не растягиваем. */
+/* Кресло — крупный фоновый объект: стоит позади контента в правом нижнем
+   углу сцены, текст и кнопки прижаты к верху. Объект остаётся в полную
+   силу, пересечения с текстом нет, поэтому глушить его не нужно. */
+.page-hero--about{min-height:clamp(560px,52vw,780px)}
+.page-hero--about .page-hero__grid{grid-template-columns:1fr;align-items:start}
+.page-hero--about .page-hero__in{max-width:min(56%,700px);position:relative;z-index:2}
+.about-stage{position:absolute;inset:0;z-index:0;pointer-events:none}
+.about-chair{
+  position:absolute;right:-5%;bottom:-7%;
+  /* 68vw наезжало на текстовую колонку тем сильнее, чем уже экран: на 1280px
+     кресло начиналось раньше, чем заканчивались чипы. Отодвинули правее и
+     привязали ширину к остатку места, а не ко всему экрану. */
+  width:min(58vw,940px);height:auto;
+  filter:drop-shadow(0 34px 62px rgba(var(--shade-rgb),.62));
+}
+.about-acc{
+  position:absolute;height:auto;
+  filter:drop-shadow(0 10px 22px rgba(var(--shade-rgb),.45));
+  animation:hero-acc-float 6s ease-in-out infinite;
+}
+.about-acc--spark{width:120px;right:34%;top:12%;opacity:.8}
+.about-acc--swoosh{width:150px;right:2%;top:24%;opacity:.55;animation-delay:-3s}
+@keyframes hero-acc-float{
+  0%,100%{transform:translateY(0) rotate(0)}
+  50%    {transform:translateY(-12px) rotate(-3deg)}
+}
+@media (max-width:900px){
+  /* на узком экране текст занимает всю ширину — кресло встаёт под ним
+     по центру и работает как подложка секции */
+  .page-hero--about{min-height:auto;padding-bottom:clamp(190px,52vw,340px)}
+  .page-hero--about .page-hero__in{max-width:none}
+  .about-chair{right:auto;left:50%;translate:-50% 0;bottom:-4%;width:min(104vw,620px)}
+  .about-acc{display:none}
+}
+@media (prefers-reduced-motion:reduce){.about-acc{animation:none}}
+
+/* --------------------------------------------------- карточки «за что нас выбирают» */
+/* Иллюстрация лежит на мягком световом пятне — без круга и рамки:
+   у объектов уже есть своя форма, оправа её только глушит. */
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.8vw,26px)}
+.perk{
+  position:relative;overflow:hidden;
+  padding:clamp(26px,2.4vw,38px);
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius-l);
+  transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s var(--ease);
+}
+.perk::before{
+  content:"";position:absolute;right:-26%;top:-38%;width:72%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(52,200,138,.17),rgba(52,200,138,0));
+  opacity:0;transition:opacity .3s var(--ease);pointer-events:none;
+}
+.perk:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--brand-100)}
+.perk:hover::before{opacity:1}
+.perk__ico{position:relative;display:grid;place-items:center;width:104px;height:88px;margin-bottom:22px}
+.perk__ico::before{
+  content:"";position:absolute;inset:-14% -6%;
+  background:radial-gradient(ellipse 46% 42% at 50% 54%,rgba(52,200,138,.20),rgba(52,200,138,0) 72%);
+}
+.perk__ico img{
+  position:relative;max-width:100%;max-height:100%;width:auto;height:auto;
+  filter:drop-shadow(0 12px 20px rgba(var(--shade-rgb),.5));
+  transition:transform .3s var(--ease);
+}
+.perk:hover .perk__ico img{transform:scale(1.07) rotate(-3deg)}
+.perk h3{position:relative;font-size:20px;color:var(--ink-strong);margin-bottom:10px;letter-spacing:-.02em}
+.perk p{position:relative;font-size:15px;line-height:1.55;color:var(--ink-2);margin:0}
+
+/* блок с цифрами стоит вплотную к герою — сверху воздух не нужен */
+.section--tight{padding-top:clamp(28px,3vw,44px)}
+
+@media (max-width:1080px){.perks{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.perks{grid-template-columns:1fr}}
+
+/* --------------------------------------------------- фоновые иллюстрации */
+/* Иллюстрации из набора разложены как лёгкий декор на заднем плане —
+   без подписей и рамок, у краёв секций, где нет текста, чтобы не
+   спорить с контентом. Тот же приём, что у .calc__deco. */
+.deco-host{position:relative;overflow:hidden}
+.bg-deco{position:absolute;z-index:0;pointer-events:none;opacity:.4;filter:drop-shadow(0 10px 22px rgba(var(--shade-rgb),.4))}
+/* врач: секция высокая — декор свободно стоит в четырёх углах */
+.bg-deco--1{left:1%;top:4%;width:104px;transform:rotate(-12deg)}
+.bg-deco--2{right:2%;top:8%;width:88px;transform:rotate(9deg)}
+.bg-deco--3{left:2%;bottom:6%;width:96px;transform:rotate(10deg)}
+/* лицензия: секция короткая, текст занимает верх — декор только внизу */
+.bg-deco--5{left:42%;bottom:6px;width:52px;transform:rotate(14deg)}
+.bg-deco--6{right:2%;bottom:12px;width:60px;transform:scaleX(-1) rotate(-6deg)}
+/* полоса записи: текст слева впритык к краю — декор только справа, у кнопок */
+.bg-deco--8{right:20%;bottom:8px;width:56px;transform:rotate(8deg)}
+.bg-deco--9{right:1%;top:14%;width:80px;transform:rotate(12deg)}
+@media (max-width:1080px){.bg-deco{display:none}}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
@@ -1297,3 +1718,427 @@ body.is-locked{overflow:hidden}
   .header,.mobile-bar,.to-top,.modal,.lightbox,.booking,.promo-banner{display:none!important}
   body{padding:0}
 }
+
+/* ------------------------------------------- точечные правки светлой темы */
+/* Всё, что в тёмной теме держалось на «свечении» и тёмных подложках:
+   на светлом фоне свет не читается, поэтому эти места переопределяем
+   явно, а не через токены. */
+/* ---- поле страницы ----
+   В тёмной теме фон — это свет из нескольких точек по почти чёрному.
+   На салатовом те же пятна работают наоборот: тёмная зелень поверх
+   светлой давала грязные разводы и полосы на стыках секций. Здесь поле
+   светится к центру, как в макете: края насыщеннее, середина — воздух. */
+:root[data-theme="light"] body::before{
+  background:
+    radial-gradient(72% 54% at 50% 30%, rgba(255,255,255,.62) 0%, rgba(255,255,255,0) 68%),
+    radial-gradient(88% 62% at 50% 96%, rgba(154,199,128,.34) 0%, rgba(154,199,128,0) 72%),
+    radial-gradient(60% 46% at 6% 6%, rgba(154,199,128,.30) 0%, rgba(154,199,128,0) 70%),
+    radial-gradient(60% 46% at 96% 10%, rgba(154,199,128,.26) 0%, rgba(154,199,128,0) 70%);
+}
+/* Вуали секций: на салатовом «налёт» тёмным давал заметные полосы —
+   секции чередуем светом, а не тенью. */
+:root[data-theme="light"] .section--soft{
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.34) 18%,rgba(255,255,255,.34) 82%,rgba(255,255,255,0) 100%);
+}
+:root[data-theme="light"] .section--alt{
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.5) 18%,rgba(255,255,255,.5) 82%,rgba(255,255,255,0) 100%);
+}
+:root[data-theme="light"] .section--soft::after,
+:root[data-theme="light"] .section--alt::after{
+  background:radial-gradient(70% 60% at 50% 0%, rgba(255,255,255,.34) 0%, rgba(255,255,255,0) 70%);
+}
+
+/* ---- заголовок героя ----
+   Из макета: первая половина строки белая, вторая — травяная. Белое по
+   салатовому даёт 1.5:1 — по меркам мелкого текста это нечитаемо, и
+   вытянуть контраст, оставшись в макете, нечем. Держится оно на другом:
+   кегль под 130px, вес 900 и мягкая зелёная тень, которая отделяет буквы
+   от поля. Обычный текст так набирать нельзя — здесь это единственная
+   строка такого размера, и дублируется она в <title> и в шапке страницы. */
+:root[data-theme="light"] .hero__title{
+  color:#fff;
+  text-shadow:0 3px 30px rgba(26,58,28,.22),0 1px 1px rgba(26,58,28,.10);
+}
+/* Травяной из макета — #528F66; уводим темнее к концу строки, иначе
+   хвост «отлично!» на светлой середине поля пропадал. */
+:root[data-theme="light"] .hero__title em{
+  background:linear-gradient(104deg,#59956C 0%,#3E8A5B 42%,#2A7047 100%);
+  -webkit-background-clip:text;background-clip:text;
+  text-shadow:none;
+}
+/* плашка над заголовком: в макете поле чистое, поэтому здесь — не
+   стеклянная подложка, а лёгкая белая пилюля */
+:root[data-theme="light"] .hero__eyebrow span{
+  background:rgba(255,255,255,.62);
+  border-color:rgba(255,255,255,.9);
+  color:var(--brand-700);
+}
+/* карточка услуги — светлая плашка, затемнение снизу меняем на осветление */
+:root[data-theme="light"] .service{background:var(--card)}
+:root[data-theme="light"] .service::after{
+  background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.72) 62%,#fff 100%);
+}
+:root[data-theme="light"] .service::before{
+  background:radial-gradient(circle,rgba(15,154,102,.17) 0%,rgba(15,154,102,.06) 38%,rgba(15,154,102,0) 70%);
+}
+/* тени предметов: те же альфы на светлом фоне выглядят грязью */
+:root[data-theme="light"] .service img{filter:drop-shadow(0 16px 26px rgba(30,60,28,.22))}
+/* Светлая сцена ближе к макету: зуб занимает середину кадра и перекрывает
+   строку заголовка. 620px — предел, дальше снимок (725px в оригинале)
+   начинает мылить; ниже 38vw он перестаёт держать кадр, как в макете.
+   Отражение впечатано в сам снимок, поэтому тень под объектом мягкая и
+   короткая — иначе она спорит с отражением.
+   Тёмная тема сохраняет прежний, более сдержанный размер. */
+/* Тень объекта. Обтравка теперь чистая, и отражение строится отдельно,
+   поэтому тень нужна только чтобы зуб не висел в воздухе: короткая и
+   почти прозрачная. Прежняя падала на рыхлый край старого выреза и давала
+   серую кайму вокруг листьев. */
+:root[data-theme="light"] .hero__object img.hero__img{
+  filter:drop-shadow(0 18px 26px rgba(38,68,32,.10));
+}
+/* На салатовом поле отражение в макете едва заметно — приглушаем. */
+:root[data-theme="light"] .hero__reflect{opacity:.16}
+
+/* На узких экранах заголовок переносится и встаёт НАД объектом — доля от
+   ширины тут не работает, размер повторяем за тёмной темой. Иначе своя
+   специфичность этого правила перебивала мобильное и зуб мельчал. */
+
+/* ---- поле героя ----
+   Светлая сцена собрана так же, как тёмная: ровное поле плюс одно пятно
+   света. Поле — #B6D6A1, тон снят пипеткой с краёв макета, где он держится
+   одинаковым сверху донизу. Раньше поле было градиентом, который к низу
+   уходил в цвет страницы: у нижнего края получалось #D1E5BC вместо
+   #B7D6A1, и кадр терял рамку — низ выглядел молочным. */
+:root[data-theme="light"] .hero{background:#B6D6A1}
+/* Свет тот же слой, что и в тёмной теме, только белёсый и выше: в макете
+   он стоит за заголовком (центр на 30% высоты) и разливается почти на всю
+   высоту кадра — 87%, — а по горизонтали гаснет к 42%, поэтому левый и
+   правый края остаются чистой зеленью. Оттенок тёплый (255,252,235):
+   чистый белый уводил поле в синеву. */
+:root[data-theme="light"] .hero__glow{
+  background:radial-gradient(ellipse 42% 87% at 50% 30%, rgba(255,252,235,.72) 0%, rgba(255,252,235,0) 100%);
+}
+/* Пол: лёгкий подъём у самого низа — отражение, как в макете, — и короткий
+   уход в цвет страницы, чтобы не было ступеньки на стыке секций. */
+:root[data-theme="light"] .hero::after{
+  height:30%;
+  background:linear-gradient(180deg,rgba(255,252,235,0) 0%,rgba(255,252,235,.10) 62%,rgba(255,252,235,.10) 82%,var(--lav) 100%);
+}
+:root[data-theme="light"] .doctor__photo img{filter:drop-shadow(0 22px 44px rgba(30,60,28,.22))}
+:root[data-theme="light"] .about-chair{filter:drop-shadow(0 28px 50px rgba(30,60,28,.24))}
+:root[data-theme="light"] .page-hero__art img{filter:drop-shadow(0 22px 38px rgba(30,60,28,.22))}
+:root[data-theme="light"] .page-hero__art--3d img{filter:drop-shadow(0 24px 40px rgba(30,60,28,.24))}
+:root[data-theme="light"] .perk__ico img{filter:drop-shadow(0 10px 16px rgba(30,60,28,.22))}
+:root[data-theme="light"] .header.is-stuck{box-shadow:0 10px 40px rgba(38,68,32,.10)}
+/* ---- шапка по макету ----
+   В макете шапка сидит прямо на поле: заливки нет, «Записаться» — белая
+   пилюля с тёмной надписью, круглые кнопки — белым контуром. Пока
+   страница не прокручена, подложка прозрачная; после прокрутки
+   возвращается матовое стекло — иначе шапка ложится на карточки. */
+:root[data-theme="light"] .header{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+:root[data-theme="light"] .header.is-stuck{
+  background:rgba(var(--panel-rgb),.86);
+  backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(16px);
+}
+:root[data-theme="light"] .header__cta{
+  --btn-bg:#fff;        --btn-fg:var(--ink-strong);   --btn-bd:rgba(255,255,255,.9);
+  --btn-bg-h:#fff;      --btn-fg-h:var(--brand-700);  --btn-bd-h:var(--brand-100);
+  --btn-sh:0 6px 18px rgba(38,68,32,.14);--btn-sh-h:0 10px 26px rgba(38,68,32,.18);
+}
+:root[data-theme="light"] .icon-btn,
+:root[data-theme="light"] .burger{
+  background:rgba(255,255,255,.42);border-color:rgba(255,255,255,.85);
+}
+:root[data-theme="light"] .icon-btn:hover,
+:root[data-theme="light"] .burger:hover{background:#fff;border-color:var(--brand-100)}
+/* Полоса записи: под снимком лежит почти чёрная завеса — она собрана под
+   светлый текст тёмной темы. В светлой теме текст тёмный, и на той же
+   завесе абзац просто пропадал. Здесь завеса светлая, а снимок ещё
+   приглушён: он остаётся фоном, а не спорит с текстом. */
+:root[data-theme="light"] .booking::before{
+  background:linear-gradient(90deg,rgba(213,232,193,.96) 0%,rgba(213,232,193,.88) 46%,rgba(213,232,193,.66) 100%);
+}
+:root[data-theme="light"] .booking img.booking__bg{opacity:.32}
+/* затемнение под модалкой — в тон темы, иначе на салатовом оно синит */
+:root[data-theme="light"] .modal{background:rgba(26,58,28,.5)}
+:root[data-theme="light"] .booking .eyebrow{color:var(--brand-700)}
+/* Второстепенная кнопка: в тёмной теме это стекло с белым налётом, на
+   салатовом тот же налёт тёмный — пилюля пропадала в поле. Здесь она,
+   наоборот, светлее фона, как белые плашки в макете. */
+:root[data-theme="light"] .btn--ghost{
+  --btn-bg:rgba(255,255,255,.58);  --btn-bd:rgba(255,255,255,.9);
+  --btn-bg-h:#fff;                 --btn-bd-h:var(--brand-100);
+  --btn-sh:0 6px 18px rgba(38,68,32,.10);--btn-sh-h:0 10px 26px rgba(38,68,32,.14);
+}
+/* контровой свет за объектом — на светлом фоне гасим до лёгкой подложки */
+/* В тёмной теме за объектом стоит источник света. В светлой наоборот:
+   к центру поле светлеет, и зуб оказывается в самой светлой точке кадра —
+   тот же приём «свет за объектом», вывернутый под светлый фон. Пятно
+   поднято к 40% и растянуто: в макете светится вся середина кадра,
+   а не круг вокруг объекта. */
+
+:root[data-theme="light"] .page-hero::before{
+  background:
+    radial-gradient(ellipse 42% 34% at 62% 42%, rgba(15,154,102,.11) 0%, rgba(15,154,102,0) 66%),
+    radial-gradient(ellipse 58% 46% at 60% 50%, rgba(15,154,102,.09) 0%, rgba(15,154,102,0) 74%);
+}
+:root[data-theme="light"] .page-hero__art::before{
+  background:
+    radial-gradient(ellipse 30% 24% at 50% 46%, rgba(15,154,102,.10) 0%, rgba(15,154,102,0) 58%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(15,154,102,.12) 0%, rgba(15,154,102,0) 68%);
+}
+/* «Живая» кнопка в светлой теме: светлая пилюля с тёмной надписью.
+   Бегущий свет приходится перекрашивать целиком — в тёмной теме его
+   яркая точка белая, на светлом фоне белое по светлому не видно, поэтому
+   самой заметной точкой становится, наоборот, самый глубокий зелёный. */
+/* дорожка чуть толще тёмной: тонкая зелёная нить на светлом фоне
+   читается хуже, чем светящаяся на почти чёрном */
+:root[data-theme="light"] .btn-live{padding:3.5px;background:rgba(24,54,30,.14)}
+:root[data-theme="light"] .btn-live__face{
+  background:linear-gradient(180deg,#FFFFFF,#F2FBF6);
+  color:var(--ink-strong);
+}
+:root[data-theme="light"] .btn-live:hover .btn-live__face{
+  background:linear-gradient(180deg,#FFFFFF,#E8F6EE);
+}
+:root[data-theme="light"] .btn-live__glow{
+  background:conic-gradient(from var(--live-a),
+    transparent 0deg 170deg,
+    rgba(15,154,102,.55) 232deg,
+    #17B879 288deg,
+    #0B7A50 322deg,
+    #04432C 340deg,
+    #0B7A50 352deg,
+    transparent 360deg);
+}
+/* ореол вокруг кнопки — зелёный, иначе на светлом фоне его нет */
+:root[data-theme="light"] .btn-live::before{
+  background:radial-gradient(closest-side,rgba(15,154,102,.46),rgba(15,154,102,0) 100%);
+}
+:root[data-theme="light"] .btn-live__star,
+:root[data-theme="light"] .btn-live__arrow{fill:var(--brand)}
+:root[data-theme="light"] .btn-live:hover .btn-live__star{fill:var(--brand-700)}
+@media (prefers-reduced-motion:reduce){
+  :root[data-theme="light"] .btn-live__glow{background:rgba(15,154,102,.65)}
+}
+
+/* ------------------------------------------- согласие на обработку данных */
+/* Нативный чекбокс оставлен в потоке (доступность, фокус с клавиатуры),
+   но визуально скрыт: рисуем свой квадрат, иначе в тёмной теме системный
+   выглядит инородно. Кликабельна вся строка — это <label>. */
+.consent{display:flex;gap:11px;align-items:flex-start;margin:16px 0 0;cursor:pointer;user-select:none}
+.consent input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.consent__box{flex:0 0 auto;width:20px;height:20px;margin-top:1px;border:1.5px solid var(--line);
+  border-radius:6px;background:var(--card);display:grid;place-items:center;
+  transition:border-color .18s var(--ease),background .18s var(--ease)}
+.consent__box svg{width:14px;height:14px;fill:var(--on-brand);opacity:0;transform:scale(.6);
+  transition:opacity .18s var(--ease),transform .18s var(--ease)}
+.consent:hover .consent__box{border-color:var(--brand-300)}
+.consent input:checked~.consent__box{background:var(--brand);border-color:var(--brand)}
+.consent input:checked~.consent__box svg{opacity:1;transform:scale(1)}
+.consent input:focus-visible~.consent__box{outline:none;box-shadow:0 0 0 4px rgba(52,200,138,.22)}
+.consent__txt{font-size:12.5px;color:var(--ink-3);line-height:1.5}
+.consent__txt a{color:var(--brand-600);text-decoration:underline}
+.consent.is-error .consent__box{border-color:#E5484D;box-shadow:0 0 0 4px rgba(229,72,77,.1)}
+.consent__err{display:none;font-size:13px;color:#E5484D;margin-top:7px;font-weight:600}
+.consent.is-error+.consent__err{display:block}
+.consent+.consent__err+.btn{margin-top:14px}
+.consent+.btn{margin-top:18px}
+
+/* --------------------------------------------------------- плашка cookie */
+/* Держится внизу слева, чтобы не спорить с мобильной панелью «Записаться»
+   и кнопкой «наверх» справа. На мобильном уезжает над панелью. */
+.cookie{position:fixed;left:var(--gutter);bottom:22px;z-index:70;max-width:430px;
+  display:flex;align-items:center;gap:16px;padding:16px 18px;
+  background:var(--card-2);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);opacity:0;transform:translateY(14px);
+  transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.cookie.is-in{opacity:1;transform:none}
+.cookie__txt{margin:0;font-size:13px;line-height:1.5;color:var(--ink-2)}
+.cookie__txt a{color:var(--brand-600);text-decoration:underline}
+.cookie__ok{flex:0 0 auto;padding:10px 20px;font-size:14px}
+@media (max-width:760px){
+  /* Выше кнопки виджета: иначе она садится прямо на плашку, а согласие
+     человек должен видеть и нажимать без препятствий. */
+  .cookie{left:12px;right:12px;max-width:none;bottom:146px;flex-direction:column;align-items:stretch;gap:12px}
+  .cookie__ok{width:100%}
+}
+
+/* ------------------------------------------------------------ ошибка 404 */
+.err404{padding-block:clamp(70px,10vw,150px)}
+.err404__in{max-width:var(--read);text-align:center;margin-inline:auto}
+.err404__code{display:block;font-size:clamp(90px,18vw,190px);font-weight:900;line-height:.9;
+  letter-spacing:-.04em;background:linear-gradient(180deg,var(--brand-300),rgba(52,200,138,.12));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.err404 h1{margin:18px 0 0;font-size:clamp(28px,4vw,44px)}
+.err404 p{margin:14px auto 0;max-width:52ch;color:var(--ink-2)}
+.err404 .hero__actions{margin-top:30px;justify-content:center}
+.err404__links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:38px}
+.err404__links a{padding:10px 18px;border:1px solid var(--line);border-radius:999px;
+  font-size:14.5px;font-weight:600;color:var(--ink);background:var(--glass);
+  transition:border-color .2s var(--ease),color .2s var(--ease)}
+.err404__links a:hover{border-color:var(--brand);color:var(--brand-600)}
+.err404__call{margin-top:26px;font-size:14.5px}
+.err404__call a{color:var(--brand-600);font-weight:700;white-space:nowrap}
+
+/* ------------------------------------------------ ошибка отправки заявки */
+/* Отдельно от .field__err: та про конкретное поле, эта — про то, что до
+   сервера не достучались. Появляется под кнопкой, где человек её и ищет. */
+.form-err{display:none;margin:14px 0 0;padding:12px 15px;border-radius:var(--radius-s);
+  background:rgba(229,72,77,.10);border:1px solid rgba(229,72,77,.35);
+  color:#FF8A8D;font-size:14px;line-height:1.45;font-weight:600}
+.form-err.is-on{display:block}
+
+
+/* =========================================================================
+   СВЕТЛАЯ ТЕМА: карточки на светлой вуали
+   Чистый белый на салатовом поле читался наклейкой, полностью прозрачная
+   карточка — наоборот, тонула в фоне: на длинном прайсе глазу не за что
+   держаться. Середина: полупрозрачное белое, сквозь которое поле всё ещё
+   просвечивает. Карточка светлее фона, но не отрывается от страницы.
+   Формы, модалка и поля ввода намеренно НЕ входят в список: там заливка
+   несёт смысл (отделяет область ввода), и полупрозрачность их ломает.
+   ====================================================================== */
+:root[data-theme="light"] .service,
+:root[data-theme="light"] .stat,
+:root[data-theme="light"] .reason,
+:root[data-theme="light"] .case,
+:root[data-theme="light"] .ba,
+:root[data-theme="light"] .offer,
+:root[data-theme="light"] .perk,
+:root[data-theme="light"] .pills li,
+:root[data-theme="light"] .price-group,
+:root[data-theme="light"] .price-note,
+:root[data-theme="light"] .review,
+:root[data-theme="light"] .acc,
+:root[data-theme="light"] .steps li,
+:root[data-theme="light"] .info-card,
+:root[data-theme="light"] .license,
+:root[data-theme="light"] .table-wrap{
+  background:rgba(255,255,255,.58);
+}
+
+/* Заливка полупрозрачная, поэтому границу карточки держит в основном
+   рамка — она чуть плотнее обычной линии. */
+:root[data-theme="light"] .service,
+:root[data-theme="light"] .case,
+:root[data-theme="light"] .ba,
+:root[data-theme="light"] .offer,
+:root[data-theme="light"] .pills li,
+:root[data-theme="light"] .price-group,
+:root[data-theme="light"] .review,
+:root[data-theme="light"] .acc,
+:root[data-theme="light"] .steps li,
+:root[data-theme="light"] .info-card,
+:root[data-theme="light"] .license,
+:root[data-theme="light"] .table-wrap{
+  border-color:rgba(26,58,28,.20);
+}
+
+/* Плашка предупреждения в светлой теме тоже своего цвета, тёплого. */
+:root[data-theme="light"] .warn-card{
+  background:linear-gradient(150deg,#FBE7DC 0%,#F7EFE6 100%);
+  border-color:rgba(168,51,9,.30);
+}
+:root[data-theme="light"] .warn-card h3{color:var(--accent-300)}
+
+/* Нижнее осветление карточки услуги в светлой теме уходило в чистый белый —
+   при прозрачной заливке это давало ту же белую плашку, только снизу. */
+:root[data-theme="light"] .service::after{background:none}
+
+/* Светлому фону нужен знак с тёмно-зелёной обводкой — на салатовом поле
+   светлая обводка тонет. */
+:root[data-theme="light"] .logo__mark{
+  background-image:url("../img/logo-light.png");
+}
+
+
+/* =========================================================================
+   УЗЕЛ СВЯЗИ — своя кнопка со списком каналов
+   Родная кнопка amoCRM показывает только онлайн-чат: в панели у неё нет
+   списка каналов, MAX туда добавить нечем. Поэтому виджет висит скрытым,
+   а открывается командой runChatShow из пункта «Написать в чат».
+   ====================================================================== */
+.chatdock{position:fixed;right:22px;bottom:22px;z-index:875;display:flex;
+  flex-direction:column;align-items:flex-end;gap:10px}
+
+.chatdock__toggle{
+  width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--brand);box-shadow:var(--shadow-brand);
+  display:grid;place-items:center;transition:.24s var(--ease);
+}
+.chatdock__toggle:hover{background:var(--brand-700);transform:translateY(-2px)}
+.chatdock__toggle svg{width:25px;height:25px;fill:#fff}
+/* Крестик вместо облачка, когда список раскрыт. Обе иконки лежат в одной
+   ячейке сетки, поэтому кнопка не дёргается при переключении. */
+.chatdock__toggle svg{grid-area:1/1}
+.chatdock__toggle-close{opacity:0;transform:rotate(-90deg) scale(.6)}
+.chatdock__toggle-chat{opacity:1;transform:none}
+.chatdock__toggle svg{transition:opacity .2s var(--ease),transform .24s var(--ease)}
+.chatdock.is-open .chatdock__toggle-chat{opacity:0;transform:rotate(90deg) scale(.6)}
+.chatdock.is-open .chatdock__toggle-close{opacity:1;transform:none}
+
+.chatdock__list{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+/* Пункты без подписей — только знаки. Названия остались в разметке
+   с .visually-hidden: их не видно, но скринридер и голосовой доступ
+   по-прежнему называют пункт. */
+.chatdock__item{
+  display:grid;place-items:center;padding:0;border:none;background:none;
+  cursor:pointer;line-height:0;
+  transition:transform .2s var(--ease);
+}
+.chatdock__item:hover{transform:scale(1.08)}
+
+.chatdock__ico{
+  width:46px;height:46px;border-radius:50%;flex-shrink:0;
+  display:grid;place-items:center;font-style:normal;
+  font-size:12.5px;font-weight:900;letter-spacing:.04em;color:#fff;
+  box-shadow:0 8px 22px rgba(var(--shade-rgb),.30);
+}
+.chatdock__ico svg{width:23px;height:23px;fill:#fff}
+/* Фирменный знак MAX идёт со своей подложкой — градиентным квадратом со
+   скруглением. Своей заливки под ним не нужно, а круглая обрезка ставит его
+   в один ряд с остальными знаками. */
+.chatdock__ico--max{background:none;overflow:hidden}
+.chatdock__ico--max img{width:100%;height:100%;display:block}
+.chatdock__ico--vk{background:var(--vk)}
+.chatdock__ico--chat{background:var(--brand)}
+.chatdock__ico--tel{background:var(--ink-2)}
+
+/* Появление списка: снизу вверх, по очереди. */
+.chatdock__list .chatdock__item{opacity:0;transform:translateY(8px)}
+.chatdock.is-open .chatdock__list .chatdock__item{opacity:1;transform:none;
+  transition:opacity .2s var(--ease),transform .24s var(--ease)}
+.chatdock.is-open .chatdock__list .chatdock__item:nth-child(1){transition-delay:.04s}
+.chatdock.is-open .chatdock__list .chatdock__item:nth-child(2){transition-delay:.08s}
+.chatdock.is-open .chatdock__list .chatdock__item:nth-child(3){transition-delay:.12s}
+.chatdock.is-open .chatdock__list .chatdock__item:nth-child(4){transition-delay:.16s}
+
+/* На телефоне снизу выезжает панель «Позвонить / Записаться» — поднимаем
+   узел над ней, иначе кнопка ляжет прямо на неё. */
+@media (max-width:900px){
+  .chatdock{right:16px;bottom:calc(84px + env(safe-area-inset-bottom))}
+  .chatdock__toggle{width:52px;height:52px}
+  .chatdock__ico{width:44px;height:44px}
+}
+
+/* Родная кнопка amoCRM. Прятать её целиком нельзя тремя способами сразу:
+   display:none и нулевой размер ломают виджет (окно чата не создаётся),
+   а opacity:0 на #amobutton гасит и само окно — оно лежит ВНУТРИ кнопки
+   отдельным блоком #amo-livechat. Всё три варианта проверены на живой
+   странице. Поэтому убираем только внешность кнопки: свою заливку, тень
+   и значок, — а окно чата остаётся видимым. Открываем его настоящим
+   кликом по кнопке из пункта «Написать в чат». */
+#amobutton{background:transparent!important;box-shadow:none!important;
+  border-color:transparent!important}
+#amobutton > .amo-button--main-icon,
+#amobutton > .amo-button-greeting-badge{opacity:0!important}
+/* Когда чат раскрыт, эта же кнопка служит кнопкой «закрыть» — возвращаем
+   ей вид, иначе окно нечем закрыть. Состояние виджет помечает сам,
+   классом amo-livechat_chat на вложенном блоке. */
+#amobutton:has(> .amo-livechat_chat){
+  background:#fff!important;border-color:rgba(0,0,0,.08)!important;
+  box-shadow:0 1px 15px rgba(0,0,0,.15)!important;
+}
+#amobutton:has(> .amo-livechat_chat) > .amo-button--main-icon{opacity:1!important}
+.amo-button-holder{z-index:870!important}

@@ -5,6 +5,37 @@
   var $  = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
+  /* ------------------------------------------------- переключатель темы */
+  /* Выбор темы уже применён инлайн-скриптом в <head> — там же он читается
+     из localStorage, иначе страница успевала моргнуть тёмным. Здесь только
+     переключение и запись выбора. */
+  var THEME_KEY = 'kleomed-theme';
+  function applyTheme(name) {
+    var root = document.documentElement;
+    var changed = root.getAttribute('data-theme') !== name;
+    root.setAttribute('data-theme', name);
+    var meta = $('meta[name="theme-color"]');
+    /* Цвет строки состояния мобильного браузера — держим его равным фону
+       страницы (--lav), иначе над сайтом висит полоса чужого оттенка. */
+    if (meta) meta.setAttribute('content', name === 'light' ? '#D5E8C1' : '#02120F');
+    $$('.theme-toggle').forEach(function (b) {
+      b.setAttribute('aria-label', name === 'light' ? 'Включить тёмную тему' : 'Включить светлую тему');
+    });
+    /* Смена только CSS-переменных не инвалидирует слои с backdrop-filter:
+       шапка, нижняя панель и стеклянные плашки остаются перекрашенными
+       по-старому, пока страница под ними уже сменила тему. Один
+       принудительный пересчёт макета перерисовывает их все разом. */
+    if (changed) { root.style.display = 'none'; void root.offsetHeight; root.style.display = ''; }
+  }
+  applyTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+  $$('.theme-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+    });
+  });
+
   /* ---------------------------------------------------------- шапка */
   var header = $('.header');
   if (header) {
@@ -64,6 +95,75 @@
     }
   }
 
+  /* ------------------------------ нижняя панель на телефоне */
+  /* На первом экране её нет: там уже стоят «Записаться на приём» и телефон,
+     а панель вдобавок съедала высоту, из-за которой следующая секция
+     заглядывала под сгиб. Появляется, когда герой ушёл вверх больше чем
+     наполовину. Порог считаем от самого героя, а не от окна: на подстраницах
+     его нет, и там панель нужна почти сразу. */
+  var mobileBar = $('.mobile-bar');
+  if (mobileBar) {
+    var hero = $('.hero');
+    var toggleBar = function () {
+      var edge = hero ? hero.offsetHeight * 0.6 : window.innerHeight * 0.3;
+      mobileBar.classList.toggle('is-on', window.scrollY > edge);
+    };
+    toggleBar();
+    window.addEventListener('scroll', toggleBar, { passive: true });
+    window.addEventListener('resize', toggleBar);
+  }
+
+  /* ---------------------------------------- узел связи */
+  /* Кнопка со списком каналов вместо родной кнопки amoCRM: в её панели
+     нет списка каналов, MAX туда добавить нечем. Виджет amo загружается
+     скрытым (inline + hidden в коде вставки), а «Написать в чат» открывает
+     его командой runChatShow — имя команды взято из самого button.js. */
+  var dock = $('[data-chatdock]');
+  if (dock) {
+    var dockBtn = dock.querySelector('.chatdock__toggle');
+    var dockList = dock.querySelector('.chatdock__list');
+    var setDock = function (open) {
+      dock.classList.toggle('is-open', open);
+      dockBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      /* hidden снимаем сразу, а ставим обратно после анимации — иначе
+         пункты исчезают мгновенно, не успев уехать вниз. */
+      if (open) { dockList.hidden = false; }
+      else { setTimeout(function () { if (!dock.classList.contains('is-open')) dockList.hidden = true; }, 240); }
+    };
+    dockBtn.addEventListener('click', function () {
+      setDock(!dock.classList.contains('is-open'));
+    });
+    document.addEventListener('click', function (e) {
+      if (!dock.contains(e.target)) setDock(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setDock(false);
+    });
+    var amoBtn = dock.querySelector('[data-amo-chat]');
+    if (amoBtn) {
+      amoBtn.addEventListener('click', function () {
+        setDock(false);
+        /* Сначала штатная команда виджета. Если она не сработала (виджет
+           отвечает не всегда), жмём его собственную кнопку — она спрятана
+           стилями, но в отрисовке осталась, и клик по ней открывает чат
+           тем же путём, что и обычно. */
+        /* Настоящий клик по кнопке виджета — единственный надёжный способ:
+           команда runChatShow из его же кода выполняется без ошибки, но окно
+           не открывает (проверено на боевой странице).
+           Вызов отложен: иначе наш собственный клик всплывает до документа,
+           виджет считает его кликом «мимо себя» и тут же закрывает только
+           что открытое окно. */
+        setTimeout(function () {
+          var own = document.getElementById('amobutton');
+          if (own) own.click();
+          else if (typeof window.amoSocialButton === 'function') {
+            try { window.amoSocialButton('runChatShow'); } catch (e) {}
+          }
+        }, 250);
+      });
+    }
+  }
+
   /* -------------------------------------------------- наверх */
   var toTop = $('.to-top');
   if (toTop) {
@@ -101,37 +201,121 @@
   $$('input[type="tel"]').forEach(maskPhone);
 
   /* ------------------------------------------ проверка формы */
+  /* Галочка согласия — тоже [required], но у неё подсвечивается не сам
+     input (он визуально скрыт), а обёртка .consent: иначе ошибку не видно. */
+  function errHost(f) { return (f.closest && f.closest('.consent')) || f; }
+
   function validate(form) {
     var ok = true;
     $$('[required]', form).forEach(function (f) {
       var bad = false;
       if (f.type === 'tel') bad = f.value.replace(/\D/g, '').length !== 11;
+      else if (f.type === 'checkbox') bad = !f.checked;
       else bad = !f.value.trim();
-      f.classList.toggle('is-error', bad);
+      errHost(f).classList.toggle('is-error', bad);
       if (bad && ok) { f.focus(); }
       if (bad) ok = false;
     });
     return ok;
   }
 
+  /* Адрес приёмника заявок. Тот же домен — значит без CORS и без
+     стороннего сервиса в цепочке. nginx проксирует /api/ на сервис. */
+  var LEAD_URL = '/api/lead';
+  var CALL_US = 'Не удалось отправить заявку. Позвоните нам: +7 (911) 937-77-27';
+
+  /* Метки рекламы живут в первой ссылке, по которой пришёл человек, а форму
+     он заполняет уже на третьей странице. Поэтому запоминаем на сессию. */
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  var UTM_STORE = 'kleomed-utm';
+
+  function readUtm() {
+    var out = {};
+    try {
+      var q = new URLSearchParams(location.search);
+      var fresh = false;
+      UTM_KEYS.forEach(function (k) {
+        var v = q.get(k);
+        if (v) { out[k] = v.slice(0, 120); fresh = true; }
+      });
+      if (fresh) { sessionStorage.setItem(UTM_STORE, JSON.stringify(out)); return out; }
+      var saved = sessionStorage.getItem(UTM_STORE);
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) { return out; }
+  }
+
+  /* Место для сообщения об ошибке отправки — создаём при первой надобности,
+     чтобы не плодить пустые узлы в разметке всех шестнадцати страниц. */
+  function formError(form) {
+    var el = $('.form-err', form);
+    if (!el) {
+      el = document.createElement('p');
+      el.className = 'form-err';
+      el.setAttribute('role', 'alert');
+      form.appendChild(el);
+    }
+    return el;
+  }
+
   $$('form[data-booking]').forEach(function (form) {
     $$('input,select', form).forEach(function (f) {
-      f.addEventListener('input', function () { f.classList.remove('is-error'); });
-      f.addEventListener('change', function () { f.classList.remove('is-error'); });
+      var clear = function () { errHost(f).classList.remove('is-error'); };
+      f.addEventListener('input', clear);
+      f.addEventListener('change', clear);
     });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!validate(form)) return;
+
       var card = form.closest('.form-card') || form.closest('.modal__box');
       var btn = $('button[type="submit"]', form);
+      var err = formError(form);
+      err.textContent = '';
+      err.classList.remove('is-on');
       if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
-      /* Бэкенд не подключён: заявка нигде не сохраняется.
-         Подставьте здесь запрос к вашей CRM / почтовому обработчику. */
-      window.setTimeout(function () {
-        if (card) card.classList.add('is-sent');
+
+      var val = function (n) { var f = $('[name="' + n + '"]', form); return f ? f.value : ''; };
+      var payload = {
+        name:    val('name'),
+        phone:   val('phone'),
+        service: val('service'),
+        time:    val('time'),
+        consent: true,
+        form:    form.closest('.modal__box') ? 'Модальное окно записи' : 'Блок записи на странице',
+        page:    location.pathname,
+        referer: document.referrer
+      };
+      var utm = readUtm();
+      for (var k in utm) { if (utm.hasOwnProperty(k)) payload[k] = utm[k]; }
+
+      var done = function (ok, message) {
         if (btn) { btn.disabled = false; btn.textContent = 'Записаться'; }
-        form.reset();
-      }, 550);
+        if (ok) {
+          if (card) card.classList.add('is-sent');
+          form.reset();
+          document.dispatchEvent(new CustomEvent('kleomed:lead'));
+        } else {
+          err.textContent = message;
+          err.classList.add('is-on');
+        }
+      };
+
+      fetch(LEAD_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (data) {
+          return { ok: r.ok, data: data };
+        });
+      }).then(function (res) {
+        if (res.ok && res.data.ok) done(true);
+        else done(false, res.data.error || CALL_US);
+      }).catch(function () {
+        /* Сеть отвалилась или сервис лежит. Молча «спасибо» показывать нельзя:
+           человек будет ждать звонка, которого никто не сделает. */
+        done(false, CALL_US);
+      });
     });
   });
 
@@ -388,6 +572,74 @@
     veil.addEventListener('click', function (e) { if (e.target === veil) closeVeil(); });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && !veil.hidden) closeVeil();
+    });
+  }
+
+  /* ------------------------------------------ плашка про cookie */
+  /* Плашка уведомительная: счётчик работает сразу, кнопка лишь убирает
+     сообщение и запоминает это в localStorage. Отдельного «отказа» нет —
+     без аналитики сайт вести нельзя, а факт сбора мы честно раскрываем
+     в политике конфиденциальности. */
+  var COOKIE_KEY = 'kleomed-cookie-ok';
+
+  function cookieSeen() {
+    try { return localStorage.getItem(COOKIE_KEY) === '1'; } catch (e) { return true; }
+  }
+
+  if (!cookieSeen()) {
+    var bar = document.createElement('div');
+    bar.className = 'cookie';
+    bar.setAttribute('role', 'region');
+    bar.setAttribute('aria-label', 'Уведомление об использовании cookie');
+    bar.innerHTML =
+      '<p class="cookie__txt">Мы используем cookie и сервисы статистики, чтобы сайт работал ' +
+      'корректно и мы понимали, что вам интересно. Подробнее — в ' +
+      '<a href="/privacy-policy">политике конфиденциальности</a>.</p>' +
+      '<button class="btn cookie__ok" type="button">Хорошо</button>';
+    document.body.appendChild(bar);
+    /* следующий кадр — иначе перехода не видно */
+    requestAnimationFrame(function () { bar.classList.add('is-in'); });
+    $('.cookie__ok', bar).addEventListener('click', function () {
+      try { localStorage.setItem(COOKIE_KEY, '1'); } catch (e) {}
+      bar.classList.remove('is-in');
+      setTimeout(function () { bar.remove(); }, 320);
+    });
+  }
+
+  /* ------------------------------------------- Яндекс.Метрика */
+  /* Номер счётчика берётся в кабинете Метрики (metrika.yandex.ru).
+     Пока строка пустая — ничего не грузится и запросов наружу нет.
+     Чтобы включить аналитику, впишите сюда номер, например '12345678'. */
+  var METRIKA_ID = '110119162';
+
+  /* Вебвизор пока выключен намеренно. Он записывает действия на странице,
+     включая то, что человек печатает в форме записи, — то есть ФИО и телефон
+     пациента уехали бы в Яндекс. Яндекс маскирует сам только пароли и карты,
+     а имя в поле «Ваше имя» — нет; его же условия прямо запрещают собирать
+     через Вебвизор данные, идентифицирующие человека.
+     Включим (webvisor:true), когда в настройках счётчика будет поднято
+     «Маскировать персональные данные» с селекторами полей формы. */
+  var METRIKA_WEBVISOR = false;
+
+  if (METRIKA_ID) {
+    window.ym = window.ym || function () { (window.ym.a = window.ym.a || []).push(arguments); };
+    window.ym.l = +new Date();
+    var ms = document.createElement('script');
+    ms.async = true;
+    ms.src = 'https://mc.yandex.ru/metrika/tag.js';
+    document.head.appendChild(ms);
+    window.ym(METRIKA_ID, 'init', {
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+      webvisor: METRIKA_WEBVISOR
+    });
+
+    /* Цели: отправленная заявка и клик по телефону — то, ради чего сайт есть. */
+    document.addEventListener('kleomed:lead', function () { window.ym(METRIKA_ID, 'reachGoal', 'lead'); });
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="tel:"]');
+      if (a) window.ym(METRIKA_ID, 'reachGoal', 'call');
     });
   }
 

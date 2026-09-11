@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /404.html
+Disallow: /*?utm_
+Disallow: /*?from=
+
+Sitemap: https://xn--d1abasfhn.xn--p1ai/sitemap.xml

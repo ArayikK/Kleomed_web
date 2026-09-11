@@ -1,0 +1,129 @@
+# КЛЕОМЕД — конфигурация nginx.
+#
+# Отдаёт статический сайт и проксирует на сервис заявок (leads.py) три вещи:
+# форму, точки опроса IDENT и страницу со списком заявок.
+#
+# Домен кириллический, поэтому в конфиге он пишется в punycode:
+#   клеомед.рф  →  xn--d1abasfhn.xn--p1ai
+#
+# Положить в /etc/nginx/sites-available/kleomed, включить симлинком,
+# сертификат получить через certbot --nginx.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name xn--d1abasfhn.xn--p1ai www.xn--d1abasfhn.xn--p1ai;
+
+    # certbot сам добавит сюда исключение для проверки домена
+    return 301 https://xn--d1abasfhn.xn--p1ai$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name www.xn--d1abasfhn.xn--p1ai;
+
+    ssl_certificate     /etc/letsencrypt/live/xn--d1abasfhn.xn--p1ai/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/xn--d1abasfhn.xn--p1ai/privkey.pem;
+
+    # Одна каноническая версия адреса, без www — как в тегах canonical.
+    return 301 https://xn--d1abasfhn.xn--p1ai$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name xn--d1abasfhn.xn--p1ai;
+
+    root /var/www/kleomed/site;
+    index index.html;
+    charset utf-8;
+
+    ssl_certificate     /etc/letsencrypt/live/xn--d1abasfhn.xn--p1ai/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/xn--d1abasfhn.xn--p1ai/privkey.pem;
+    ssl_protocols       TLSv1.2 TLSv1.3;
+    ssl_session_cache   shared:SSL:10m;
+
+    # HTTPS обязателен: через форму идут данные о здоровье, а в карточке
+    # оператора у клиники заявлено использование шифровальных средств.
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    add_header X-Content-Type-Options    "nosniff" always;
+    add_header Referrer-Policy           "strict-origin-when-cross-origin" always;
+
+    client_max_body_size 1m;
+
+    gzip on;
+    gzip_types text/css application/javascript image/svg+xml application/xml;
+    gzip_min_length 512;
+
+    # ------------------------------------------------------------- заявки
+    location /api/ {
+        proxy_pass http://127.0.0.1:8081;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Forwarded-For   $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # ---------------------------------------------------- опрос со стороны IDENT
+    # IDENT ходит сюда сам, раз в две минуты, со своим ключом в заголовке.
+    location ~ ^/(GetTickets|GetOngoingCalls|GetFinishedCalls|PostTimeTable)$ {
+        proxy_pass http://127.0.0.1:8081;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Forwarded-For   $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # ------------------------------------------------------------ проверка живости
+    # Отдаёт «ok», если сервис заявок отвечает. Нужен мониторингу Beget и
+    # нам самим: без него «сайт открывается» ещё не значит «заявки принимаются».
+    location = /health {
+        proxy_pass http://127.0.0.1:8081;
+        access_log off;
+    }
+
+    # ------------------------------------------------- список заявок для админа
+    location /admin {
+        proxy_pass http://127.0.0.1:8081;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Forwarded-For   $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # ------------------------------------------------------------ статика
+    location ~* \.(css|js|woff2|png|jpe?g|webp|svg|ico)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        try_files $uri =404;
+    }
+
+    # Адреса на Tilda были без .html — проверено на живом сайте:
+    # клеомед.рф/privacy-policy, клеомед.рф/thankyoupage. Canonical в наших
+    # страницах такой же, поэтому ссылки с расширением уводим на канонический
+    # вид, чтобы у одной страницы не было двух адресов в поиске.
+    location ~ ^/(.+)\.html$ {
+        return 301 /$1;
+    }
+
+    # Страница благодарности с Tilda: там форма уводила человека на отдельный адрес,
+    # у нас окно «спасибо» появляется на месте. Адрес мог попасть в поиск —
+    # отправляем на главную, чтобы не отдавать 404 по живой ссылке.
+    location = /thankyoupage {
+        return 301 /;
+    }
+
+    location = / {
+        try_files /index.html =404;
+    }
+
+    location / {
+        try_files $uri $uri.html $uri/ =404;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
+
+    access_log /var/log/nginx/kleomed.access.log;
+    error_log  /var/log/nginx/kleomed.error.log;
+}

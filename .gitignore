@@ -11,3 +11,6 @@ desktop.ini
 # Python
 __pycache__/
 *.pyc
+
+# Claude Code — локальные разрешения этой машины
+.claude/settings.local.json

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,15 +10,15 @@
 <meta property="og:title" content="Стоматология «Клеомед» в Санкт-Петербурге — лечение, имплантация, протезирование">
 <meta property="og:description" content="Стоматологическая клиника «Клеомед» на проспекте Тореза, 23 в Санкт-Петербурге. Имплантация от 30 000 ₽, протезирование, лечение кариеса, брекеты и элайнеры. Бесплатная консультация, гарантия до 10 лет. Телефон +7 (911) 937-77-27.">
 <meta property="og:url" content="https://клеомед.рф/">
-<meta property="og:image" content="https://клеомед.рф/img/hero-clinic.png">
+<meta property="og:image" content="https://клеомед.рф/img/og-cover.jpg">
 <meta property="og:locale" content="ru_RU">
-<meta name="theme-color" content="#02120F">
+<meta name="theme-color" content="#D5E8C1">
 <link rel="icon" href="img/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="img/favicon.png">
 <link rel="preload" href="fonts/TildaSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/TildaSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css">
-<script>document.documentElement.className+=' js';</script>
+<link rel="stylesheet" href="css/style.css?v=dc57248d">
+<script>document.documentElement.className+=' js';try{var t=localStorage.getItem('kleomed-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,7 +43,7 @@
 <body>
 <header class="header">
   <div class="container header__inner">
-    <a class="logo" href="index.html" aria-label="Клеомед — на главную">
+    <a class="logo" href="/" aria-label="Клеомед — на главную">
       <span class="logo__mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C9.5 2 8.6 3 7 3S4.5 2.2 3.6 3.4C2.4 5 2.6 8.2 3.3 11c.6 2.4 1 4 1.3 6.3.2 1.6.4 3.7 1.7 4.5 1.4.9 2.2-.6 2.6-2.4.3-1.4.5-3 .8-4 .2-.7.5-1.4 1.3-1.4s1.1.7 1.3 1.4c.3 1 .5 2.6.8 4 .4 1.8 1.2 3.3 2.6 2.4 1.3-.8 1.5-2.9 1.7-4.5.3-2.3.7-3.9 1.3-6.3.7-2.8.9-6-.3-7.6C17.5 2.2 16.6 3 15 3s-2.5-1-3-1z"/></svg></span>
       <span class="logo__text">
         <span class="logo__name">КЛЕОМЕД</span>
@@ -52,14 +52,18 @@
     </a>
 
     <nav class="nav" aria-label="Основная навигация">
-      <a href="o-klinike.html" class="nav__link">О клинике</a>
-      <a href="index.html#doctor" class="nav__link">Врачи</a>
-      <a href="index.html#services" class="nav__link">Услуги</a>
+      <a href="/o-klinike" class="nav__link">О клинике</a>
+      <a href="/#doctor" class="nav__link">Врачи</a>
+      <a href="/#services" class="nav__link">Услуги</a>
     </nav>
 
     <div class="header__actions">
       <button class="btn header__cta" type="button" data-open-modal>Записаться</button>
-      <a class="icon-btn" href="ceny.html#price-search" aria-label="Поиск по услугам и ценам">
+      <button class="icon-btn theme-toggle" type="button" aria-label="Переключить тему">
+        <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-14a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM3 12a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1zm15 0a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1zM5.6 5.6a1 1 0 0 1 1.4 0l1.4 1.4A1 1 0 0 1 7 8.4L5.6 7a1 1 0 0 1 0-1.4zm10 10a1 1 0 0 1 1.4 0l1.4 1.4a1 1 0 0 1-1.4 1.4L15.6 17a1 1 0 0 1 0-1.4zm2.8-10a1 1 0 0 1 0 1.4L17 8.4A1 1 0 0 1 15.6 7L17 5.6a1 1 0 0 1 1.4 0zm-10 10a1 1 0 0 1 0 1.4L7 18.4A1 1 0 0 1 5.6 17L7 15.6a1 1 0 0 1 1.4 0z"/></svg>
+        <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 13.6A9 9 0 1 1 10.4 2.6a7 7 0 0 0 11 11z"/></svg>
+      </button>
+      <a class="icon-btn" href="/ceny#price-search" aria-label="Поиск по услугам и ценам">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></svg>
       </a>
       <button class="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobile-nav"><span></span></button>
@@ -68,12 +72,11 @@
 </header>
 
 <div class="mobile-nav" id="mobile-nav">
-  <a href="index.html#services">Услуги</a>
-  <a href="ceny.html">Цены</a>
-  <a href="raboty.html">Наши работы</a>
-  <a href="discont.html">Акции</a>
-  <a href="o-klinike.html">О клинике</a>
-  <a href="index.html#contacts">Контакты</a>
+  <a href="/#services">Услуги</a>
+  <a href="/ceny">Цены</a>
+  <a href="/discont">Акции</a>
+  <a href="/o-klinike">О клинике</a>
+  <a href="/#contacts">Контакты</a>
   <a href="tel:+79119377727">+7 (911) 937-77-27</a>
   <button class="btn btn--block" type="button" data-open-modal>Записаться на приём</button>
 </div>
@@ -93,7 +96,17 @@
     <h1 class="hero__title">Чувствуй себя <em>отлично!</em></h1>
 
     <div class="hero__object">
-      <img src="img/hero-tooth.png" alt="Здоровый зуб" width="725" height="707" fetchpriority="high">
+      <!-- .hero__stack сжат ровно по зубу — от него ветка и считает свои
+           проценты, поэтому держится за объект на любой ширине экрана. -->
+      <div class="hero__stack">
+        <img class="hero__img" src="img/hero-tooth.webp" alt="Здоровый зуб" width="1338" height="1176" fetchpriority="high">
+        <!-- Отражение: тот же файл, перевёрнутый и уведённый в прозрачность.
+             В снимке его нет — и хорошо, так им можно управлять отдельно
+             для тёмной и светлой сцены. -->
+        <span class="hero__reflect" aria-hidden="true">
+          <img src="img/hero-tooth.webp" alt="" width="1338" height="1176">
+        </span>
+      </div>
     </div>
 
     <div class="hero__actions hero__actions--center">
@@ -102,11 +115,11 @@
     </div>
 
     <div class="hero__bar">
-      <a class="btn-live" href="discont.html#calc">
+      <a class="btn-live" href="/discont#offers">
         <span class="btn-live__glow" aria-hidden="true"></span>
         <span class="btn-live__face">
           <svg class="btn-live__star" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 2.4 5.6L20 9l-4.4 4 1.2 6L12 16.2 7.2 19l1.2-6L4 9l5.6-1.4z"/></svg>
-          <b>Получить акцию</b>
+          <b>Наши акции</b>
           <svg class="btn-live__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2L11.6 6.4z"/></svg>
         </span>
       </a>
@@ -122,64 +135,64 @@
       <h2>Наши услуги</h2>
     </div>
     <div class="services">
-      <a class="service reveal reveal-d0" href="viniri-luminiri.html">
-        <img src="img/srv-viniri.png" alt="Виниры и люминиры — стоматология Клеомед" loading="lazy">
+      <a class="service reveal reveal-d0" href="/viniri-luminiri">
+        <img src="img/srv-viniri.webp" width="1536" height="1024" alt="Виниры и люминиры — стоматология Клеомед" loading="lazy">
         <div class="service__body">
           <h3>Виниры и люминиры</h3>
           <p>Тонкие керамические накладки на переднюю поверхность зубов — форма, цвет и блеск за 2–3 визита.</p>
           <span class="service__more">Подробнее <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2L11.6 6.4z"/></svg></span>
         </div>
       </a>
-      <a class="service reveal reveal-d1" href="implantaciya.html">
-        <img src="img/srv-implantaciya.png" alt="Имплантация — стоматология Клеомед" loading="lazy">
+      <a class="service reveal reveal-d1" href="/implantaciya">
+        <img src="img/srv-implantaciya.webp" width="600" height="386" alt="Имплантация — стоматология Клеомед" loading="lazy">
         <div class="service__body">
           <h3>Имплантация</h3>
           <p>Безопасное и надёжное восстановление одного или нескольких утраченных зубов под ключ.</p>
           <span class="service__more">Подробнее <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2L11.6 6.4z"/></svg></span>
         </div>
       </a>
-      <a class="service reveal reveal-d2" href="zubnie-koronki.html">
-        <img src="img/srv-koronki.png" alt="Зубные коронки — стоматология Клеомед" loading="lazy">
+      <a class="service reveal reveal-d2" href="/zubnie-koronki">
+        <img src="img/srv-koronki.webp" width="760" height="698" alt="Зубные коронки — стоматология Клеомед" loading="lazy">
         <div class="service__body">
           <h3>Зубные коронки</h3>
           <p>Полностью покрывают видимую часть зуба, возвращая ему форму, прочность и естественный вид.</p>
           <span class="service__more">Подробнее <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2L11.6 6.4z"/></svg></span>
         </div>
       </a>
-      <a class="service reveal reveal-d3" href="protezirovanie-na-implantah.html">
-        <img src="img/srv-protez-implant.png" alt="Протезирование на имплантах — стоматология Клеомед" loading="lazy">
+      <a class="service reveal reveal-d3" href="/protezirovanie-na-implantah">
+        <img src="img/srv-protez-implant.webp" width="760" height="473" alt="Протезирование на имплантах — стоматология Клеомед" loading="lazy">
         <div class="service__body">
           <h3>Протезирование на имплантах</h3>
           <p>Современный метод восстановления зубного ряда — от одиночной коронки до All-on-4 и All-on-6.</p>
           <span class="service__more">Подробнее <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2L11.6 6.4z"/></svg></span>
         </div>
       </a>
-      <a class="service reveal reveal-d0" href="ortodontiya.html">
-        <img src="img/srv-ortodontiya.png" alt="Ортодонтия — стоматология Клеомед" loading="lazy">
+      <a class="service reveal reveal-d0" href="/ortodontiya">
+        <img src="img/srv-ortodontiya.webp" width="564" height="402" alt="Ортодонтия — стоматология Клеомед" loading="lazy">
         <div class="service__body">
           <h3>Ортодонтия</h3>
           <p>Брекеты, элайнеры и трейнеры — ровные зубы и правильный прикус в любом возрасте.</p>
           <span class="service__more">Подробнее <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2L11.6 6.4z"/></svg></span>
         </div>
       </a>
-      <a class="service reveal reveal-d1" href="hirurgicheskaya-stomatologiya.html">
-        <img src="img/srv-hirurgiya.png" alt="Хирургическая стоматология — стоматология Клеомед" loading="lazy">
+      <a class="service reveal reveal-d1" href="/hirurgicheskaya-stomatologiya">
+        <img src="img/srv-hirurgiya.webp" width="700" height="525" alt="Хирургическая стоматология — стоматология Клеомед" loading="lazy">
         <div class="service__body">
           <h3>Хирургическая стоматология</h3>
           <p>Удаление зубов любой сложности, костная пластика, синус-лифтинг и операции на дёснах.</p>
           <span class="service__more">Подробнее <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2L11.6 6.4z"/></svg></span>
         </div>
       </a>
-      <a class="service reveal reveal-d2" href="lechenie-kariesa.html">
-        <img src="img/srv-karies.png" alt="Лечение кариеса — стоматология Клеомед" loading="lazy">
+      <a class="service reveal reveal-d2" href="/lechenie-kariesa">
+        <img src="img/srv-karies.webp" width="760" height="507" alt="Лечение кариеса — стоматология Клеомед" loading="lazy">
         <div class="service__body">
           <h3>Лечение кариеса</h3>
           <p>Безболезненное лечение на любой стадии — от белого пятна до глубокого поражения.</p>
           <span class="service__more">Подробнее <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2L11.6 6.4z"/></svg></span>
         </div>
       </a>
-      <a class="service reveal reveal-d3" href="mostovidnie-protezi.html">
-        <img src="img/srv-most.png" alt="Мостовидные протезы — стоматология Клеомед" loading="lazy">
+      <a class="service reveal reveal-d3" href="/mostovidnie-protezi">
+        <img src="img/srv-most.webp" width="760" height="500" alt="Мостовидные протезы — стоматология Клеомед" loading="lazy">
         <div class="service__body">
           <h3>Мостовидные протезы</h3>
           <p>Несъёмная конструкция для восстановления одного или нескольких отсутствующих зубов подряд.</p>
@@ -222,7 +235,7 @@
   <div class="container">
     <div class="doctor">
       <div class="doctor__photo reveal">
-        <img src="img/doctor-zeynalyan.png" width="1197" height="1189" alt="Зейналян Айк Арамаисович — стоматолог-ортопед клиники «Клеомед»" loading="lazy">
+        <img src="img/doctor-zeynalyan.webp?v=4" width="1254" height="1254" alt="Зейналян Айк Арамаисович — стоматолог-ортопед клиники «Клеомед»" loading="lazy">
       </div>
       <div class="reveal reveal-d1">
         <span class="eyebrow">Ваш врач</span>
@@ -233,7 +246,25 @@
         и сколько будет стоить.</p>
         <div class="hero__actions" style="margin-bottom:0">
           <button class="btn" type="button" data-open-modal data-service="Протезирование на имплантах">Записаться к врачу</button>
-          <a class="btn btn--ghost" href="o-klinike.html">Подробнее о клинике</a>
+          <a class="btn btn--ghost" href="/o-klinike">Подробнее о клинике</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="doctor doctor--rev">
+      <div class="doctor__photo reveal">
+        <img src="img/doctor-polkovaya.webp" width="1254" height="1254" alt="Полковая Анна Владимировна — врач стоматолог-терапевт клиники «Клеомед»" loading="lazy">
+      </div>
+      <div class="reveal reveal-d1">
+        <span class="eyebrow">Ваш врач</span>
+        <h2 class="doctor__name">Полковая Анна Владимировна</h2>
+        <p class="doctor__role">Врач стоматолог-терапевт</p>
+        <p class="doctor__text">Занимаюсь лечением кариеса на любой стадии, пульпита и каналов,
+        художественной реставрацией и профилактикой. Работаю без спешки и под анестезией —
+        особенно бережно с теми, кто давно откладывал визит к стоматологу.</p>
+        <div class="hero__actions" style="margin-bottom:0">
+          <button class="btn" type="button" data-open-modal data-service="Лечение кариеса">Записаться к врачу</button>
+          <a class="btn btn--ghost" href="/o-klinike">Подробнее о клинике</a>
         </div>
       </div>
     </div>
@@ -262,7 +293,7 @@
       </table>
     </div>
     <div class="sec-more">
-      <a class="btn btn--ghost btn--lg" href="ceny.html">Полный прайс клиники <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2L11.6 6.4z"/></svg></a>
+      <a class="btn btn--ghost btn--lg" href="/ceny">Полный прайс клиники <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 5l7 7-7 7-1.4-1.4 4.6-4.6H4v-2h12.2L11.6 6.4z"/></svg></a>
     </div>
   </div>
 </section>
@@ -363,12 +394,6 @@
         <span class="way__val">Перезвоним вам</span>
         <span class="way__note">В течение рабочего дня</span>
       </button>
-      <a class="way" href="https://t.me/Kleomed" target="_blank" rel="noopener">
-        <span class="way__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.3-.1-.5-.6-.2L6.2 12.7 1.3 11.2c-1-.3-1-1 .2-1.5l19.1-7.4c.9-.3 1.6.2 1.3 1.5z"/></svg></span>
-        <b>Написать в Telegram</b>
-        <span class="way__val">@Kleomed</span>
-        <span class="way__note">Ответим в переписке</span>
-      </a>
       <a class="way" href="https://yandex.com/maps/-/CLEXq2I-" target="_blank" rel="noopener">
         <span class="way__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
         <b>Приехать</b>
@@ -380,7 +405,7 @@
 </section>
 
 <section class="section booking" id="booking">
-  <img class="booking__bg" src="img/cta-bg.webp" alt="" aria-hidden="true" loading="lazy">
+  <img class="booking__bg" src="img/cta-bg.webp" width="1680" height="1350" alt="" aria-hidden="true" loading="lazy">
   <div class="container booking__in">
     <div class="reveal">
       <span class="eyebrow">Бесплатная консультация</span>
@@ -418,9 +443,13 @@
             <option value="Вечер">Вечер, 17:00 — 20:00</option>
           </select>
         </div>
+        <label class="consent">
+          <input type="checkbox" name="consent" required>
+          <span class="consent__box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.6 16.2 4.8 11.4l1.4-1.4 3.4 3.4 8-8L19 6.8z"/></svg></span>
+          <span class="consent__txt">Я даю согласие на обработку персональных данных и принимаю <a href="/privacy-policy" target="_blank" rel="noopener">политику конфиденциальности</a></span>
+        </label>
+        <span class="consent__err">Без согласия мы не сможем принять заявку</span>
         <button class="btn btn--block btn--lg" type="submit">Записаться</button>
-        <p class="form-consent">Нажимая кнопку, вы соглашаетесь с
-          <a href="privacy-policy.html">политикой конфиденциальности</a> и обработкой персональных данных.</p>
       </form>
       <div class="form-ok">
         <div class="form-ok__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.6 16.2 4.8 11.4l1.4-1.4 3.4 3.4 8-8L19 6.8z"/></svg></div>
@@ -436,7 +465,7 @@
   <div class="container">
     <div class="footer__grid">
       <div>
-        <a class="logo" href="index.html">
+        <a class="logo" href="/">
           <span class="logo__mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C9.5 2 8.6 3 7 3S4.5 2.2 3.6 3.4C2.4 5 2.6 8.2 3.3 11c.6 2.4 1 4 1.3 6.3.2 1.6.4 3.7 1.7 4.5 1.4.9 2.2-.6 2.6-2.4.3-1.4.5-3 .8-4 .2-.7.5-1.4 1.3-1.4s1.1.7 1.3 1.4c.3 1 .5 2.6.8 4 .4 1.8 1.2 3.3 2.6 2.4 1.3-.8 1.5-2.9 1.7-4.5.3-2.3.7-3.9 1.3-6.3.7-2.8.9-6-.3-7.6C17.5 2.2 16.6 3 15 3s-2.5-1-3-1z"/></svg></span>
           <span class="logo__text">
             <span class="logo__name">КЛЕОМЕД</span>
@@ -446,37 +475,36 @@
         <p class="footer__about">Стоматологическая клиника в Калининском районе Санкт-Петербурга.
         Полный спектр лечения, протезирования и имплантации — с понятным планом и честной ценой.</p>
         <div class="socials">
-          <a href="https://t.me/Kleomed" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.3-.1-.5-.6-.2L6.2 12.7 1.3 11.2c-1-.3-1-1 .2-1.5l19.1-7.4c.9-.3 1.6.2 1.3 1.5z"/></svg></a>
           <a href="https://yandex.com/maps/-/CLEXq2I-" target="_blank" rel="noopener" aria-label="Мы на карте"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3h-.2L15 5.1 9 3 3.4 4.9c-.2.1-.4.3-.4.6V20.5c0 .3.2.5.5.5h.2L9 18.9l6 2.1 5.6-1.9c.2-.1.4-.3.4-.6V3.5c0-.3-.2-.5-.5-.5zM15 19l-6-2.1V5l6 2.1V19z"/></svg></a>
           <a href="tel:+79119377727" aria-label="Позвонить"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg></a>
+          <a href="https://vk.me/kleomedspb" target="_blank" rel="noopener" aria-label="Написать во ВКонтакте"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.808 7.376 2.808z"/></svg></a>
         </div>
       </div>
 
       <div>
         <h4>Услуги</h4>
         <ul>
-        <li><a href="viniri-luminiri.html">Виниры и люминиры</a></li>
-        <li><a href="implantaciya.html">Имплантация</a></li>
-        <li><a href="zubnie-koronki.html">Зубные коронки</a></li>
-        <li><a href="protezirovanie-na-implantah.html">Протезирование на имплантах</a></li>
-        <li><a href="ortodontiya.html">Ортодонтия</a></li>
-        <li><a href="hirurgicheskaya-stomatologiya.html">Хирургическая стоматология</a></li>
-        <li><a href="lechenie-kariesa.html">Лечение кариеса</a></li>
-        <li><a href="mostovidnie-protezi.html">Мостовидные протезы</a></li>
+        <li><a href="/viniri-luminiri">Виниры и люминиры</a></li>
+        <li><a href="/implantaciya">Имплантация</a></li>
+        <li><a href="/zubnie-koronki">Зубные коронки</a></li>
+        <li><a href="/protezirovanie-na-implantah">Протезирование на имплантах</a></li>
+        <li><a href="/ortodontiya">Ортодонтия</a></li>
+        <li><a href="/hirurgicheskaya-stomatologiya">Хирургическая стоматология</a></li>
+        <li><a href="/lechenie-kariesa">Лечение кариеса</a></li>
+        <li><a href="/mostovidnie-protezi">Мостовидные протезы</a></li>
         </ul>
       </div>
 
       <div>
         <h4>Клиника</h4>
         <ul>
-          <li><a href="o-klinike.html">О клинике</a></li>
-          <li><a href="ceny.html">Цены</a></li>
-          <li><a href="raboty.html">Наши работы</a></li>
-          <li><a href="index.html#reviews">Отзывы</a></li>
-          <li><a href="discont.html">Акции</a></li>
-          <li><a href="lisenzii.html">Лицензии</a></li>
-          <li><a href="privacy-policy.html">Политика конфиденциальности</a></li>
-          <li><a href="protivopokazaniya.html">Противопоказания</a></li>
+          <li><a href="/o-klinike">О клинике</a></li>
+          <li><a href="/ceny">Цены</a></li>
+          <li><a href="/#reviews">Отзывы</a></li>
+          <li><a href="/discont">Акции</a></li>
+          <li><a href="/lisenzii">Лицензии</a></li>
+          <li><a href="/privacy-policy">Политика конфиденциальности</a></li>
+          <li><a href="/protivopokazaniya">Противопоказания</a></li>
         </ul>
       </div>
 
@@ -503,7 +531,7 @@
       </div>
       <div class="footer__bottom">
         <span>© <span data-year>2026</span> ООО «Клеомед». Все права защищены. При перепечатке материалов ссылка на сайт обязательна.</span>
-        <a href="privacy-policy.html">Политика конфиденциальности</a>
+        <a href="/privacy-policy">Политика конфиденциальности</a>
       </div>
     </div>
   </div>
@@ -550,9 +578,13 @@
           <option value="Вечер">Вечер, 17:00 — 20:00</option>
         </select>
       </div>
+      <label class="consent">
+        <input type="checkbox" name="consent" required>
+        <span class="consent__box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.6 16.2 4.8 11.4l1.4-1.4 3.4 3.4 8-8L19 6.8z"/></svg></span>
+        <span class="consent__txt">Я даю согласие на обработку персональных данных и принимаю <a href="/privacy-policy" target="_blank" rel="noopener">политику конфиденциальности</a></span>
+      </label>
+      <span class="consent__err">Без согласия мы не сможем принять заявку</span>
       <button class="btn btn--block btn--lg" type="submit">Записаться</button>
-      <p class="form-consent">Нажимая кнопку, вы соглашаетесь с
-        <a href="privacy-policy.html">политикой конфиденциальности</a> и обработкой персональных данных.</p>
     </form>
     <div class="form-ok">
       <div class="form-ok__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.6 16.2 4.8 11.4l1.4-1.4 3.4 3.4 8-8L19 6.8z"/></svg></div>
@@ -576,8 +608,43 @@
   <button class="btn" type="button" data-open-modal>Записаться</button>
 </div>
 
+<!-- Свой узел связи. Своя кнопка, а не амошная, по одной причине: в панели
+     amoCRM у онлайн-чата нет списка каналов — только код для вставки, MAX
+     туда добавить нечем. Поэтому виджет загружается скрытым, а открываем
+     его командой runChatShow из пункта «Написать в чат». -->
+<div class="chatdock" data-chatdock>
+  <div class="chatdock__list" id="chatdock-list" hidden>
+    <a class="chatdock__item" href="https://max.ru/id7802211601_1_bot" target="_blank" rel="noopener">
+      <i class="chatdock__ico chatdock__ico--max" aria-hidden="true"><img src="img/max.svg" alt="" width="46" height="46"></i>
+      <span class="visually-hidden">Написать в MAX</span>
+    </a>
+    <a class="chatdock__item" href="https://vk.me/kleomedspb" target="_blank" rel="noopener">
+      <i class="chatdock__ico chatdock__ico--vk" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.808 7.376 2.808z"/></svg></i>
+      <span class="visually-hidden">Написать во ВКонтакте</span>
+    </a>
+    <button class="chatdock__item" type="button" data-amo-chat>
+      <i class="chatdock__ico chatdock__ico--chat" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c5 0 9 3.4 9 7.6 0 4.2-4 7.6-9 7.6-.9 0-1.8-.1-2.6-.3L4 20l1.3-3.4C3.9 15.2 3 13 3 10.6 3 6.4 7 3 12 3z"/></svg></i>
+      <span class="visually-hidden">Написать в чат</span>
+    </button>
+    <a class="chatdock__item" href="tel:+79119377727">
+      <i class="chatdock__ico chatdock__ico--tel" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg></i>
+      <span class="visually-hidden">Позвонить</span>
+    </a>
+  </div>
+  <button class="chatdock__toggle" type="button" aria-expanded="false"
+          aria-controls="chatdock-list" aria-label="Связаться с клиникой">
+    <svg class="chatdock__toggle-chat" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c5 0 9 3.4 9 7.6 0 4.2-4 7.6-9 7.6-.9 0-1.8-.1-2.6-.3L4 20l1.3-3.4C3.9 15.2 3 13 3 10.6 3 6.4 7 3 12 3z"/></svg>
+    <svg class="chatdock__toggle-close" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 10.6 5-5 1.4 1.4-5 5 5 5-1.4 1.4-5-5-5 5-1.4-1.4 5-5-5-5L7 5.6z"/></svg>
+  </button>
+</div>
+
 <button class="to-top" type="button" aria-label="Наверх"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 8 8-1.4 1.4L13 7.8V20h-2V7.8l-5.6 5.6L4 12z"/></svg></button>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=f54748cb"></script>
+
+<!-- Онлайн-чат amoCRM. Сообщение из него попадает в чаты amoCRM, ответ
+     администратора возвращается человеку сюда же. Загрузчик асинхронный и
+     стоит последним — на отрисовку страницы не влияет. -->
+<script>(function(a,m,o,c,r,m){a[m]={id:"450037",hash:"8a39f8ae076f8b073227931c5528caee3092c172964a771e9ed00918fd77a527",locale:"ru",inline:false,setMeta:function(p){this.params=(this.params||[]).concat([p])}};a[o]=a[o]||function(){(a[o].q=a[o].q||[]).push(arguments)};a[o+'Config']=a[o+'Config']||{};a[o+'Config'].hidden=!1;var d=a.document,s=d.createElement('script');s.async=true;s.id=m+'_script';s.src='https://gso.amocrm.ru/js/button.js';d.head&&d.head.appendChild(s)}(window,0,'amoSocialButton',0,0,'amo_social_button'));</script>
 </body>
 </html>
