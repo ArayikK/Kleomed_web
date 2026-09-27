@@ -109,6 +109,11 @@
 
   --card:#FFFFFF;
   --card-2:#F6FBEE;
+  /* Плашка карточки: сплошная, на 6 шагов светлее поля. Полупрозрачное
+     белое поверх поля давало тот же тон, но проявляло всё, что лежит
+     под карточкой — вуали секций, свечение фона, — и соседние карточки
+     оказывались разного оттенка. */
+  --card-soft:#F1F8E9;
   --glass:rgba(26,58,28,.06);
   --glass-2:rgba(26,58,28,.10);
 
@@ -290,17 +295,6 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 }
 .header__inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(14px,2vw,34px);height:100%}
 .logo{display:flex;align-items:center;gap:12px;flex-shrink:0}
-/* Знак — присланный фирменный зуб, отдельными файлами под тёмный и светлый
-   фон (у них разная обводка). Ставится фоном, а не <img>: так браузер
-   скачивает только ту версию, которая нужна текущей теме, и HTML всех
-   17 страниц трогать не пришлось. Плитки под знаком нет — объект лежит
-   на фоне сам, как остальные предметы на сайте. */
-.logo__mark{
-  width:44px;height:44px;border-radius:0;flex-shrink:0;
-  background:url("../img/logo-dark.png") center/contain no-repeat;
-  box-shadow:none;
-}
-.logo__mark svg{display:none}
 .logo__text{display:flex;flex-direction:column;line-height:1.05}
 .logo__name{font-weight:900;font-size:20px;letter-spacing:.04em;color:var(--ink)}
 .logo__sub{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-600)}
@@ -354,6 +348,30 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .mobile-nav.is-open{transform:none;visibility:visible}
 .mobile-nav a{padding:15px 4px;font-size:18px;font-weight:700;color:var(--ink);border-bottom:1px solid var(--line-2)}
 .mobile-nav .btn{margin-top:22px}
+/* Каналы связи: MAX, ВК, звонок, карта. Раньше они лежали значками в
+   подвале, но туда доскроллит не каждый, а меню открывается одним нажатием
+   с любого экрана. Номер отдельной строкой из меню убран — звонок теперь
+   здесь же, значком, и строка не дублирует кнопку.
+   Ряд идёт без разделителей и без крупного кегля: это не пункты меню,
+   а быстрые действия, и путать их с навигацией не надо. */
+.mobile-nav__chan{display:flex;gap:12px;margin-top:14px}
+.mobile-nav__chan a{
+  /* Не растягиваем на всю ширину: меню открывается и на широком экране,
+     и там четыре растянутые плитки читаются полосами, а не значками.
+     Четыре по 58 с зазорами — 268px, помещается и на узком телефоне. */
+  flex:0 0 58px;width:58px;height:58px;padding:0;border-bottom:none;
+  border-radius:18px;background:var(--card);border:1px solid var(--line);
+  display:grid;place-items:center;transition:.22s var(--ease);
+}
+.mobile-nav__chan a:hover{background:var(--brand);border-color:var(--brand);
+  transform:translateY(-3px);box-shadow:var(--shadow-brand)}
+.mobile-nav__chan svg{width:24px;height:24px;fill:var(--brand-700);transition:fill .22s var(--ease)}
+.mobile-nav__chan a:hover svg{fill:#fff}
+/* Знак MAX идёт линейным, как и остальные: из фирменной иконки взят сам
+   знак, а градиентный квадрат под ним отброшен. С квадратом он был
+   единственным цветным пятном в ряду и читался наклейкой, а не значком.
+   Заливку ему задаёт то же правило, что и прочим, — цвет меняется
+   на наведении вместе со всеми. */
 
 /* --------------------------------------------------------------- герой */
 /* Сцена собрана как предметная съёмка: чёрное поле, один источник света
@@ -1157,11 +1175,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 .contact-list b{display:block;font-size:12.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
 .contact-list span,.contact-list a{font-size:17.5px;font-weight:700;color:var(--ink)}
 .contact-list a:hover{color:var(--brand-600)}
-.socials{display:flex;gap:10px;margin-top:10px}
-.socials a{width:50px;height:50px;border-radius:16px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;transition:.22s var(--ease)}
-.socials a:hover{background:var(--brand);border-color:var(--brand);transform:translateY(-4px);box-shadow:var(--shadow-brand)}
-.socials svg{width:22px;height:22px;fill:var(--brand-700);transition:fill .22s var(--ease)}
-.socials a:hover svg{fill:#fff}
+
 .map-card{border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow);background:var(--deep);min-height:340px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;color:#fff}
 .map-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
 .map-card:hover{color:var(--ink-strong)}   /* карточка — ссылка, не даём a:hover затемнить текст */
@@ -1212,7 +1226,6 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
 /* --------------------------------------------------------------- подвал */
 .footer{background:linear-gradient(180deg,rgba(var(--tint-rgb),.05) 0%,rgba(var(--panel-rgb),.55) 100%);border-top:1px solid var(--line);color:var(--ink-2);padding-block:clamp(46px,5vw,74px) 26px;font-size:15px}
 .footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:clamp(24px,2.6vw,44px);padding-bottom:36px;border-bottom:1px solid rgba(var(--tint-rgb),.16)}
-.footer .logo__mark{box-shadow:none}
 .footer .logo__name{color:var(--ink-strong)}
 .footer .logo__sub{color:var(--brand-300)}
 .footer h4{color:var(--ink-strong);font-size:15.5px;font-weight:800;margin-bottom:16px;letter-spacing:.02em}
@@ -1522,7 +1535,7 @@ h3{font-size:clamp(20px,2.1vw,26px);font-weight:800}
    высоту первого разворота. Класс is-on вешает main.js после прокрутки. */
 .mobile-bar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:880;background:rgba(var(--panel-rgb),.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom));gap:10px;box-shadow:0 -6px 26px rgba(var(--shade-rgb),.5)}
 .mobile-bar .btn{flex:1;padding:15px 12px;font-size:15px}
-.to-top{position:fixed;right:22px;bottom:132px;z-index:870;width:52px;height:52px;border-radius:50%;border:none;background:var(--brand);cursor:pointer;display:grid;place-items:center;box-shadow:var(--shadow-brand);opacity:0;visibility:hidden;transform:translateY(12px);transition:.28s var(--ease)}
+.to-top{position:fixed;right:22px;bottom:94px;z-index:870;width:52px;height:52px;border-radius:50%;border:none;background:var(--brand);cursor:pointer;display:grid;place-items:center;box-shadow:var(--shadow-brand);opacity:0;visibility:hidden;transform:translateY(12px);transition:.28s var(--ease)}
 .to-top.is-visible{opacity:1;visibility:visible;transform:none}
 .to-top:hover{background:var(--brand-700)}
 .to-top svg{width:21px;height:21px;fill:#fff}
@@ -1582,7 +1595,7 @@ body.is-locked{overflow:hidden}
   }
   .mobile-bar.is-on{transform:none;opacity:1;pointer-events:auto}
   body{padding-bottom:78px}
-  .to-top{bottom:152px;right:16px;width:46px;height:46px}
+  .to-top{bottom:calc(156px + env(safe-area-inset-bottom));right:16px;width:46px;height:46px}
   /* Виджет Битрикса ставит свою кнопку в угол и про нашу нижнюю панель не
      знает — на телефоне она легла прямо на «Записаться». Поднимаем её над
      панелью. Цепляемся за data-атрибут, а не за класс: имена классов
@@ -1779,7 +1792,7 @@ body.is-locked{overflow:hidden}
   background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.72) 62%,#fff 100%);
 }
 :root[data-theme="light"] .service::before{
-  background:radial-gradient(circle,rgba(15,154,102,.17) 0%,rgba(15,154,102,.06) 38%,rgba(15,154,102,0) 70%);
+  background:radial-gradient(circle,rgba(15,154,102,.09) 0%,rgba(15,154,102,.03) 38%,rgba(15,154,102,0) 70%);
 }
 /* тени предметов: те же альфы на светлом фоне выглядят грязью */
 :root[data-theme="light"] .service img{filter:drop-shadow(0 16px 26px rgba(30,60,28,.22))}
@@ -1991,13 +2004,14 @@ body.is-locked{overflow:hidden}
 
 
 /* =========================================================================
-   СВЕТЛАЯ ТЕМА: карточки на светлой вуали
+   СВЕТЛАЯ ТЕМА: карточки — светлые плашки
    Чистый белый на салатовом поле читался наклейкой, полностью прозрачная
-   карточка — наоборот, тонула в фоне: на длинном прайсе глазу не за что
-   держаться. Середина: полупрозрачное белое, сквозь которое поле всё ещё
-   просвечивает. Карточка светлее фона, но не отрывается от страницы.
+   карточка — наоборот, тонула в фоне. Середина: сплошная заливка
+   --card-soft, светлее поля, но той же зелёной семьи. Форму держит не
+   рамка, а сама плашка и мягкая тень под ней — поэтому рамка здесь
+   почти сведена на нет.
    Формы, модалка и поля ввода намеренно НЕ входят в список: там заливка
-   несёт смысл (отделяет область ввода), и полупрозрачность их ломает.
+   несёт смысл (отделяет область ввода), и её тон должен отличаться.
    ====================================================================== */
 :root[data-theme="light"] .service,
 :root[data-theme="light"] .stat,
@@ -2015,25 +2029,32 @@ body.is-locked{overflow:hidden}
 :root[data-theme="light"] .info-card,
 :root[data-theme="light"] .license,
 :root[data-theme="light"] .table-wrap{
-  background:rgba(255,255,255,.58);
+  background:var(--card-soft);
 }
 
-/* Заливка полупрозрачная, поэтому границу карточки держит в основном
-   рамка — она чуть плотнее обычной линии. */
+/* Плашка сама отделяет карточку от поля, поэтому рамка нужна только
+   чтобы край не размывался — почти невидимая линия плюс мягкая тень. */
 :root[data-theme="light"] .service,
+:root[data-theme="light"] .stat,
+:root[data-theme="light"] .reason,
 :root[data-theme="light"] .case,
 :root[data-theme="light"] .ba,
 :root[data-theme="light"] .offer,
-:root[data-theme="light"] .pills li,
+:root[data-theme="light"] .perk,
 :root[data-theme="light"] .price-group,
+:root[data-theme="light"] .price-note,
 :root[data-theme="light"] .review,
 :root[data-theme="light"] .acc,
 :root[data-theme="light"] .steps li,
 :root[data-theme="light"] .info-card,
 :root[data-theme="light"] .license,
 :root[data-theme="light"] .table-wrap{
-  border-color:rgba(26,58,28,.20);
+  border-color:rgba(26,58,28,.06);
+  box-shadow:0 12px 30px rgba(38,68,32,.07);
 }
+/* Пилюли фильтра — не карточки, а строка управления: та же плашка, но
+   без тени, иначе ряд кнопок начинает спорить с карточками под ним. */
+:root[data-theme="light"] .pills li{border-color:rgba(26,58,28,.10)}
 
 /* Плашка предупреждения в светлой теме тоже своего цвета, тёплого. */
 :root[data-theme="light"] .warn-card{
@@ -2046,99 +2067,222 @@ body.is-locked{overflow:hidden}
    при прозрачной заливке это давало ту же белую плашку, только снизу. */
 :root[data-theme="light"] .service::after{background:none}
 
-/* Светлому фону нужен знак с тёмно-зелёной обводкой — на салатовом поле
-   светлая обводка тонет. */
-:root[data-theme="light"] .logo__mark{
-  background-image:url("../img/logo-light.png");
-}
 
 
 /* =========================================================================
-   УЗЕЛ СВЯЗИ — своя кнопка со списком каналов
-   Родная кнопка amoCRM показывает только онлайн-чат: в панели у неё нет
-   списка каналов, MAX туда добавить нечем. Поэтому виджет висит скрытым,
-   а открывается командой runChatShow из пункта «Написать в чат».
+   КНОПКА ЧАТА — родная кнопка amoCRM, поставленная в наш угол
+   Своего узла связи здесь больше нет. Он существовал, чтобы собрать в одном
+   месте MAX, ВК и чат, но платил за это пряткой: кнопку amoCRM приходилось
+   гасить, а вместе с ней пропадало и облачко с ответом администратора —
+   оно висело в углу само по себе, без кнопки, и выглядело поломкой.
+   Прятать виджет нечем: окно чата #amo-livechat лежит ВНУТРИ кнопки, любой
+   display:none или opacity гасит и его (проверено всеми тремя способами).
+   Зато переставлять и перекрашивать кнопку можно свободно — это наш DOM,
+   а не iframe. Поэтому теперь она просто стоит там, где стоял наш узел,
+   в нашем зелёном. MAX и ВК переехали в подвал, звонок и запись на телефоне
+   уже есть в нижней панели.
+   Позиция и цвет идут через !important: виджет выставляет себе
+   position/right/bottom и фон инлайном, а инлайн обычным правилом не перебить.
    ====================================================================== */
-.chatdock{position:fixed;right:22px;bottom:22px;z-index:875;display:flex;
-  flex-direction:column;align-items:flex-end;gap:10px}
-
-.chatdock__toggle{
-  width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
-  background:var(--brand);box-shadow:var(--shadow-brand);
-  display:grid;place-items:center;transition:.24s var(--ease);
+.amo-button-holder{
+  position:fixed!important;
+  /* Холдер на 7px шире кнопки с каждой стороны, поэтому отступы уменьшены
+     на эти 7px — иначе сама кнопка встанет не по одной линии с «наверх». */
+  right:15px!important; bottom:15px!important;
+  left:auto!important; top:auto!important;
+  z-index:870!important;
 }
-.chatdock__toggle:hover{background:var(--brand-700);transform:translateY(-2px)}
-.chatdock__toggle svg{width:25px;height:25px;fill:#fff}
-/* Крестик вместо облачка, когда список раскрыт. Обе иконки лежат в одной
-   ячейке сетки, поэтому кнопка не дёргается при переключении. */
-.chatdock__toggle svg{grid-area:1/1}
-.chatdock__toggle-close{opacity:0;transform:rotate(-90deg) scale(.6)}
-.chatdock__toggle-chat{opacity:1;transform:none}
-.chatdock__toggle svg{transition:opacity .2s var(--ease),transform .24s var(--ease)}
-.chatdock.is-open .chatdock__toggle-chat{opacity:0;transform:rotate(90deg) scale(.6)}
-.chatdock.is-open .chatdock__toggle-close{opacity:1;transform:none}
-
-.chatdock__list{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-/* Пункты без подписей — только знаки. Названия остались в разметке
-   с .visually-hidden: их не видно, но скринридер и голосовой доступ
-   по-прежнему называют пункт. */
-.chatdock__item{
-  display:grid;place-items:center;padding:0;border:none;background:none;
-  cursor:pointer;line-height:0;
-  transition:transform .2s var(--ease);
+#amobutton{
+  background:var(--brand)!important;
+  border-color:transparent!important;
+  box-shadow:var(--shadow-brand)!important;
 }
-.chatdock__item:hover{transform:scale(1.08)}
-
-.chatdock__ico{
-  width:46px;height:46px;border-radius:50%;flex-shrink:0;
-  display:grid;place-items:center;font-style:normal;
-  font-size:12.5px;font-weight:900;letter-spacing:.04em;color:#fff;
-  box-shadow:0 8px 22px rgba(var(--shade-rgb),.30);
-}
-.chatdock__ico svg{width:23px;height:23px;fill:#fff}
-/* Фирменный знак MAX идёт со своей подложкой — градиентным квадратом со
-   скруглением. Своей заливки под ним не нужно, а круглая обрезка ставит его
-   в один ряд с остальными знаками. */
-.chatdock__ico--max{background:none;overflow:hidden}
-.chatdock__ico--max img{width:100%;height:100%;display:block}
-.chatdock__ico--vk{background:var(--vk)}
-.chatdock__ico--chat{background:var(--brand)}
-.chatdock__ico--tel{background:var(--ink-2)}
-
-/* Появление списка: снизу вверх, по очереди. */
-.chatdock__list .chatdock__item{opacity:0;transform:translateY(8px)}
-.chatdock.is-open .chatdock__list .chatdock__item{opacity:1;transform:none;
-  transition:opacity .2s var(--ease),transform .24s var(--ease)}
-.chatdock.is-open .chatdock__list .chatdock__item:nth-child(1){transition-delay:.04s}
-.chatdock.is-open .chatdock__list .chatdock__item:nth-child(2){transition-delay:.08s}
-.chatdock.is-open .chatdock__list .chatdock__item:nth-child(3){transition-delay:.12s}
-.chatdock.is-open .chatdock__list .chatdock__item:nth-child(4){transition-delay:.16s}
-
-/* На телефоне снизу выезжает панель «Позвонить / Записаться» — поднимаем
-   узел над ней, иначе кнопка ляжет прямо на неё. */
-@media (max-width:900px){
-  .chatdock{right:16px;bottom:calc(84px + env(safe-area-inset-bottom))}
-  .chatdock__toggle{width:52px;height:52px}
-  .chatdock__ico{width:44px;height:44px}
-}
-
-/* Родная кнопка amoCRM. Прятать её целиком нельзя тремя способами сразу:
-   display:none и нулевой размер ломают виджет (окно чата не создаётся),
-   а opacity:0 на #amobutton гасит и само окно — оно лежит ВНУТРИ кнопки
-   отдельным блоком #amo-livechat. Всё три варианта проверены на живой
-   странице. Поэтому убираем только внешность кнопки: свою заливку, тень
-   и значок, — а окно чата остаётся видимым. Открываем его настоящим
-   кликом по кнопке из пункта «Написать в чат». */
-#amobutton{background:transparent!important;box-shadow:none!important;
-  border-color:transparent!important}
-#amobutton > .amo-button--main-icon,
-#amobutton > .amo-button-greeting-badge{opacity:0!important}
-/* Когда чат раскрыт, эта же кнопка служит кнопкой «закрыть» — возвращаем
-   ей вид, иначе окно нечем закрыть. Состояние виджет помечает сам,
-   классом amo-livechat_chat на вложенном блоке. */
+/* Значок внутри — белый (fill зашит в сам path), на зелёном читается. */
+#amobutton > .amo-button--main-icon{opacity:1!important}
+/* Когда чат раскрыт, эта же кнопка работает крестиком «закрыть».
+   Виджет метит состояние классом amo-livechat_chat на вложенном блоке —
+   красим и её, иначе крестик уезжает в белый и выпадает из угла. */
 #amobutton:has(> .amo-livechat_chat){
-  background:#fff!important;border-color:rgba(0,0,0,.08)!important;
-  box-shadow:0 1px 15px rgba(0,0,0,.15)!important;
+  background:var(--brand-700)!important;
 }
-#amobutton:has(> .amo-livechat_chat) > .amo-button--main-icon{opacity:1!important}
-.amo-button-holder{z-index:870!important}
+
+@media (max-width:900px){
+  /* Снизу выезжает панель «Позвонить / Записаться» — поднимаем кнопку
+     над ней. 84px — её высота с запасом, минус те же 7px холдера. */
+  .amo-button-holder{
+    right:9px!important;
+    bottom:calc(77px + env(safe-area-inset-bottom))!important;
+  }
+}
+
+
+
+/* ==========================================================================
+   ЖИВОЙ ТЕКСТ — сентябрь 2026
+   Анимированные заголовки, бегущие строки, строки услуг с плашкой,
+   манифест по прокрутке. Цвета — только существующие токены.
+   ========================================================================== */
+
+/* ---------------------------------------------- герой: слова из размытия */
+@keyframes kl-blur-in{
+  from{opacity:0;filter:blur(14px);transform:translateY(.22em)}
+  to{opacity:1;filter:blur(0);transform:none}
+}
+.hero__title .blur-word{display:inline-block;animation:kl-blur-in 1s var(--ease) both;animation-delay:calc(120ms + var(--i,0) * 130ms)}
+
+/* Сменяющееся слово. Все варианты в одной ячейке — ширина по самому
+   длинному. Градиент висит на каждом слове, а не на <em>: у родителя
+   background-clip:text захватил бы глифы всех вариантов сразу. */
+.hero__title .rotword,
+:root[data-theme="light"] .hero__title .rotword{background:none;display:inline-grid;justify-items:start;vertical-align:bottom;text-shadow:none}
+.rotword__w{
+  grid-area:1/1;opacity:0;filter:blur(12px);transform:translateY(.4em);
+  transition:opacity .6s var(--ease),filter .6s var(--ease),transform .6s var(--ease);
+  background:linear-gradient(104deg,#F2FFF8 0%,#8FEFC0 42%,#31B87F 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+:root[data-theme="light"] .rotword__w{background:linear-gradient(104deg,#59956C 0%,#3E8A5B 42%,#2A7047 100%);-webkit-background-clip:text;background-clip:text}
+.rotword__w.is-on{opacity:1;filter:blur(0);transform:none}
+.rotword__w.is-off{opacity:0;filter:blur(12px);transform:translateY(-.4em)}
+
+/* ------------------------------------------------ маркер в заголовках */
+.marker{
+  background-image:linear-gradient(var(--brand-100),var(--brand-100));
+  background-repeat:no-repeat;background-position:0 86%;background-size:0 .34em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  padding-inline:.06em;margin-inline:-.06em;
+  transition:background-size 1.1s var(--ease) .25s;
+}
+.marker.is-in,html:not(.js) .marker{background-size:100% .34em}
+
+/* ------------------------------------------------ полоса прокрутки */
+.scroll-progress{
+  position:fixed;left:0;right:0;top:0;height:3px;z-index:950;pointer-events:none;
+  background:linear-gradient(90deg,var(--brand),var(--brand-300));
+  transform-origin:0 50%;transform:scaleX(0);
+}
+
+/* ------------------------------------------------------------ врачи */
+.doctors{padding-top:clamp(48px,5.4vw,90px)}
+.docs{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,72px);max-width:1240px;margin-inline:auto}
+.doc{display:flex;flex-direction:column;align-items:center;text-align:center}
+/* Портрет свободно стоит на сцене, за ним — мягкий свет, как за зубом. */
+.doc__photo{position:relative;isolation:isolate;width:min(100%,380px);margin-bottom:clamp(14px,1.6vw,24px)}
+.doc__photo::before{
+  content:"";position:absolute;inset:8%;z-index:-1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(52,200,138,.34) 0%,rgba(52,200,138,.10) 45%,rgba(52,200,138,0) 72%);
+  filter:blur(18px);transition:transform .6s var(--ease);
+}
+.doc__photo img{width:100%;height:auto;filter:drop-shadow(0 26px 54px rgba(var(--shade-rgb),.55));transition:transform .6s var(--ease)}
+.doc:hover .doc__photo img{transform:translateY(-8px) scale(1.02)}
+.doc:hover .doc__photo::before{transform:scale(1.12)}
+:root[data-theme="light"] .doc__photo img{filter:drop-shadow(0 22px 44px rgba(30,60,28,.22))}
+.doc__name{font-size:clamp(22px,2.1vw,30px);color:var(--ink-strong);margin-bottom:6px}
+.doc__role{font-size:15.5px;font-weight:700;color:var(--brand-600);margin-bottom:14px}
+.doc__text{font-size:clamp(15.5px,1.2vw,17px);line-height:1.64;color:var(--ink-2);max-width:48ch;margin-bottom:22px}
+.doc .btn{width:auto;margin-top:auto}
+
+/* ------------------------------------------------ бегущие строки */
+@keyframes kl-marquee{to{transform:translateX(calc(-1 * var(--shift,50%)))}}
+.marquee__track{display:flex;width:max-content;will-change:transform}
+.marquee__set{display:flex;align-items:center;flex-shrink:0;gap:.55em;padding-right:.55em;white-space:nowrap}
+.is-ready > .marquee__track{animation:kl-marquee var(--speed,40s) linear infinite}
+[data-reverse].is-ready > .marquee__track{animation-direction:reverse}
+
+/* Две ленты крест-накрест: лежат в одной ячейке сетки, поэтому
+   пересекаются ровно посередине при любой высоте текста. */
+.ribbons{display:grid;align-items:center;overflow:hidden;padding-block:clamp(80px,9vw,150px);position:relative}
+.ribbon{grid-area:1/1;width:112%;margin-left:-6%;overflow:hidden;padding-block:clamp(14px,1.5vw,22px)}
+.ribbon:hover .marquee__track{animation-play-state:paused}
+.ribbon--brand{
+  position:relative;z-index:2;transform:rotate(-4deg);
+  background:var(--brand);color:var(--on-brand);box-shadow:var(--shadow-brand);
+  font-size:clamp(24px,3.3vw,54px);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:1;
+}
+.ribbon--glass{
+  position:relative;z-index:1;transform:rotate(3.6deg);
+  background:rgba(var(--panel-rgb),.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-block:1px solid var(--line);color:var(--ink-strong);
+  font-size:clamp(17px,1.7vw,25px);font-weight:700;letter-spacing:-.01em;line-height:1.2;
+}
+.ribbon__star{width:.62em;height:.62em;flex-shrink:0;margin-inline:.35em}
+.ribbon--brand .ribbon__star{fill:currentColor;opacity:.8}
+.ribbon--glass .ribbon__star{fill:var(--brand-300)}
+.ribbon q{quotes:"«" "»"}
+.ribbon cite{font-style:normal;font-size:.56em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ------------------------------------------------ строки услуг */
+.srv-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.srv-row{position:relative;overflow:hidden;margin:0;border-bottom:1px solid var(--line)}
+.srv-row__link{
+  position:relative;z-index:1;display:grid;align-items:center;
+  grid-template-columns:44px 96px minmax(0,1.05fr) minmax(0,1fr) auto 50px;
+  gap:clamp(14px,2vw,34px);padding-block:clamp(16px,1.7vw,26px);color:var(--ink-strong);
+}
+.srv-row__link:hover{color:var(--ink-strong)}
+.srv-row__num{font-size:13.5px;font-weight:800;letter-spacing:.12em;color:var(--ink-3)}
+.srv-row__thumb{position:relative;height:66px;display:grid;place-items:center}
+.srv-row__thumb::before{
+  content:"";position:absolute;inset:-20% 0;border-radius:50%;
+  background:radial-gradient(circle,rgba(86,230,166,.22) 0%,rgba(86,230,166,0) 68%);
+}
+.srv-row__thumb img{position:relative;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(var(--shade-rgb),.5))}
+.srv-row__title{font-size:clamp(22px,2.5vw,40px);font-weight:900;letter-spacing:-.03em;line-height:1.05}
+.srv-row__desc{font-size:15px;line-height:1.5;color:var(--ink-2);max-width:46ch}
+.srv-row__price{font-size:clamp(16px,1.25vw,19px);font-weight:800;color:var(--brand-300);white-space:nowrap}
+.srv-row__go{width:50px;height:50px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:background .3s var(--ease),border-color .3s var(--ease)}
+.srv-row__go svg{width:18px;height:18px;fill:var(--ink-strong)}
+.srv-row__link:focus-visible .srv-row__go{background:var(--brand);border-color:var(--brand)}
+
+/* Плашка с бегущей строкой. Выезжает по наведению (см. main.js);
+   клики проходят сквозь неё к ссылке. */
+.srv-row__flow{
+  position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;
+  display:flex;align-items:center;
+  background:var(--brand);color:var(--on-brand);
+  transform:translateY(101%);transition:transform .6s cubic-bezier(.16,1,.3,1);
+  --speed:16s;
+}
+.srv-row__flow > .marquee__track{animation-play-state:paused}
+.srv-row.is-on .srv-row__flow > .marquee__track{animation-play-state:running}
+.srv-row__flow .marquee__set{gap:clamp(18px,2vw,32px);padding-right:clamp(18px,2vw,32px)}
+.srv-row__flow b{font-size:clamp(28px,3vw,48px);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:1}
+.srv-row__flow i{font-style:normal;font-size:clamp(17px,1.4vw,21px);font-weight:700;opacity:.85}
+.srv-row__flow .ribbon__star{width:22px;height:22px;fill:currentColor;opacity:.7}
+.srv-row__pill{width:140px;height:70px;border-radius:100px;background:rgba(var(--shade-rgb),.2);display:grid;place-items:center;overflow:hidden;flex-shrink:0}
+.srv-row__pill img{width:88%;height:88%;object-fit:contain}
+
+/* ------------------------------------------------ манифест */
+.manifest-sec{padding-block:clamp(70px,9vw,160px)}
+.manifest{
+  max-width:1180px;margin:0 auto;text-align:center;
+  font-size:clamp(27px,4vw,62px);font-weight:800;line-height:1.14;letter-spacing:-.03em;color:var(--ink-strong);
+}
+.mw{opacity:.14;transition:opacity .35s var(--ease),color .35s var(--ease)}
+.mw.is-lit{opacity:1}
+.mw--accent.is-lit{color:var(--brand-300)}
+
+/* ------------------------------------------------ узкие экраны */
+@media (max-width:1100px){
+  .srv-row__link{grid-template-columns:40px 84px minmax(0,1fr) auto 46px}
+  .srv-row__desc{display:none}
+}
+@media (max-width:760px){
+  .docs{grid-template-columns:1fr;gap:56px}
+  .doc__photo{width:min(78%,320px)}
+  .srv-row__link{grid-template-columns:70px minmax(0,1fr) auto;gap:14px}
+  .srv-row__num,.srv-row__go{display:none}
+  .srv-row__thumb{height:54px}
+  .srv-row__title{font-size:clamp(19px,5.4vw,24px)}
+  .srv-row__price{font-size:14.5px}
+  .ribbon{width:130%;margin-left:-15%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .hero__title .blur-word{animation:none}
+  .rotword__w{transition:none}
+  .marquee__track{animation:none!important}
+  .marker{transition:none}
+  .srv-row__flow{display:none}
+  .mw{transition:none}
+}

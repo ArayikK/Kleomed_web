@@ -102,6 +102,28 @@ B24_ASSIGNED = os.environ.get('KLEOMED_B24_ASSIGNED', '').strip()
 # Источник из справочника CRM. WEB («Сайт») есть на любом портале.
 B24_SOURCE = os.environ.get('KLEOMED_B24_SOURCE', 'WEB').strip()
 
+# amoCRM — CRM клиники (с сентября 2026). Нужны адрес аккаунта и
+# долгосрочный токен: Настройки → Интеграции → «Создать интеграцию» →
+# вкладка «Ключи и доступы» → «Долгосрочный токен». Токен равносилен
+# паролю — живёт только в /etc/kleomed/leads.env. Пусто = выключено.
+#     KLEOMED_AMO_DOMAIN=kleomed.amocrm.ru
+AMO_DOMAIN = os.environ.get('KLEOMED_AMO_DOMAIN', '').strip()
+AMO_TOKEN = os.environ.get('KLEOMED_AMO_TOKEN', '').strip()
+# Воронка и этап. Пусто — первый этап основной воронки. id печатает
+#     python3 leads.py --amo-pipelines
+AMO_PIPELINE = os.environ.get('KLEOMED_AMO_PIPELINE', '').strip()
+AMO_STATUS = os.environ.get('KLEOMED_AMO_STATUS', '').strip()
+# Ответственный (id пользователя amoCRM). Пусто — владелец токена.
+AMO_RESPONSIBLE = os.environ.get('KLEOMED_AMO_RESPONSIBLE', '').strip()
+AMO_TAG = os.environ.get('KLEOMED_AMO_TAG', 'Сайт').strip()
+
+
+def crm_enabled():
+    """Включена ли хоть одна CRM. amoCRM главнее: если заданы обе,
+    заявки идут в amo."""
+    return bool((AMO_DOMAIN and AMO_TOKEN) or B24_HOOK)
+
+
 CRM_RETRY_EVERY = 300        # как часто пробовать дослать, секунд
 CRM_RETRY_MAX = 24           # сколько попыток, дальше — только руками
 CRM_RETRY_AGE = 7 * 86400    # заявки старше уже не дёргаем
@@ -489,29 +511,132 @@ def crm_create(row):
         crm_common(row), TITLE=title[:250], NAME=row['name'], PHONE=phone)})
 
 
+# ------------------------------------------------------------------ amoCRM
+
+def amo_call(method, path, payload=None, timeout=15):
+    """Один запрос к API amoCRM v4 с долгосрочным токеном.
+
+    Как и у Битрикса, на ошибку amo отвечает телом с описанием (поле
+    validation-errors подсказывает, какое именно поле не понравилось) —
+    его и поднимаем в исключение, голый код 400 ничего не объясняет."""
+    host = AMO_DOMAIN.replace('https://', '').replace('http://', '').strip('/')
+    url = 'https://' + host + path
+    data = (json.dumps(payload, ensure_ascii=False).encode('utf-8')
+            if payload is not None else None)
+    req = urllib.request.Request(url, data=data, method=method, headers={
+        'Authorization': 'Bearer ' + AMO_TOKEN,
+        'Content-Type': 'application/json; charset=utf-8'})
+    ctx = ssl.create_default_context()
+    try:
+        with urllib.request.urlopen(req, timeout=timeout, context=ctx) as r:
+            body = r.read().decode('utf-8', 'replace')
+    except urllib.error.HTTPError as e:
+        body = e.read().decode('utf-8', 'replace')
+        raise RuntimeError('amoCRM %s: %s' % (e.code, body[:600]))
+    return json.loads(body) if body.strip() else {}
+
+
+def amo_note(row):
+    """Примечание к сделке: всё из заявки плюс метки рекламы. Метки кладём
+    текстом, а не в поля UTM: если в аккаунте этих полей нет, amo отклонил
+    бы всю сделку целиком, и заявка не дошла бы вовсе."""
+    lines = [crm_comment(row)]
+    utm = ['%s=%s' % (k, row[k]) for k in ('utm_source', 'utm_medium',
+           'utm_campaign', 'utm_term', 'utm_content') if row[k]]
+    if utm:
+        lines.append('Метки: ' + ', '.join(utm))
+    return chr(10).join(lines)
+
+
+def amo_create(row):
+    """Сделка с контактом одним запросом (leads/complex) и примечание к ней.
+
+    complex сам склеивает контакт с уже существующим по телефону, если в
+    аккаунте включён контроль дублей, — повторный пациент не плодит
+    карточки-близнецы."""
+    title = 'Заявка с сайта № {}'.format(row['id'])
+    if row['service']:
+        title += ' — ' + row['service']
+    lead = {
+        'name': title[:250],
+        '_embedded': {
+            'contacts': [{
+                'first_name': row['name'],
+                'custom_fields_values': [{
+                    'field_code': 'PHONE',
+                    'values': [{'value': row['phone'], 'enum_code': 'MOB'}],
+                }],
+            }],
+        },
+    }
+    if AMO_TAG:
+        lead['_embedded']['tags'] = [{'name': AMO_TAG}]
+    if AMO_PIPELINE:
+        lead['pipeline_id'] = int(AMO_PIPELINE)
+    if AMO_STATUS:
+        lead['status_id'] = int(AMO_STATUS)
+    if AMO_RESPONSIBLE:
+        lead['responsible_user_id'] = int(AMO_RESPONSIBLE)
+
+    out = amo_call('POST', '/api/v4/leads/complex', [lead])
+    first = out[0] if isinstance(out, list) and out else {}
+    lead_id = first.get('id')
+    if not lead_id:
+        raise RuntimeError('amoCRM не вернул id сделки: %s' % str(out)[:300])
+    try:
+        amo_call('POST', '/api/v4/leads/%s/notes' % lead_id, [{
+            'note_type': 'common', 'params': {'text': amo_note(row)}}])
+    except Exception as e:                      # noqa: BLE001
+        # Сделка с телефоном уже есть — без примечания перезвонить можно.
+        # Повторять всю отправку ради него значит завести дубль.
+        log.warning('примечание к сделке %s не добавилось: %s', lead_id, e)
+    return 'amo %s' % lead_id
+
+
+def amo_pipelines():
+    """Печатает воронки и этапы с их id — для KLEOMED_AMO_PIPELINE/STATUS.
+    Заодно это проверка токена: ответил — значит, доступ есть."""
+    if not (AMO_DOMAIN and AMO_TOKEN):
+        print('Не заданы KLEOMED_AMO_DOMAIN и KLEOMED_AMO_TOKEN в /etc/kleomed/leads.env')
+        return 1
+    try:
+        data = amo_call('GET', '/api/v4/leads/pipelines')
+    except Exception as e:                      # noqa: BLE001
+        print('Не удалось обратиться к amoCRM: %s' % e)
+        return 1
+    for p in (data.get('_embedded') or {}).get('pipelines', []):
+        print('воронка %-10s %s%s' % (p['id'], p['name'],
+                                     '  (основная)' if p.get('is_main') else ''))
+        for st in (p.get('_embedded') or {}).get('statuses', []):
+            print('    этап %-10s %s' % (st['id'], st['name']))
+    return 0
+
+
 def push_to_crm(row):
-    """Отправляет заявку в Битрикс24 и запоминает исход.
+    """Отправляет заявку в CRM (amoCRM или Битрикс24) и запоминает исход.
 
     Заявка к этому моменту уже в SQLite и пациенту уже сказано «спасибо».
     Поэтому любая ошибка CRM — повод дослать позже, а не потерять человека:
     crm_id остаётся пустым, и фоновый повтор вернётся к этой строке."""
-    if not B24_HOOK:
+    if not crm_enabled():
         return False
+    use_amo = bool(AMO_DOMAIN and AMO_TOKEN)
+    crm_name = 'amoCRM' if use_amo else 'Битрикс24'
     lead_id = row['id']
     try:
-        crm_id = crm_create(row)
+        crm_id = amo_create(row) if use_amo else crm_create(row)
     except Exception as e:                      # noqa: BLE001
         with db() as conn:
             conn.execute(
                 'UPDATE leads SET crm_tries = crm_tries + 1 WHERE id = ?',
                 (lead_id,))
-        log.warning('Битрикс24 не принял заявку №%s: %s', lead_id, e)
+        log.warning('%s не принял заявку №%s: %s', crm_name, lead_id, e)
         return False
     with db() as conn:
         conn.execute(
             'UPDATE leads SET crm_id = ?, crm_tries = crm_tries + 1 '
             'WHERE id = ?', (str(crm_id), lead_id))
-    log.info('заявка №%s заведена в Битрикс24: %s', lead_id, crm_id)
+    log.info('заявка №%s заведена в %s: %s', lead_id, crm_name, crm_id)
     return True
 
 
@@ -523,7 +648,7 @@ def crm_retry_loop():
     а не вечный стук в чужой API."""
     while True:
         time.sleep(CRM_RETRY_EVERY)
-        if not B24_HOOK:
+        if not crm_enabled():
             continue
         try:
             with db() as conn:
@@ -646,7 +771,7 @@ def crm_cell(row):
     не дожидаясь CRM."""
     if row['crm_id']:
         return '', esc(row['crm_id'])
-    if not B24_HOOK:
+    if not crm_enabled():
         return '', '—'
     if row['crm_tries'] < CRM_RETRY_MAX:
         return '', 'ждёт'
@@ -879,8 +1004,10 @@ def main():
         log.warning('MAX не настроен — уведомления не отправляются')
     if not ADMIN_TOKEN:
         log.warning('KLEOMED_ADMIN_TOKEN не задан — /admin закрыт')
-    if not B24_HOOK:
-        log.warning('KLEOMED_B24_HOOK не задан — заявки в CRM не уходят')
+    if AMO_DOMAIN and AMO_TOKEN:
+        log.info('заявки уходят в amoCRM: %s', AMO_DOMAIN)
+    elif not B24_HOOK:
+        log.warning('CRM не настроена — заявки в CRM не уходят')
     elif B24_ENTITY not in ('lead', 'deal'):
         log.warning('KLEOMED_B24_ENTITY=%s — ожидается lead или deal',
                     B24_ENTITY)
@@ -896,4 +1023,6 @@ def main():
 if __name__ == '__main__':
     if '--chats' in sys.argv:
         sys.exit(list_chats())
+    if '--amo-pipelines' in sys.argv:
+        sys.exit(amo_pipelines())
     main()

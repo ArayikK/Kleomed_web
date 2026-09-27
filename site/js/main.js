@@ -81,7 +81,9 @@
   }
 
   /* ------------------------------------------ появление блоков */
-  var reveals = $$('.reveal');
+  /* .marker — фирменная подсветка слов в заголовках: полоса проезжает
+     под словом, когда заголовок попадает в кадр. */
+  var reveals = $$('.reveal, .marker');
   if (reveals.length) {
     if ('IntersectionObserver' in window) {
       var ro = new IntersectionObserver(function (entries, obs) {
@@ -94,6 +96,137 @@
       reveals.forEach(function (el) { el.classList.add('is-in'); });
     }
   }
+
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ------------------------------------ сменяющееся слово в герое */
+  var rot = $('[data-rotate]');
+  if (rot && !calm) {
+    var words = $$('.rotword__w', rot), wi = 0;
+    /* Первая смена — после того как заголовок проявился целиком. */
+    setTimeout(function () {
+      setInterval(function () {
+        words[wi].classList.remove('is-on');
+        words[wi].classList.add('is-off');
+        var prev = words[wi];
+        setTimeout(function () { prev.classList.remove('is-off'); }, 700);
+        wi = (wi + 1) % words.length;
+        words[wi].classList.add('is-on');
+      }, 2600);
+    }, 1400);
+  }
+
+  /* ------------------------------------------------ бегущие строки */
+  /* Набор слов копируется, пока лента не станет вдвое шире экрана, а
+     сдвиг анимации — ровно на ширину одного набора. Тогда круг
+     замыкается без рывка на любой ширине окна и при любой длине текста. */
+  function buildMarquee(box) {
+    var track = box.querySelector('.marquee__track');
+    var set = track.querySelector('.marquee__set');
+    if (!track || !set) return;
+    $$('.marquee__set', track).forEach(function (n) { if (n !== set) n.remove(); });
+    var w = set.getBoundingClientRect().width;
+    if (!w) return;
+    var need = Math.ceil((box.clientWidth || window.innerWidth) * 2 / w) + 1;
+    for (var k = 0; k < need; k++) {
+      var c = set.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      track.appendChild(c);
+    }
+    track.style.setProperty('--shift', w + 'px');
+    box.classList.add('is-ready');
+  }
+  var marquees = $$('[data-marquee], .srv-row__flow');
+  if (marquees.length) {
+    var buildAll = function () { marquees.forEach(buildMarquee); };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(buildAll); else buildAll();
+    var mqT;
+    window.addEventListener('resize', function () { clearTimeout(mqT); mqT = setTimeout(buildAll, 200); });
+  }
+
+  /* ---------------------------- строки услуг: плашка по курсору */
+  /* Плашка въезжает с той стороны, откуда зашёл курсор, и уезжает туда,
+     куда он вышел — строка «следит» за рукой. Только для мыши: на
+     касаниях строка — обычная ссылка. */
+  var srvList = $('[data-srv-list]');
+  if (srvList && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $$('.srv-row', srvList).forEach(function (row) {
+      var flow = row.querySelector('.srv-row__flow');
+      var side = function (e) {
+        var r = row.getBoundingClientRect();
+        return e.clientY < r.top + r.height / 2 ? '-101%' : '101%';
+      };
+      row.addEventListener('mouseenter', function (e) {
+        flow.style.transition = 'none';
+        flow.style.transform = 'translateY(' + side(e) + ')';
+        void flow.offsetHeight;
+        flow.style.transition = '';
+        flow.style.transform = 'translateY(0)';
+        row.classList.add('is-on');
+      });
+      row.addEventListener('mouseleave', function (e) {
+        flow.style.transform = 'translateY(' + side(e) + ')';
+        row.classList.remove('is-on');
+      });
+    });
+  }
+
+  /* ------------------------------------ манифест: слова по прокрутке */
+  /* Каждое слово получает свою долю пути: пока абзац проходит через
+     середину экрана, слова загораются одно за другим. <b> в разметке —
+     слова-акценты, они загораются фирменным зелёным. */
+  var manifest = $('[data-manifest]');
+  if (manifest) {
+    var out = [];
+    Array.prototype.slice.call(manifest.childNodes).forEach(function (n) {
+      var accent = n.nodeType === 1;
+      (n.textContent || '').split(/(\s+)/).forEach(function (t) {
+        if (!t) return;
+        if (/^\s+$/.test(t)) { out.push(document.createTextNode(' ')); return; }
+        var sp = document.createElement('span');
+        sp.className = 'mw' + (accent ? ' mw--accent' : '');
+        sp.textContent = t;
+        out.push(sp);
+      });
+    });
+    manifest.setAttribute('aria-label', manifest.textContent.replace(/\s+/g, ' ').trim());
+    manifest.textContent = '';
+    out.forEach(function (n) { manifest.appendChild(n); });
+    var mws = $$('.mw', manifest);
+    if (calm) {
+      mws.forEach(function (w) { w.classList.add('is-lit'); });
+    } else {
+      var paint = function () {
+        var r = manifest.getBoundingClientRect(), vh = window.innerHeight;
+        /* 0 — верх абзаца у 85% высоты экрана, 1 — низ абзаца у 45%. */
+        var p = (vh * 0.85 - r.top) / (r.height + vh * 0.4);
+        var lit = Math.round(Math.max(0, Math.min(1, p)) * mws.length);
+        mws.forEach(function (w, i) { w.classList.toggle('is-lit', i < lit); });
+      };
+      var mTick = false;
+      window.addEventListener('scroll', function () {
+        if (!mTick) { mTick = true; requestAnimationFrame(function () { mTick = false; paint(); }); }
+      }, { passive: true });
+      window.addEventListener('resize', paint);
+      paint();
+    }
+  }
+
+  /* ------------------------------------------ полоса прокрутки */
+  var bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+  var pTick = false;
+  var progress = function () {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, window.scrollY / h) : 0) + ')';
+    pTick = false;
+  };
+  window.addEventListener('scroll', function () {
+    if (!pTick) { pTick = true; requestAnimationFrame(progress); }
+  }, { passive: true });
+  progress();
 
   /* ------------------------------ нижняя панель на телефоне */
   /* На первом экране её нет: там уже стоят «Записаться на приём» и телефон,
@@ -111,57 +244,6 @@
     toggleBar();
     window.addEventListener('scroll', toggleBar, { passive: true });
     window.addEventListener('resize', toggleBar);
-  }
-
-  /* ---------------------------------------- узел связи */
-  /* Кнопка со списком каналов вместо родной кнопки amoCRM: в её панели
-     нет списка каналов, MAX туда добавить нечем. Виджет amo загружается
-     скрытым (inline + hidden в коде вставки), а «Написать в чат» открывает
-     его командой runChatShow — имя команды взято из самого button.js. */
-  var dock = $('[data-chatdock]');
-  if (dock) {
-    var dockBtn = dock.querySelector('.chatdock__toggle');
-    var dockList = dock.querySelector('.chatdock__list');
-    var setDock = function (open) {
-      dock.classList.toggle('is-open', open);
-      dockBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      /* hidden снимаем сразу, а ставим обратно после анимации — иначе
-         пункты исчезают мгновенно, не успев уехать вниз. */
-      if (open) { dockList.hidden = false; }
-      else { setTimeout(function () { if (!dock.classList.contains('is-open')) dockList.hidden = true; }, 240); }
-    };
-    dockBtn.addEventListener('click', function () {
-      setDock(!dock.classList.contains('is-open'));
-    });
-    document.addEventListener('click', function (e) {
-      if (!dock.contains(e.target)) setDock(false);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') setDock(false);
-    });
-    var amoBtn = dock.querySelector('[data-amo-chat]');
-    if (amoBtn) {
-      amoBtn.addEventListener('click', function () {
-        setDock(false);
-        /* Сначала штатная команда виджета. Если она не сработала (виджет
-           отвечает не всегда), жмём его собственную кнопку — она спрятана
-           стилями, но в отрисовке осталась, и клик по ней открывает чат
-           тем же путём, что и обычно. */
-        /* Настоящий клик по кнопке виджета — единственный надёжный способ:
-           команда runChatShow из его же кода выполняется без ошибки, но окно
-           не открывает (проверено на боевой странице).
-           Вызов отложен: иначе наш собственный клик всплывает до документа,
-           виджет считает его кликом «мимо себя» и тут же закрывает только
-           что открытое окно. */
-        setTimeout(function () {
-          var own = document.getElementById('amobutton');
-          if (own) own.click();
-          else if (typeof window.amoSocialButton === 'function') {
-            try { window.amoSocialButton('runChatShow'); } catch (e) {}
-          }
-        }, 250);
-      });
-    }
   }
 
   /* -------------------------------------------------- наверх */
@@ -502,6 +584,7 @@
         res     = $('#calc-res'),
         resNum  = $('#calc-res-num'),
         resCat  = $('#calc-res-cat'),
+        resSub  = $('.calc-res__sub'),
         errBox  = $('#calc-err'),
         btnClose= $('#calc-close'),
         btnBook = $('#calc-book'),
@@ -550,6 +633,11 @@
 
       var off = parseInt(picked.getAttribute('data-off'), 10) || 0;
       resCat.textContent = picked.value;
+      /* У большинства категорий скидка идёт на всё лечение, и подпись под
+         числом общая. Там, где она уже, категория несёт свой data-scope —
+         иначе человек увидит крупное «20%» и решит, что это на любую услугу. */
+      if (resSub) resSub.textContent = picked.getAttribute('data-scope')
+        || 'скидка на лечение в «Клеомед»';
 
       /* показываем шторку и крутим загрузку 3–4 секунды */
       veil.hidden = false;
