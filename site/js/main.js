@@ -429,10 +429,51 @@
     if (lastFocus) lastFocus.focus();
   }
 
+  /* Две дороги в CRM. Кнопки «Записаться…» открывают онлайн-чат amoCRM —
+     разговор сразу попадает администратору. Кнопки «Оставить заявку»
+     (нижняя панель, блок контактов) открывают форму: она тоже уходит в
+     amoCRM, но сделкой через наш сервис. Разводим по надписи, чтобы новые
+     кнопки вели себя правильно без лишних атрибутов в разметке. */
+  function chatOpen() {
+    var own = document.getElementById('amobutton');
+    return !!(own && own.querySelector(':scope > .amo-livechat_chat'));
+  }
+  function openChat(service) {
+    /* Виджет не загрузился (блокировщик, сеть) — не оставляем человека
+       ни с чем, открываем форму. */
+    if (typeof window.amoSocialButton !== 'function' || !document.getElementById('amobutton')) {
+      openModal(service); return;
+    }
+    if (mobileNav && mobileNav.classList.contains('is-open')) {
+      mobileNav.classList.remove('is-open');
+      burger.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('is-locked');
+    }
+    /* Штатная команда runChatShow. Первые ~2 секунды после загрузки
+       виджет ещё не готов: команда (как и клик по его кнопке) лишь
+       перекрашивает кнопку в крестик, а окно не открывает — проверено на
+       боевом через CDP. Поэтому повторяем, пока окно не откроется: команда
+       идемпотентна, в отличие от клика, который открытый чат закрыл бы.
+       Первая попытка отложена, чтобы наш клик успел всплыть до документа —
+       иначе виджет примет его за клик «мимо себя». Не открылся за 12 с —
+       форма. */
+    var tries = 0;
+    var attempt = function () {
+      if (chatOpen()) return;
+      if (++tries > 40) { openModal(service); return; }
+      try { window.amoSocialButton('runChatShow'); } catch (e) {}
+      setTimeout(attempt, 300);
+    };
+    setTimeout(attempt, 250);
+  }
+
   $$('[data-open-modal]').forEach(function (b) {
+    var toChat = /^\s*Записаться/.test(b.textContent);
     b.addEventListener('click', function (e) {
       e.preventDefault();
-      openModal(b.getAttribute('data-service') || '');
+      var service = b.getAttribute('data-service') || '';
+      if (toChat) openChat(service); else openModal(service);
     });
   });
   if (modal) {
