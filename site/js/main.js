@@ -468,6 +468,26 @@
     setTimeout(attempt, 250);
   }
 
+  /* ------------------------------------------------ узел связи */
+  var dock = $('[data-chatdock]');
+  if (dock) {
+    var dockBtn = $('.chatdock__toggle', dock), dockList = $('.chatdock__list', dock);
+    var setDock = function (open) {
+      dock.classList.toggle('is-open', open);
+      dockBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      /* hidden снимаем сразу, а ставим обратно после анимации — иначе
+         пункты исчезают мгновенно, не успев уехать вниз */
+      if (open) dockList.hidden = false;
+      else setTimeout(function () { if (!dock.classList.contains('is-open')) dockList.hidden = true; }, 260);
+    };
+    dockBtn.addEventListener('click', function () { setDock(!dock.classList.contains('is-open')); });
+    document.addEventListener('click', function (e) { if (!dock.contains(e.target)) setDock(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setDock(false); });
+    $$('a', dockList).forEach(function (a) { a.addEventListener('click', function () { setDock(false); }); });
+    var dockChat = $('[data-amo-chat]', dock);
+    if (dockChat) dockChat.addEventListener('click', function () { setDock(false); openChat(''); });
+  }
+
   $$('[data-open-modal]').forEach(function (b) {
     var toChat = /^\s*Записаться/.test(b.textContent);
     b.addEventListener('click', function (e) {
