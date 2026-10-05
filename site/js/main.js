@@ -17,7 +17,7 @@
     var meta = $('meta[name="theme-color"]');
     /* Цвет строки состояния мобильного браузера — держим его равным фону
        страницы (--lav), иначе над сайтом висит полоса чужого оттенка. */
-    if (meta) meta.setAttribute('content', name === 'light' ? '#D5E8C1' : '#02120F');
+    if (meta) meta.setAttribute('content', name === 'light' ? '#F3F7EC' : '#02120F');
     $$('.theme-toggle').forEach(function (b) {
       b.setAttribute('aria-label', name === 'light' ? 'Включить тёмную тему' : 'Включить светлую тему');
     });

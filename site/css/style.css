@@ -102,10 +102,10 @@
      Проверено по каждой паре: обычный текст не ниже 4.5:1, крупный — 3:1.
      Единственное исключение — белый заголовок героя, см. .hero__title.
      ------------------------------------------------------------------ */
-  --lav:#D5E8C1;          /* фон страницы */
-  --lav-2:#CBE2B3;        /* чередующаяся секция */
-  --pink:#CBE2B3;         /* полоса записи на приём */
-  --pink-2:#C0DBA7;
+  --lav:#F3F7EC;          /* фон страницы — почти белый, тон пилюли героя (окт. 2026) */
+  --lav-2:#EDF3E4;        /* чередующаяся секция */
+  --pink:#EAF2DF;         /* полоса записи на приём */
+  --pink-2:#E1ECD3;
 
   --card:#FFFFFF;
   --card-2:#F6FBEE;
@@ -113,7 +113,7 @@
      белое поверх поля давало тот же тон, но проявляло всё, что лежит
      под карточкой — вуали секций, свечение фона, — и соседние карточки
      оказывались разного оттенка. */
-  --card-soft:#F1F8E9;
+  --card-soft:#FFFFFF;
   --glass:rgba(26,58,28,.06);
   --glass-2:rgba(26,58,28,.10);
 
@@ -127,8 +127,8 @@
   --brand-300:#2E9857;
   --brand-100:rgba(31,128,73,.32);
   --brand-050:rgba(31,128,73,.10);
-  --deep:#BCD9A5;         /* поле героя — самый насыщенный тон макета */
-  --deep-2:#AFD196;
+  --deep:#EEF5E5;         /* поле героя */
+  --deep-2:#E3EED6;
 
   --accent:#A83309;       /* акции: 5.3:1 к фону */
   --accent-600:#952C06;
@@ -143,9 +143,9 @@
   --line-2:rgba(26,58,28,.10);
 
   --tint-rgb:26,58,28;
-  --panel-rgb:229,242,214;
+  --panel-rgb:247,250,242;
   --calc-box-bg:linear-gradient(168deg,#FFFFFF,#F3FAEA);
-  --veil-bg:rgba(213,232,193,.93);
+  --veil-bg:rgba(243,247,236,.94);
   --shade-rgb:38,68,32;
 
   --shadow-s:0 2px 10px rgba(38,68,32,.08);
@@ -1744,9 +1744,9 @@ body.is-locked{overflow:hidden}
 :root[data-theme="light"] body::before{
   background:
     radial-gradient(72% 54% at 50% 30%, rgba(255,255,255,.62) 0%, rgba(255,255,255,0) 68%),
-    radial-gradient(88% 62% at 50% 96%, rgba(154,199,128,.34) 0%, rgba(154,199,128,0) 72%),
-    radial-gradient(60% 46% at 6% 6%, rgba(154,199,128,.30) 0%, rgba(154,199,128,0) 70%),
-    radial-gradient(60% 46% at 96% 10%, rgba(154,199,128,.26) 0%, rgba(154,199,128,0) 70%);
+    radial-gradient(88% 62% at 50% 96%, rgba(154,199,128,.12) 0%, rgba(154,199,128,0) 72%),
+    radial-gradient(60% 46% at 6% 6%, rgba(154,199,128,.10) 0%, rgba(154,199,128,0) 70%),
+    radial-gradient(60% 46% at 96% 10%, rgba(154,199,128,.08) 0%, rgba(154,199,128,0) 70%);
 }
 /* Вуали секций: на салатовом «налёт» тёмным давал заметные полосы —
    секции чередуем светом, а не тенью. */
@@ -1769,8 +1769,10 @@ body.is-locked{overflow:hidden}
    от поля. Обычный текст так набирать нельзя — здесь это единственная
    строка такого размера, и дублируется она в <title> и в шапке страницы. */
 :root[data-theme="light"] .hero__title{
-  color:#fff;
-  text-shadow:0 3px 30px rgba(26,58,28,.22),0 1px 1px rgba(26,58,28,.10);
+  /* Октябрь 2026: поле героя почти белое — белая половина заголовка на
+     нём исчезла бы. Тёмная зелень держит контраст 13:1. */
+  color:var(--ink-strong);
+  text-shadow:none;
 }
 /* Травяной из макета — #528F66; уводим темнее к концу строки, иначе
    хвост «отлично!» на светлой середине поля пропадал. */
@@ -1782,7 +1784,7 @@ body.is-locked{overflow:hidden}
 /* плашка над заголовком: в макете поле чистое, поэтому здесь — не
    стеклянная подложка, а лёгкая белая пилюля */
 :root[data-theme="light"] .hero__eyebrow span{
-  background:rgba(255,255,255,.62);
+  background:#fff;
   border-color:rgba(255,255,255,.9);
   color:var(--brand-700);
 }
@@ -1807,7 +1809,7 @@ body.is-locked{overflow:hidden}
    почти прозрачная. Прежняя падала на рыхлый край старого выреза и давала
    серую кайму вокруг листьев. */
 :root[data-theme="light"] .hero__object img.hero__img{
-  filter:drop-shadow(0 18px 26px rgba(38,68,32,.10));
+  filter:drop-shadow(0 18px 30px rgba(38,68,32,.18));
 }
 /* На салатовом поле отражение в макете едва заметно — приглушаем. */
 :root[data-theme="light"] .hero__reflect{opacity:.16}
@@ -1822,14 +1824,16 @@ body.is-locked{overflow:hidden}
    одинаковым сверху донизу. Раньше поле было градиентом, который к низу
    уходил в цвет страницы: у нижнего края получалось #D1E5BC вместо
    #B7D6A1, и кадр терял рамку — низ выглядел молочным. */
-:root[data-theme="light"] .hero{background:#B6D6A1}
+:root[data-theme="light"] .hero{background:var(--deep)}
 /* Свет тот же слой, что и в тёмной теме, только белёсый и выше: в макете
    он стоит за заголовком (центр на 30% высоты) и разливается почти на всю
    высоту кадра — 87%, — а по горизонтали гаснет к 42%, поэтому левый и
    правый края остаются чистой зеленью. Оттенок тёплый (255,252,235):
    чистый белый уводил поле в синеву. */
 :root[data-theme="light"] .hero__glow{
-  background:radial-gradient(ellipse 42% 87% at 50% 30%, rgba(255,252,235,.72) 0%, rgba(255,252,235,0) 100%);
+  background:
+    radial-gradient(ellipse 26% 30% at 50% 56%, rgba(120,190,140,.30) 0%, rgba(120,190,140,0) 100%),
+    radial-gradient(ellipse 46% 60% at 50% 52%, rgba(160,210,150,.22) 0%, rgba(160,210,150,0) 100%);
 }
 /* Пол: лёгкий подъём у самого низа — отражение, как в макете, — и короткий
    уход в цвет страницы, чтобы не было ступеньки на стыке секций. */
@@ -1869,7 +1873,7 @@ body.is-locked{overflow:hidden}
    завесе абзац просто пропадал. Здесь завеса светлая, а снимок ещё
    приглушён: он остаётся фоном, а не спорит с текстом. */
 :root[data-theme="light"] .booking::before{
-  background:linear-gradient(90deg,rgba(213,232,193,.96) 0%,rgba(213,232,193,.88) 46%,rgba(213,232,193,.66) 100%);
+  background:linear-gradient(90deg,rgba(243,247,236,.96) 0%,rgba(243,247,236,.90) 46%,rgba(243,247,236,.70) 100%);
 }
 :root[data-theme="light"] .booking img.booking__bg{opacity:.32}
 /* затемнение под модалкой — в тон темы, иначе на салатовом оно синит */
@@ -2283,3 +2287,13 @@ body.is-locked{overflow:hidden}
   .srv-row__flow{display:none}
   .mw{transition:none}
 }
+
+/* Плашка строк услуг в светлой теме — белая, а не тёмно-зелёная
+   (просьба владельца, окт. 2026). Тёмный текст, цена — фирменным. */
+:root[data-theme="light"] .srv-row__flow{
+  background:#fff;color:var(--ink-strong);
+  box-shadow:0 14px 40px rgba(38,68,32,.12);
+}
+:root[data-theme="light"] .srv-row__flow i{color:var(--brand-600);opacity:1}
+:root[data-theme="light"] .srv-row__flow .ribbon__star{fill:var(--brand-300);opacity:1}
+:root[data-theme="light"] .srv-row__pill{background:var(--lav-2)}

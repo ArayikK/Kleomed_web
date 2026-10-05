@@ -513,7 +513,7 @@ def crm_create(row):
 
 # ------------------------------------------------------------------ amoCRM
 
-def amo_call(method, path, payload=None, timeout=15):
+def amo_call(method, path, payload=None, timeout=30):
     """Один запрос к API amoCRM v4 с долгосрочным токеном.
 
     Как и у Битрикса, на ошибку amo отвечает телом с описанием (поле
@@ -557,6 +557,18 @@ def amo_create(row):
     title = 'Заявка с сайта № {}'.format(row['id'])
     if row['service']:
         title += ' — ' + row['service']
+    # Повтор после сбоя. Тайм-аут на чтении ответа не значит, что amo
+    # сделку не завёл: запрос мог дойти, а ответ — нет (так и было с
+    # заявкой №23). Прежде чем заводить заново, ищем свою же сделку по
+    # номеру заявки в названии — иначе администратор получит двойника.
+    if row['crm_tries']:
+        found = amo_call('GET', '/api/v4/leads?' + urllib.parse.urlencode(
+            {'query': 'Заявка с сайта № {}'.format(row['id'])}))
+        for lead in ((found or {}).get('_embedded') or {}).get('leads', []):
+            if lead.get('name', '').startswith('Заявка с сайта № {}'.format(row['id'])) \
+                    and lead.get('name', '')[len('Заявка с сайта № {}'.format(row['id'])):][:1] in ('', ' '):
+                log.info('заявка №%s уже есть в amoCRM: %s', row['id'], lead['id'])
+                return 'amo %s' % lead['id']
     lead = {
         'name': title[:250],
         '_embedded': {
