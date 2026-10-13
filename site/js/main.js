@@ -429,11 +429,10 @@
     if (lastFocus) lastFocus.focus();
   }
 
-  /* Две дороги в CRM. Кнопки «Записаться…» открывают онлайн-чат amoCRM —
-     разговор сразу попадает администратору. Кнопки «Оставить заявку»
-     (нижняя панель, блок контактов) открывают форму: она тоже уходит в
-     amoCRM, но сделкой через наш сервис. Разводим по надписи, чтобы новые
-     кнопки вели себя правильно без лишних атрибутов в разметке. */
+  /* Две дороги в CRM (так решил владелец 13.10.2026). Все кнопки записи
+     ([data-open-modal]) открывают форму — заявка уходит сделкой в amoCRM
+     и сообщением в MAX. Кнопка «Написать нам» в шапке ([data-open-chat])
+     и пункт «Чат на сайте» в узле связи открывают онлайн-чат amoCRM. */
   function chatOpen() {
     var own = document.getElementById('amobutton');
     return !!(own && own.querySelector(':scope > .amo-livechat_chat'));
@@ -489,11 +488,15 @@
   }
 
   $$('[data-open-modal]').forEach(function (b) {
-    var toChat = /^\s*Записаться/.test(b.textContent);
     b.addEventListener('click', function (e) {
       e.preventDefault();
-      var service = b.getAttribute('data-service') || '';
-      if (toChat) openChat(service); else openModal(service);
+      openModal(b.getAttribute('data-service') || '');
+    });
+  });
+  $$('[data-open-chat]').forEach(function (b) {
+    b.addEventListener('click', function (e) {
+      e.preventDefault();
+      openChat('');
     });
   });
   if (modal) {
